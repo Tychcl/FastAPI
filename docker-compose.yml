@@ -1,0 +1,71 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: PGDB
+    environment:
+      POSTGRES_DB: Bookshelf
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_INITDB_ARGS: --encoding=UTF8 --locale=en_US.UTF-8
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./Database/Default:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - bookshelf
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: PGA
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin_password
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - bookshelf
+    restart: unless-stopped
+
+  web:
+    build: ./web
+    container_name: Web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./web:/var/www/html
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - bookshelf
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: Bookshelf
+      DB_USER: postgres
+      DB_PASSWORD: postgres_password
+      JWT_LIFETIME: 10800
+      JWT_STRING: access_token
+      JWT_SECRET: +#:H}?W%FM2DDs2:U?B-[4gQkF&)K$SkCp-exo|J8&f
+      REFRESH_LIFETIME: 259200
+      REFRESH_STRING: refresh_token
+      REFRESH_SECRET: /HV&zTz#72d]@L6jRsG/NU<g(_6n(_d#$7yPZjV-<RF
+      ALGORITHM_SECRET: HS256
+    restart: unless-stopped
+
+networks:
+  bookshelf:
+    driver: bridge
+
+volumes:
+  postgres_data:

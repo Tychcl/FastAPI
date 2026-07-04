@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книжная полка</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <script src="{{ url_for('static', path='/js/script.js') }}"></script>
+    <link rel="icon" href="{{ url_for('static', path='/images/favicon.ico') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=home"/>
+</head> 
+<body>
+    <header>
+        {% block header %}
+            {% include 'header.html' %}
+        {% endblock %}
+    </header>
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+    <footer>
+        {% block footer %}
+            {% include 'footer.html' %}
+        {% endblock %}
+    </footer>
+</body>
+</html>
