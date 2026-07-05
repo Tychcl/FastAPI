@@ -18,8 +18,8 @@ class UserBase(Base):
 	role_id: Mapped[int] = mapped_column(ForeignKey("user_roles.id"))
 	role: ClassVar[UserRoleBase] = relationship("UserRoleBase", back_populates="users")
 
-	def __repr__(self) -> str:
-		return f"UserBase:id={self.id}, login={self.username}, password={self.password}, role_id={self.role_id}, role_name={self.role.name})"
+	def __repr__(self) -> dict:
+		return {"id": self.id, "username": self.username, "role_id": self.role_id, "role_name": self.role.name}
 
 	def from_signup_request(request: SignupRequest) -> "UserBase":
 		return UserBase(

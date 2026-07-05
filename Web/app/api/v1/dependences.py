@@ -13,13 +13,15 @@ async def password_hasher_service() -> IPasswordHasherService:
 async def user_service(session: AsyncSession = Depends(get_context)) -> IUserService:
     return UserService(session)
 
-async def auth_service(session: AsyncSession = Depends(get_context), 
-                       hasher: IPasswordHasherService = Depends(password_hasher_service),
-                       user_service: IUserService = Depends(user_service)) -> IAuthService:
-    return AuthService(session, hasher, user_service)
-
 async def role_service(session: AsyncSession = Depends(get_context)) -> IRoleService:
     return RoleService(session)
 
 async def cookie_service() -> ICookieService:
     return CookieService()
+
+async def auth_service(session: AsyncSession = Depends(get_context), 
+                       hasher: IPasswordHasherService = Depends(password_hasher_service),
+                       user_service: IUserService = Depends(user_service),
+                       jwt_service: IJWTService = Depends(jwt_service),
+                       cookie_service: ICookieService = Depends(cookie_service)) -> IAuthService:
+    return AuthService(session, hasher, user_service, jwt_service, cookie_service)

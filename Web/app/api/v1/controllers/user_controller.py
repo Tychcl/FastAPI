@@ -4,15 +4,16 @@ from ..interfaces.IUserService import IUserService
 from ..dependences import user_service
 from ..middlewares import role_required, auth_check
 from ...models import UserBase
+from typing import Optional
 
 user_controller = APIRouter()
 
 @role_required(2)
 @user_controller.post("/user/{id}")
 async def get_user_by_id(request: Request, 
-                         id: int | None = None, 
+                         id: Optional[int] = None, 
                          UserService: IUserService = Depends(user_service),
-                         user: UserBase | None = Depends(auth_check)) -> JSONResponse:
+                         user: Optional[UserBase] = Depends(auth_check)) -> JSONResponse:
     if id is None:
         return JSONResponse(content={"error": "id required"}, status_code=400)
     user = await UserService.get_user_by_id(id)
