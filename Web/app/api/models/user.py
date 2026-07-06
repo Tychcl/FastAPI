@@ -19,7 +19,7 @@ class UserBase(Base):
 	role: ClassVar[UserRoleBase] = relationship("UserRoleBase", back_populates="users")
 
 	def __repr__(self) -> dict:
-		return {"id": self.id, "username": self.username, "role_id": self.role_id, "role_name": self.role.name}
+		return {"user_id": self.id, "username": self.username, "role_id": self.role_id, "role_name": self.role.name}
 
 	def from_signup_request(request: SignupRequest) -> "UserBase":
 		return UserBase(

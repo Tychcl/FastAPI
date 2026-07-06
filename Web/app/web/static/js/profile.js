@@ -1,36 +1,81 @@
-document.addEventListener('DOMContentLoaded', function() {
+function is_valid_username(username) {
+    return /^[a-zA-Z]+$/.test(username);
+}
+
+function is_valid_password(password) {
+    return /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:'",.<>/?\\|`~]).{8,}$/.test(password);
+}
+
+async function login(event) {
+    event.preventDefault();
     const form = document.getElementById('loginForm');
-    if (!form) return;
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const usernameError = document.getElementById('usernameError');
     const passwordError = document.getElementById('passwordError');
     const formError = document.getElementById('formError');
-    const usernameRegex = /^[a-zA-Z]+$/;
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:'",.<>/?\\|`~]).{8,}$/;
-    form.addEventListener('submit', function(e) {
-        let valid = true;
-        usernameError.textContent = '';
-        passwordError.textContent = '';
-        formError.textContent = '';
-        const username = usernameInput.value.trim();
-        if (!usernameRegex.test(username)) {
-            usernameError.textContent = 'Логин должен содержать только латинские буквы (a-z, A-Z)';
-            valid = false;
+    usernameError.textContent = '';
+    passwordError.textContent = '';
+    formError.textContent = '';
+    let valid = true;
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
+    if (!is_valid_username(username)) {
+        usernameError.textContent = 'Логин должен содержать только латинские буквы (a-z, A-Z)';
+        valid = false;
+    }
+    if (!is_valid_password(password)) {
+        passwordError.textContent = 'Пароль: мин. 8 символов, 1 заглавная, 1 строчная, 1 цифра, 1 спецсимвол';
+        valid = false;
+    }
+    if (!valid) {
+        const firstError = document.querySelector('.error:not(:empty)');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+    }
+    try {
+        const response = await fetch('/api/v1/auth/signin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify({ username, password }),
+        });
+
+        if (response.ok) {
+            window.location.href = '/profile';
+        } else {
+            const data = await response.json().catch(() => ({}));
+            const errorMsg = data.detail || 'Неверный логин или пароль';
+            formError.textContent = errorMsg;
         }
-        const password = passwordInput.value;
-        if (!passwordRegex.test(password)) {
-            passwordError.textContent = 'Пароль: мин. 8 символов, 1 заглавная, 1 строчная, 1 цифра, 1 спецсимвол';
-            valid = false;
-        }
-        if (!valid) {
-            e.preventDefault();
-            const firstError = document.querySelector('.error:not(:empty)');
-            if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    });
+    } catch (error) {
+        console.error('Ошибка:', error);
+        formError.textContent = 'Произошла ошибка при входе. Попробуйте позже.';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('loginForm');
+    if (form) {
+        form.addEventListener('submit', login);
+    }
 });
 
-function logout(){
-    
+async function logout() {
+    try {
+        const response = await fetch('/api/v1/auth/signout', {
+            method: 'POST',
+            credentials: 'same-origin'
+        });
+        if (response.ok) {
+            window.location.href = '/profile';
+        } else {
+            alert('Ошибка при выходе');
+        }
+    } catch (error) {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка при выходе');
+    }
 }

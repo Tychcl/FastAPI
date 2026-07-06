@@ -1,4 +1,4 @@
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select,  insert
 from sqlalchemy.orm import selectinload
@@ -39,3 +39,9 @@ class AuthService(IAuthService):
         user: UserBase = UserBase.from_signup_request(data)
         await self.user_service.create_user(user)
         return user
+    
+    async def logout(self) -> RedirectResponse:
+        response: RedirectResponse = RedirectResponse(url="/", status_code=302)
+        self.cookie_service.delete_cookie(response, settings.JWT_STRING)
+        self.cookie_service.delete_cookie(response, settings.REFRESH_STRING)
+        return response

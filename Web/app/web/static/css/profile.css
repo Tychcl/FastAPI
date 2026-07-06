@@ -1,0 +1,164 @@
+.profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 14px;
+}
+
+.profile-card-shell-shell {
+    background: white;
+    flex: 0 1 auto;  
+}
+.profile-card-shell {
+    padding: 0 14px 14px 0;
+    background: #edeff3;
+    border-radius: 0 0 26px 0;
+}
+.profile-card {
+    width: fit-content;
+    max-width: 500px;
+    background: white;
+    border-radius: 12px;
+    padding: 14px;
+    z-index: 1;
+}
+
+.profile-card .inner {
+    display: inline-block;
+}
+.profile-card h2 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+.profile-card .inner-btn {
+    vertical-align: top;
+}
+
+.profile-menu-buttons {
+    flex: 1 1 0;              
+    min-width: 0;             
+    background: white;
+    border-radius: 12px 12px 0 0;
+    padding: 14px;
+}
+
+.profile-menu-buttons .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.profile-menu-buttons .buttons .profile-menu-btn {
+    flex: 1 1 auto;
+    min-width: 120px;
+    max-width: 100%;
+    padding-right: 15px;
+    height: 50px;
+}
+
+.profile-menu-btn__text {
+    opacity: 1;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-menu-btn:hover {
+    background: #e8f5e9;
+    border-color: #388e3c;
+    box-shadow: 0 4px 14px rgba(76, 175, 80, 0.25);
+}
+.profile-menu-btn:hover .icon-stroke,
+.profile-menu-btn:hover .icon-fill {
+    stroke: #388e3c;
+    fill: #388e3c;
+}
+.profile-menu-btn:hover .menu-btn__text {
+    color: #388e3c;
+}
+
+.profile-menu {
+    flex: 0 0 100%;           
+    min-height: 200px;
+    background: white;
+    border-radius: 12px 0px 12px 12px;
+    padding: 14px;
+}
+
+.login-box {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+}
+.login-box h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #2c3e50;
+}
+.form-group {
+    margin-bottom: 18px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+.form-group input:focus {
+    border-color: #7c5cf0;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(124,92,240,0.2);
+}
+.error {
+    color: #e74c3c;
+    font-size: 13px;
+    margin-top: 4px;
+    display: block;
+}
+.login-box button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: #7c5cf0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.login-box button[type="submit"]:hover {
+    background: #5b3fd6;
+}
+.register-link {
+    text-align: center;
+    margin-top: 16px;
+}
+
+@media (max-width: 605px) {
+    .profile-container {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    .profile-card-shell-shell,
+    .profile-menu-buttons {
+        flex: 1 1 100% !important;
+    }
+    .profile-menu {
+        min-height: 150px;
+    }
+    .login-box {
+        padding: 20px;
+    }
+}

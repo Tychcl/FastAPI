@@ -1,7 +1,7 @@
 from ...models.user import UserBase
 from abc import ABC, abstractmethod
 from ..requests import SignupRequest, SigninRequest
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from typing import Optional
 
 class IAuthService(ABC):
@@ -10,3 +10,6 @@ class IAuthService(ABC):
     
     @abstractmethod
     async def signup(self, data: SignupRequest) -> Optional[UserBase]: pass
+    
+    @abstractmethod
+    def logout(self) -> RedirectResponse: pass

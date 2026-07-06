@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request, Depends, HTTPException, status
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from ..requests import SigninRequest, SignupRequest
 from ..dependences import auth_service, role_service
 from ..interfaces import IAuthService, IRoleService
@@ -8,10 +8,10 @@ from ..middlewares import auth_check, role_required
 from ..validators import is_valid_username, is_valid_password
 from typing import Optional
 
-auth_controller = APIRouter()
+auth_controller = APIRouter(prefix="/auth")
 
 
-@auth_controller.post("/auth/signin")
+@auth_controller.post("/signin")
 async def signin(request: Request, 
                 data: SigninRequest, 
                 AuthService: IAuthService = Depends(auth_service)) -> JSONResponse:
@@ -23,7 +23,7 @@ async def signin(request: Request,
     return response
 
 @role_required(2)
-@auth_controller.post("/auth/signup")
+@auth_controller.post("/signup")
 async def signup(request: Request, 
                 data: SignupRequest, 
                 AuthService: IAuthService = Depends(auth_service),
@@ -44,3 +44,7 @@ async def signup(request: Request,
     if new_user is None:
         raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "user create error")
     return JSONResponse(content={"user": {"id": new_user.id, "username": new_user.username, "role_id": new_user.role_id, "role_name": role.name}}, status_code=200)
+
+@auth_controller.post("/signout")
+async def signout(request: Request, AuthService: IAuthService = Depends(auth_service)) -> RedirectResponse:
+    return await AuthService.logout()
