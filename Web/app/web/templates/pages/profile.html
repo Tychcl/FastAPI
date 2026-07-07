@@ -11,29 +11,23 @@
     <div class="profile-card-shell-shell">
         <div class="profile-card-shell">
             <div class="profile-card">
-                <div class="inner">
-                    <h2>👤 {{ user.username }}</h2>
-                    <p><strong>ID:</strong> {{ user.user_id }}</p>
+                <h2>👤 {{ user.username }}<span style="margin-left: 5px; font-size: 16px; vertical-align: top;">({{ user.user_id }})</span></h2>
                     <p><strong>Роль:</strong> {{ user.role_name if user.role_name else 'Не указана' }}</p>
-                    <p><strong>Роль ID:</strong> {{ user.role_id }}</p>
-                </div>
-                <div class="inner inner-btn">
-                    <button onclick="logout()" class="menu-btn menu-btn--2" aria-label="Профиль">
+                    <button onclick="logout()" class="menu-btn menu-btn--pink" aria-label="Профиль">
                         <span class="menu-btn__icon">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
                                 <path class="icon-fill icon-stroke" d="M467.18-448.51Q480-461.33 480-480q0-18.67-12.82-31.49-12.81-12.81-31.48-12.81-18.68 0-31.49 12.81-12.82 12.82-12.82 31.49 0 18.67 12.82 31.49 12.81 12.81 31.49 12.81 18.67 0 31.48-12.81ZM283.11-112.35v-90.76l232.35-38.8v-434q0-16.92-10.68-30.23-10.67-13.32-26.82-15.79l-194.85-32.81v-90.76l209.72 34.33q49.97 8.71 81.8 46.5 31.83 37.78 31.83 87.76v433q0 33.3-21.63 58.67-21.63 25.37-54.7 31.09l-247.02 41.8Zm0-90.76h393.78V-754.5l-393.78-.24v551.63Zm-125.5 91q-19.15 0-32.33-13.17-13.17-13.18-13.17-32.33t13.17-32.32q13.18-13.18 32.33-13.18h34.5V-754.5q0-37.78 26.61-64.39t64.39-26.61h393.78q37.78 0 64.39 26.61t26.61 64.39v551.39h34.5q19.15 0 32.33 13.18 13.17 13.17 13.17 32.32t-13.17 32.33q-13.18 13.17-32.33 13.17H157.61Z"/>
                             </svg>
                         </span>
                         <span class="menu-btn__text">Выйти</span>
-                    </a>
-                </div>
+                    </button>
             </div>
         </div>
     </div>
     <div class="profile-menu-buttons">
         <div class="buttons">
-            {% if user.role_id != 3 %}
-            <button class="profile-menu-btn menu-btn" aria-label="Профиль">
+            {% if user.role_id < 3 %}
+            <button onclick="show('users')" class="profile-menu-btn menu-btn menu-btn--green" aria-label="Профиль">
                 <span class="menu-btn__icon">
                     <svg viewBox="0 0 24 24">
                         <circle cx="12" cy="8" r="4" class="icon-stroke" stroke-width="1.8" />
@@ -41,12 +35,50 @@
                             stroke-linecap="round" />
                     </svg>
                 </span>
-                <span class="profile-menu-btn__text menu-btn__text">пользователи</span>
+                <span class="profile-menu-btn__text menu-btn__text">Пользователи</span>
             </button>
             {% endif %}
         </div>
     </div>
-    <div class="profile-menu">
+    <div id="menu-wrapper" class="profile-menu">
+        {% if user.role_id < 3 %}
+        <div id="users" class="hidden">
+            <form id="users-form" class="profile-menu-form">
+                <div class="form-group">
+                    <label for="ids">id(через пробел)</label>
+                    <input class="menu-btn menu-btn--green" type="text" id="ids" name="ids" placeholder="1 20 33">
+                </div>
+                <div class="form-group" style="max-width: fit-content; min-width: 0px;">
+                    <label for="username">Имя пользователя</label>
+                    <input class="menu-btn menu-btn--green" type="text" id="username" name="username" maxlength="15">
+                </div>
+                <div class="form-group" style="max-width: fit-content; min-width: 0px;">
+                    <label for="role_id">Роль</label>
+                    <select class="menu-btn menu-btn--green" id="role_id" name="role_id">
+                        <option value="">Все роли</option>
+                        {% for role in roles %}
+                        <option value="{{ role.id }}">{{ role.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button style="align-self: end;" class="menu-btn menu-btn--green" aria-label="Профиль" type="submit">
+                    <span class="menu-btn__icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="10.5" cy="10.5" r="6.5" class="icon-stroke" stroke-width="1.8" />
+                            <line x1="15.5" y1="15.5" x2="21" y2="21" class="icon-stroke" stroke-width="1.8" stroke-linecap="round" />
+                        </svg>
+                    </span>
+                    <span class="menu-btn__text">Найти</span>
+                </button>
+            </form>
+            <div id="users-result">
+                
+            </div>
+            <div id="users-pages">
+
+            </div>
+        </div>
+        {% endif %}
     </div>
     {% else %}
     <div class="login-box">

@@ -1,0 +1,212 @@
+.menu-btn {
+    height: 44px;
+    min-width: 44px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        padding-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+}
+
+.menu-btn__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.menu-btn svg,
+.profile-menu-btn svg {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.icon-stroke {
+    stroke: #555;
+    fill: none;
+    transition: stroke 0.3s ease;
+}
+.icon-fill {
+    fill: #555;
+    transition: fill 0.3s ease;
+}
+
+.menu-btn__text {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition:
+        max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.25s ease;
+    color: #333;
+}
+
+.menu-btn:hover {
+    padding-right: 16px;
+}
+.menu-btn:hover .menu-btn__text {
+    max-width: 150px;
+    opacity: 1;
+}
+
+.menu-btn--red:hover {
+    background: #ffebee;
+    border-color: #e53935;
+    box-shadow: 0 4px 14px rgba(229, 57, 53, 0.25);
+}
+.menu-btn--red:hover .icon-stroke,
+.menu-btn--red:hover .icon-fill {
+    stroke: #e53935;
+    fill: #e53935;
+}
+.menu-btn--red:hover .menu-btn__text {
+    color: #c62828;
+}
+
+.menu-btn--green:hover {
+    background: #e8f5e9;
+    border-color: #388e3c;
+    box-shadow: 0 4px 14px rgba(56, 142, 60, 0.25);
+}
+.menu-btn--green:hover .icon-stroke,
+.menu-btn--green:hover .icon-fill {
+    stroke: #388e3c;
+    fill: #388e3c;
+}
+.menu-btn--green:hover .menu-btn__text {
+    color: #1b5e20;
+}
+
+.menu-btn--blue:hover {
+    background: #e3f2fd;
+    border-color: #1976d2;
+    box-shadow: 0 4px 14px rgba(25, 118, 210, 0.25);
+}
+.menu-btn--blue:hover .icon-stroke,
+.menu-btn--blue:hover .icon-fill {
+    stroke: #1976d2;
+    fill: #1976d2;
+}
+.menu-btn--blue:hover .menu-btn__text {
+    color: #0d47a1;
+}
+
+.menu-btn--purple:hover {
+    background: #f5f3ff;
+    border-color: #7c5cf0;
+    box-shadow: 0 4px 14px rgba(124, 92, 240, 0.25);
+}
+.menu-btn--purple:hover .icon-stroke,
+.menu-btn--purple:hover .icon-fill {
+    stroke: #7c5cf0;
+    fill: #7c5cf0;
+}
+.menu-btn--purple:hover .menu-btn__text {
+    color: #5b3fd6;
+}
+
+.menu-btn--pink:hover {
+    background: #fff0f3;
+    border-color: #f06292;
+    box-shadow: 0 4px 14px rgba(240, 98, 146, 0.25);
+}
+.menu-btn--pink:hover .icon-stroke,
+.menu-btn--pink:hover .icon-fill {
+    stroke: #f06292;
+    fill: #f06292;
+}
+.menu-btn--pink:hover .menu-btn__text {
+    color: #e04876;
+}
+
+.menu-btn--yellow:hover {
+    background: #fffde7;
+    border-color: #f9a825;
+    box-shadow: 0 4px 14px rgba(249, 168, 37, 0.25);
+}
+.menu-btn--yellow:hover .icon-stroke,
+.menu-btn--yellow:hover .icon-fill {
+    stroke: #f9a825;
+    fill: #f9a825;
+}
+.menu-btn--yellow:hover .menu-btn__text {
+    color: #c17900;
+}
+
+.menu-btn--orange:hover {
+    background: #fff3e0;
+    border-color: #ef6c00;
+    box-shadow: 0 4px 14px rgba(239, 108, 0, 0.25);
+}
+.menu-btn--orange:hover .icon-stroke,
+.menu-btn--orange:hover .icon-fill {
+    stroke: #ef6c00;
+    fill: #ef6c00;
+}
+.menu-btn--orange:hover .menu-btn__text {
+    color: #b84c00;
+}
+
+.menu-btn--teal:hover {
+    background: #e0f2f1;
+    border-color: #00695c;
+    box-shadow: 0 4px 14px rgba(0, 105, 92, 0.25);
+}
+.menu-btn--teal:hover .icon-stroke,
+.menu-btn--teal:hover .icon-fill {
+    stroke: #00695c;
+    fill: #00695c;
+}
+.menu-btn--teal:hover .menu-btn__text {
+    color: #004d40;
+}
+
+@media (max-width: 605px) {
+    .menu-btn {
+        height: 40px;
+        min-width: 40px;
+        border-radius: 10px;
+    }
+
+    .menu-btn__icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .menu-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .menu-btn__text {
+        font-size: 13px;
+    }
+
+    .menu-btn:hover {
+        padding-right: 14px;
+    }
+
+    .menu-btn:hover .menu-btn__text {
+        max-width: 120px;
+    }
+}

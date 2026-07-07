@@ -1,3 +1,23 @@
+let roleMap = {};
+function loadRolesFromSelect() {
+    const select = document.getElementById('role_id');
+    if (!select) return;
+
+    const map = {};
+    for (const option of select.options) {
+        const value = option.value;
+        if (value !== '') {
+            map[value] = option.textContent.trim();
+        }
+    }
+    roleMap = map;
+    console.log('Роли загружены:', roleMap);
+}
+
+function getRoleName(roleId) {
+    return roleMap[roleId] || 'Неизвестная роль';
+}
+
 function is_valid_username(username) {
     return /^[a-zA-Z]+$/.test(username);
 }
@@ -56,10 +76,74 @@ async function login(event) {
     }
 }
 
+async function find_users(event) {
+    event.preventDefault();
+    const form = document.getElementById('users-form');
+
+    const idsInput = form.querySelector('#ids');
+    const usernameInput = form.querySelector('#username');
+    const role_idSelect = form.querySelector('#role_id');
+
+    const idsRaw = idsInput.value.trim();
+    const username = usernameInput.value.trim();
+    const role_id = role_idSelect.value;
+
+    const params = new URLSearchParams();
+
+    if (idsRaw) {
+        const idsArray = idsRaw.split(/\s+/).filter(id => id.length > 0);
+        idsArray.forEach(id => params.append('ids', id));
+    }
+    if (username) params.append('username', username);
+    if (role_id) params.append('role_id', role_id);
+
+    // Если сервер поддерживает пагинацию, можно раскомментировать:
+    // params.append('page', 1);
+    // params.append('per_page', 25);
+
+    try {
+        const response = await fetch(`/api/v1/user/find?${params.toString()}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin'
+        });
+
+        if (!response.ok) {
+            throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        const resultDiv = document.getElementById('users-result');
+        const pagesDiv = document.getElementById('users-pages');
+
+        if (data.users && data.users.length > 0) {
+            let html = ``;
+            data.users.forEach(user => {
+                html += mini_profile_html(user.id, user.username, user.role_id);
+            });
+            resultDiv.innerHTML = html;
+            pagesDiv.innerHTML = '';
+        } else {
+            resultDiv.innerHTML = '<p>Пользователи не найдены.</p>';
+            pagesDiv.innerHTML = '';
+        }
+    } catch (error) {
+        console.error('Ошибка при поиске пользователей:', error);
+        document.getElementById('users-result').innerHTML = `<p style="color:red;">Ошибка: ${error.message}</p>`;
+        document.getElementById('users-pages').innerHTML = '';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('loginForm');
-    if (form) {
-        form.addEventListener('submit', login);
+    loadRolesFromSelect();
+    const loginform = document.getElementById('loginForm');
+    if (loginform) {
+        loginform.addEventListener('submit', login);
+    }
+    const usersform = document.getElementById('users-form');
+    if (usersform) {
+        usersform.addEventListener('submit', find_users);
     }
 });
 
@@ -78,4 +162,35 @@ async function logout() {
         console.error('Ошибка:', error);
         alert('Произошла ошибка при выходе');
     }
+}
+
+function show(id){
+    const wrapper = document.getElementById('menu-wrapper');
+    if (!wrapper) {
+        console.error('Элемент #menu-wrapper не найден');
+        return;
+    }
+    const children = wrapper.children;
+    for (let child of children) {
+        if (child.id !== id) {
+            child.classList.remove('visible');
+            child.classList.add('hidden');
+        } else {
+            if (child.classList.contains('hidden')){
+                child.classList.remove('hidden');
+                child.classList.add('visible');
+            }
+            else{
+                child.classList.remove('visible');
+                child.classList.add('hidden');
+            }
+        }
+    }
+}
+
+function mini_profile_html(id, username, role_id){
+    return `<div class="profile-card profile-card-result">
+                <p class="username"><strong>👤 ${username}<span>(${id})</span></strong></p>
+                <p><strong>Роль:</strong> ${getRoleName(role_id)}</p>
+            </div>`;
 }

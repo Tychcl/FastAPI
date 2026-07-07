@@ -21,6 +21,10 @@ class UserBase(Base):
 	def __repr__(self) -> dict:
 		return {"user_id": self.id, "username": self.username, "role_id": self.role_id, "role_name": self.role.name}
 
+	@property
+	def to_dict(self):
+		return {"id": self.id, "username": self.username, "role_id": self.role_id}
+
 	def from_signup_request(request: SignupRequest) -> "UserBase":
 		return UserBase(
             username=request.username,

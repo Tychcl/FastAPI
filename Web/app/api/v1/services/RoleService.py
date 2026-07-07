@@ -17,4 +17,4 @@ class RoleService(IRoleService):
     async def get_all_roles(self) -> list[UserRoleBase]:
         sql = select(UserRoleBase)
         result = await self.session.execute(sql)
-        return result.scalar().all()
+        return result.scalars().all()

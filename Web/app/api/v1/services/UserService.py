@@ -32,22 +32,37 @@ class UserService(IUserService):
         result = await self.session.execute(sql)
         return result.scalar_one_or_none()
     
-    async def count_all_users(self) -> int:
-        sql = select(func.count()).select_from(UserBase)
-        return await self.session.scalar(sql) or 0
+    #async def count_all_users(self) -> int:
+    #    sql = select(func.count()).select_from(UserBase)
+    #    return await self.session.scalar(sql) or 0
 
-    async def count_users_by_filters(
-        self,
-        ids: Optional[List[int]] = None,
-        username: Optional[str] = None,
-        role_id: Optional[int] = None,
-    ) -> int:
+    async def count_users_by_filters(self, conditions: Optional[list] = None) -> int:
         sql = select(func.count()).select_from(UserBase)
-        conditions = self._build_conditions(ids, username, role_id)
         if conditions:
             sql = sql.where(*conditions)
         return await self.session.scalar(sql) or 0
 
+    async def find_users_by_any(
+        self,
+        ids: Optional[List[int]] = None,
+        username: Optional[str] = None,
+        role_id: Optional[int] = None,
+        page: int = 1,
+        per_page: int = 25
+    ) -> Tuple[List[UserBase], int, int]:
+        sql = select(UserBase)
+        conditions = self._build_conditions(ids, username, role_id)
+        if conditions:
+            sql = sql.where(*conditions)
+        sql = sql.options(selectinload(UserBase.role))
+        sql = sql.offset((page - 1) * per_page).limit(per_page)
+        result = await self.session.execute(sql)
+        count: int = await self.count_users_by_filters()
+        count_filter: int = count
+        if conditions:
+            count_filter = await self.count_users_by_filters(conditions)
+        return result.scalars().all(), count_filter, count
+    
     def _build_conditions(self, ids, username, role_id):
         conditions = []
         if ids is not None:
@@ -57,20 +72,3 @@ class UserService(IUserService):
         if role_id is not None:
             conditions.append(UserBase.role_id == role_id)
         return conditions
-
-    async def find_users_by_any(
-        self,
-        ids: Optional[List[int]] = None,
-        username: Optional[str] = None,
-        role_id: Optional[int] = None,
-        page: int = 1,
-        per_page: int = 20,
-    ) -> List[UserBase]:
-        sql = select(UserBase)
-        conditions = self._build_conditions(ids, username, role_id)
-        if conditions:
-            sql = sql.where(*conditions)
-        #sql = sql.options(selectinload(UserBase.role))
-        sql = sql.offset((page - 1) * per_page).limit(per_page)
-        result = await self.session.execute(sql)
-        return result.scalars().all()

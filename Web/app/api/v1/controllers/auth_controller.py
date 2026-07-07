@@ -8,7 +8,7 @@ from ..middlewares import auth_check, role_required
 from ..validators import is_valid_username, is_valid_password
 from typing import Optional
 
-auth_controller = APIRouter(prefix="/auth")
+auth_controller = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @auth_controller.post("/signin")
@@ -22,7 +22,7 @@ async def signin(request: Request,
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid login or password")
     return response
 
-@role_required(2)
+@role_required(UserRoleBase.ADMIN().id)
 @auth_controller.post("/signup")
 async def signup(request: Request, 
                 data: SignupRequest, 

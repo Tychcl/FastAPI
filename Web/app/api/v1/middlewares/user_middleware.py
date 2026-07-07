@@ -1,7 +1,6 @@
-from fastapi import Request, Depends, Response, HTTPException, status
-from ..dependences import jwt_service, user_service, cookie_service
-from ..interfaces import IJWTService, IUserService, ICookieService
-from ...models import UserBase
+from fastapi import Request, Response, HTTPException, status
+from ..interfaces import IJWTService, ICookieService
+from ...models import UserBase, UserRoleBase
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 from app.config import settings
@@ -57,7 +56,7 @@ async def auth_check(request: Request) -> UserBase:
         raise HTTPException(status.HTTP_403_FORBIDDEN, {"user": {"id": user.id, "role_id": user.role_id},"role_needed": role_needed, "msg": "access denied"})
     return user
     
-def role_required(role_required: int = 3):
+def role_required(role_required: int):
     def decorator(func):
         func._role_required = role_required
         @wraps(func)

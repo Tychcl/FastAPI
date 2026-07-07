@@ -1,6 +1,8 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
 from app.config import templates
-from app.api.models import UserBase
+from app.api.models import UserBase, UserRoleBase
+from app.api.v1.dependences import role_service
+from app.api.v1.interfaces import IRoleService
 from typing import Optional
 
 pages_controller = APIRouter()
@@ -11,8 +13,12 @@ async def get_index(request: Request):
     return templates.TemplateResponse(request=request, name="pages/index.html", context=context)
 
 @pages_controller.get("/profile")
-async def get_index(request: Request):
+async def get_index(request: Request, 
+                    RoleService: IRoleService = Depends(role_service)):
     context: dict = get_user_context(request)
+    if context['user']:
+        roles = await RoleService.get_all_roles()
+        context['roles'] = [r.to_dict for r in roles]
     return templates.TemplateResponse(request=request, name="pages/profile.html", context=context)
 
 def get_user_context(request: Request) -> dict:

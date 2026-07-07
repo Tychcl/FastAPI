@@ -20,9 +20,9 @@ async def lifespan(app: FastAPI):
         result = await session.execute(stmt)
         if result.scalars().first() is None:
             session.add_all([
-                UserRoleBase(name="super admin"),
-                UserRoleBase(name="admin"),
-                UserRoleBase(name="user"),
+                UserRoleBase.S_ADMIN(),
+                UserRoleBase.ADMIN(),
+                UserRoleBase.USER(),
             ])
             await session.commit()
     yield
