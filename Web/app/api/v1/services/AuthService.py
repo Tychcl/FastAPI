@@ -7,6 +7,8 @@ from ..interfaces import IAuthService, IPasswordHasherService, IUserService, IJW
 from ..requests import SignupRequest, SigninRequest
 from app.config import settings
 from typing import Optional
+from ..validators import is_valid_password
+from fastapi import HTTPException, status
 
 class AuthService(IAuthService):
     def __init__(self, session: AsyncSession, 
@@ -20,11 +22,11 @@ class AuthService(IAuthService):
         self.jwt_service = jwt_service
         self.cookie_service = cookie_service
 
-    async def signin(self, data: SigninRequest) -> tuple[Optional[UserBase], Optional[JSONResponse]]: 
-        sql = select(UserBase).options(selectinload(UserBase.role)).where(UserBase.username == data.username)
+    async def signin(self, username: str, password: str) -> tuple[Optional[UserBase], Optional[JSONResponse]]: 
+        sql = select(UserBase).options(selectinload(UserBase.role)).where(UserBase.username == username)
         result = await self.session.execute(sql)
         user: Optional[UserBase] = result.scalar_one_or_none()
-        if user is not None and self.hasher.verify(data.password, user.password):
+        if user is not None and self.hasher.verify(password, user.password):
             user_data: dict = user.__repr__()
             access_token: str = self.jwt_service.create_access_token(user_data)
             refresh_token: str = self.jwt_service.create_refresh_token(user_data)
@@ -34,9 +36,8 @@ class AuthService(IAuthService):
             return (user, response)
         return (None, None)
     
-    async def signup(self, data: SignupRequest) -> Optional[UserBase]:
-        data.password = self.hasher.hash(data.password)
-        user: UserBase = UserBase.from_signup_request(data)
+    async def signup(self, username: str, password: str, role_id: int) -> Optional[UserBase]:
+        user: UserBase = UserBase(username=username, password=self.hasher.hash(password), role_id=role_id)
         await self.user_service.create_user(user)
         return user
     
@@ -45,3 +46,20 @@ class AuthService(IAuthService):
         self.cookie_service.delete_cookie(response, settings.JWT_STRING)
         self.cookie_service.delete_cookie(response, settings.REFRESH_STRING)
         return response
+    
+    async def change_password(self, id: int, new_password: str, old_password: str, current_user: UserBase) -> bool:
+        if not is_valid_password(new_password):
+            raise HTTPException(400, "Invalid new password format")
+        sql = select(UserBase).where(UserBase.id == id)
+        user = await self.session.scalar(sql)
+        if not user:
+            raise HTTPException(404, "User not found")
+        if current_user.id != user.id and current_user.role_id >= user.role_id:
+            raise HTTPException(404, "Access denied")
+        elif current_user.id == user.id and not self.hasher.verify(old_password, user.password):
+            raise HTTPException(400, "Old password is incorrect")
+        else:
+            pass #ВОТ ТУТ НАДО БЫ УТОЧНИТЬ МОГУТ ЛИ АДМИНЫ МЕНЯТЬ ПАРОЛИ ЛЮДЕЙ ЕСЛИ ОНИ ИХ ЗАБЫЛИ ИЛИ НАДО СДЕЛАТЬ ВОССТАОВЛЕНИЕ
+        user.password = self.hasher.hash(new_password)
+        await self.session.commit()
+        return True

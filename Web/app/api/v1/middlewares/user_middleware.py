@@ -1,11 +1,10 @@
-from fastapi import Request, Response, HTTPException, status
+from fastapi import Request, Response
 from ..interfaces import IJWTService, ICookieService
-from ...models import UserBase, UserRoleBase
+from ...models import UserBase
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 from app.config import settings
 from app.database import AsyncSessionLocal
-from functools import wraps
 from typing import Optional
 
 async def user_middleware(request: Request, call_next):
@@ -39,30 +38,4 @@ async def user_middleware(request: Request, call_next):
         stmt = select(UserBase).options(selectinload(UserBase.role)).where(UserBase.id == user_id)
         result = await session.execute(stmt)
         user = result.scalar_one_or_none()
-    return await go_next(user)
-
-async def auth_check(request: Request) -> UserBase:
-    try:
-        user: Optional[UserBase] = request.state.user
-    except AttributeError:
-        user = None
-    if user is None:
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "unauthorized")
-    endpoint = request.scope.get("endpoint")
-    if endpoint is None:
-        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "endpoint is none")
-    role_needed: Optional[int] = getattr(endpoint, "_role_required", None)
-    if role_needed is not None and role_needed < user.role_id:
-        raise HTTPException(status.HTTP_403_FORBIDDEN, {"user": {"id": user.id, "role_id": user.role_id},"role_needed": role_needed, "msg": "access denied"})
-    return user
-    
-def role_required(role_required: int):
-    def decorator(func):
-        func._role_required = role_required
-        @wraps(func)
-        async def wrapper(*args, **kwargs):
-            return await func(*args, **kwargs)
-        return wrapper
-    return decorator
-    
-    
+    return await go_next(user)    

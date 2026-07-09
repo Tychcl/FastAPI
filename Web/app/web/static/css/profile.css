@@ -105,10 +105,20 @@
 }
 
 @media (max-width: 605px) {
+    .profile-card {
+        width: auto;
+        max-width: none;
+    }
+    .profile-card-shell {
+        padding: 0px;
+    }
     .profile-container {
         flex-direction: column;
-        gap: 10px;
         padding: 10px;
+    }
+    .profile-card-shell-shell {
+        margin-bottom: 10px;
+        background: none;
     }
     .profile-card-shell-shell,
     .profile-menu-buttons {
@@ -116,6 +126,8 @@
     }
     .profile-menu {
         min-height: 150px;
+        padding-top: 0px;
+        border-radius: 0px 0px 12px 12px;
     }
     .login-box {
         padding: 20px;
@@ -180,8 +192,23 @@
     vertical-align: top;
 }
 
-.users-result{
+#users-result{
     margin: 14px 0px;
     gap: 14px;
     display: flex;
+}
+
+#users-pages .menu-btn__text {
+    opacity: 1;
+    max-width: 44px;
+    width: stretch;
+}
+
+#users-pages .menu-btn:hover {
+    padding-right: 0px;
+}
+
+.pages-separator{
+    vertical-align: bottom;
+    margin: 10px;
 }

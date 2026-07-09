@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request, Query, Depends, HTTPException
 from fastapi.responses import JSONResponse
 from ..interfaces import IUserService, IRoleService
 from ..dependences import user_service, role_service
-from ..middlewares import role_required, auth_check
+from app.config import auth_check, role_required
 from ...models import UserBase, UserRoleBase
 from typing import Optional, List, Tuple
 

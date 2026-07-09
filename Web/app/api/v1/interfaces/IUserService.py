@@ -17,3 +17,5 @@ class IUserService(ABC):
     
     @abstractmethod
     async def find_users_by_any(self, ids: Optional[List[int]] = None, username: Optional[str] = None, role_id: Optional[int] = None, page: int = 1, per_page: int = 25) -> Tuple[List[UserBase], int, int]: pass
+    
+    

@@ -31,10 +31,6 @@ class UserService(IUserService):
         sql = select(UserBase).options(selectinload(UserBase.role)).where(UserBase.username == username)
         result = await self.session.execute(sql)
         return result.scalar_one_or_none()
-    
-    #async def count_all_users(self) -> int:
-    #    sql = select(func.count()).select_from(UserBase)
-    #    return await self.session.scalar(sql) or 0
 
     async def count_users_by_filters(self, conditions: Optional[list] = None) -> int:
         sql = select(func.count()).select_from(UserBase)
@@ -68,7 +64,7 @@ class UserService(IUserService):
         if ids is not None:
             conditions.append(UserBase.id.in_(ids))
         if username is not None:
-            conditions.append(UserBase.username.ilike(f'%{username}%'))  # или ilike для частичного поиска
+            conditions.append(UserBase.username.ilike(f'%{username}%'))
         if role_id is not None:
             conditions.append(UserBase.role_id == role_id)
         return conditions

@@ -2,6 +2,10 @@ from fastapi.templating import Jinja2Templates
 import os
 import logging
 from pydantic_settings import BaseSettings
+from fastapi import HTTPException, status, Request
+from typing import Optional
+from .api.models import UserBase
+from functools import wraps
 
 class Settings(BaseSettings):
     BASE_DIR: str = os.path.dirname(os.path.abspath(__file__))
@@ -29,3 +33,29 @@ class Settings(BaseSettings):
 settings = Settings()
 templates = Jinja2Templates(directory=os.path.join(settings.BASE_DIR, "web/templates"))
 logger = logging.getLogger(__name__)
+
+templates.context_processors.append(lambda request: {"user": request.state.user.__repr__() if request.state.user else None})
+
+async def auth_check(request: Request) -> UserBase:
+    try:
+        user: Optional[UserBase] = request.state.user
+    except AttributeError:
+        user = None
+    if user is None:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "unauthorized")
+    endpoint = request.scope.get("endpoint")
+    if endpoint is None:
+        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "endpoint is none")
+    role_needed: Optional[int] = getattr(endpoint, "_role_required", None)
+    if role_needed is not None and role_needed < user.role_id:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, {"user": {"id": user.id, "role_id": user.role_id},"role_needed": role_needed, "msg": "access denied"})
+    return user
+    
+def role_required(role_required: int):
+    def decorator(func):
+        func._role_required = role_required
+        @wraps(func)
+        async def wrapper(*args, **kwargs):
+            return await func(*args, **kwargs)
+        return wrapper
+    return decorator

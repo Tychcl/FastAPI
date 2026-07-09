@@ -9,14 +9,14 @@ pages_controller = APIRouter()
 
 @pages_controller.get("/")
 async def get_index(request: Request):
-    context: dict = get_user_context(request)
-    return templates.TemplateResponse(request=request, name="pages/index.html", context=context)
+    #context: dict = get_user_context(request)
+    return templates.TemplateResponse(request=request, name="pages/index.html")
 
 @pages_controller.get("/profile")
 async def get_index(request: Request, 
                     RoleService: IRoleService = Depends(role_service)):
-    context: dict = get_user_context(request)
-    if context['user']:
+    context: dict = {}
+    if request.state.user:
         roles = await RoleService.get_all_roles()
         context['roles'] = [r.to_dict for r in roles]
     return templates.TemplateResponse(request=request, name="pages/profile.html", context=context)
