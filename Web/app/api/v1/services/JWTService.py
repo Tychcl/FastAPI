@@ -46,9 +46,9 @@ class JWTService(IJWTService):
         if payload is None:
             return None
         user_id: Optional[int] = payload.get("user_id")
-        user_role_id: Optional[int] = payload.get("user_role_id")
-        if user_id is None or user_role_id is None:
+        role_id: Optional[int] = payload.get("role_id")
+        if user_id is None or role_id is None:
             return None
-        new_access_token: str = self.create_access_token({"user_id": user_id, "user_role_id": user_role_id})
+        new_access_token: str = self.create_access_token({"user_id": user_id, "role_id": role_id})
         return new_access_token
         

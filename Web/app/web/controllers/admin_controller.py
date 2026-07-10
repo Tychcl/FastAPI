@@ -10,5 +10,9 @@ admin_controller = APIRouter(prefix="/admin")
 
 @role_required(UserRoleBase.ADMIN().id)
 @admin_controller.get("/panel")
-async def get_index(request: Request, user: UserBase  = Depends(auth_check)):
-    return templates.TemplateResponse(request=request, name="pages/index.html")
+async def get_index(request: Request, RoleService: IRoleService = Depends(role_service), user: UserBase  = Depends(auth_check)):
+    context: dict = {}
+    if user:
+        roles = await RoleService.get_all_roles()
+        context['roles'] = [r.to_dict for r in roles]
+    return templates.TemplateResponse(request=request, name="pages/admin/panel.html", context=context)

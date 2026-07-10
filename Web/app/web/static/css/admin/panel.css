@@ -1,0 +1,148 @@
+.panel-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 14px;
+}
+
+.panel-menu-buttons {
+    flex: 1 1 0;              
+    min-width: 0;             
+    background: white;
+    border-radius: 12px 12px 0 0;
+    padding: 14px;
+}
+
+.panel-menu-buttons .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.panel-menu-buttons .buttons .panel-menu-btn {
+    flex: 1 1 auto;
+    min-width: 120px;
+    max-width: 100%;
+    padding-right: 15px;
+    height: 50px;
+}
+
+.panel-menu-btn__text {
+    opacity: 1;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.panel-menu {
+    flex: 0 0 100%;           
+    min-height: 200px;
+    background: white;
+    border-radius: 0px 0px 12px 12px;
+    padding: 14px;
+}
+
+.profile-card {
+    width: fit-content;
+    max-width: 500px;
+    background: white;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+
+@media (max-width: 605px) {
+    .profile-card {
+        width: auto;
+        max-width: none;
+    }
+    .panel-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .panel-menu-buttons {
+        flex: 1 1 100% !important;
+    }
+    .panel-menu {
+        min-height: 150px;
+        padding-top: 0px;
+        border-radius: 0px 0px 12px 12px;
+    }
+}
+
+.panel-menu-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.panel-menu-form .form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+    min-width: 0px;
+}
+
+.panel-menu-form .form-group * {
+    min-width: 0px;
+}
+
+.panel-menu-form .form-group input:hover,
+.panel-menu-form .form-group select:hover{
+    padding-right: 0px;
+}
+
+.panel-menu-form .form-group input,
+.panel-menu-form .form-group select{
+    padding-left: 10px;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.profile-card-result{
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.profile-card-result .username{
+    font-size: 18px;
+}
+
+.profile-card-result span{
+    font-size: 14px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+#users-result{
+    margin: 14px 0px;
+    gap: 14px;
+    display: flex;
+}
+
+#users-pages {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+#users-pages .menu-btn__text {
+    opacity: 1;
+    max-width: 44px;
+    width: stretch;
+}
+
+#users-pages .menu-btn:hover {
+    padding-right: 0px;
+}
+
+.pages-separator{
+    vertical-align: bottom;
+    margin: 10px;
+}

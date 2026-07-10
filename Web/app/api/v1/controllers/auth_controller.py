@@ -58,3 +58,18 @@ async def password_change(request: Request,
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "All fields required")
     result: bool = await AuthService.change_password(data.user_id, data.new_password, data.old_password, user)
     return JSONResponse(content=result, status_code=status.HTTP_200_OK)
+
+@auth_controller.post("/telegram")
+async def telegram(request: Request):
+    path_params = request.path_params
+    query_params = dict(request.query_params)
+    headers = dict(request.headers)
+    cookies = dict(request.cookies)
+    body = await request.body()
+    return JSONResponse(content={
+        "path_params": path_params,
+        "query_params": query_params,
+        "headers": headers,
+        "cookies": cookies,
+        "body": body.decode() if body else None,
+    }, status_code=status.HTTP_200_OK)

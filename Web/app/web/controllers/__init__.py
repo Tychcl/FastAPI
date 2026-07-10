@@ -1,2 +1,2 @@
-from .admin import admin_controller
-from .pages import pages_controller
+from .admin_controller import admin_controller
+from .pages_controller import pages_controller

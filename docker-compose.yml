@@ -23,10 +23,12 @@ services:
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: PGA
+    env_file:
+      - .env
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin_password
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: ${PGADMIN_CONFIG_SERVER_MODE}
     ports:
       - "5050:80"
     depends_on:
@@ -46,22 +48,71 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      redis:
+        condition: service_healthy
     networks:
       - bookshelf
+    env_file:
+      - .env
     environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: Bookshelf
-      DB_USER: postgres
-      DB_PASSWORD: postgres_password
-      JWT_LIFETIME: 10800
-      JWT_STRING: access_token
-      JWT_SECRET: +#:H}?W%FM2DDs2:U?B-[4gQkF&)K$SkCp-exo|J8&f
-      REFRESH_LIFETIME: 259200
-      REFRESH_STRING: refresh_token
-      REFRESH_SECRET: /HV&zTz#72d]@L6jRsG/NU<g(_6n(_d#$7yPZjV-<RF
-      ALGORITHM_SECRET: HS256
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_LIFETIME: ${JWT_LIFETIME}
+      JWT_STRING: ${JWT_STRING}
+      JWT_SECRET: ${JWT_SECRET}
+      REFRESH_LIFETIME: ${REFRESH_LIFETIME}
+      REFRESH_STRING: ${REFRESH_STRING}
+      REFRESH_SECRET: ${REFRESH_SECRET}
+      ALGORITHM_SECRET: ${ALGORITHM_SECRET}
     restart: unless-stopped
+
+  redis:
+    image: redis:latest
+    container_name: Redis
+    env_file:
+      - .env
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_USER: ${REDIS_USER}
+      REDIS_USER_PASSWORD: ${REDIS_USER_PASSWORD}
+    ports:
+      - "6380:6379"
+    volumes:
+      - ./redisdata:/data
+    networks:
+      - bookshelf
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    command: >
+      sh -c '
+        mkdir -p /usr/local/etc/redis && 
+        echo "bind 0.0.0.0" > /usr/local/etc/redis/redis.conf &&
+        echo "requirepass $REDIS_PASSWORD" >> /usr/local/etc/redis/redis.conf &&
+        echo "appendonly yes" >> /usr/local/etc/redis/redis.conf &&
+        echo "appendfsync everysec" >> /usr/local/etc/redis/redis.conf &&
+        echo "user default on nopass ~* +@all" > /usr/local/etc/redis/users.acl &&
+        echo "user $REDIS_USER on >$REDIS_USER_PASSWORD ~* +@all" >> /usr/local/etc/redis/users.acl &&
+        redis-server /usr/local/etc/redis/redis.conf --aclfile /usr/local/etc/redis/users.acl
+      '
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "$REDIS_PASSWORD", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
 
 networks:
   bookshelf:

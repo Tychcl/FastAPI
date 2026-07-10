@@ -41,46 +41,7 @@
         </div>
     </div>
     <div id="menu-wrapper" class="profile-menu">
-        {% if user.role_id < 3 %}
-        <div id="users" class="hidden">
-            <form id="users-form" class="profile-menu-form">
-                <div class="form-group">
-                    <label for="ids">id(через пробел)</label>
-                    <input class="menu-btn menu-btn--green" type="text" id="ids" name="ids" placeholder="1 20 33">
-                </div>
-                <div class="form-group" style="max-width: fit-content; min-width: 0px;">
-                    <label for="username">Имя пользователя</label>
-                    <input class="menu-btn menu-btn--green" type="text" id="username" name="username" maxlength="15">
-                </div>
-                <div class="form-group" style="max-width: fit-content; min-width: 0px;">
-                    <label for="role_id">Роль</label>
-                    <select class="menu-btn menu-btn--green" id="role_id" name="role_id">
-                        <option value="">Все роли</option>
-                        {% for role in roles %}
-                        <option value="{{ role.id }}">{{ role.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <button style="align-self: end;" class="menu-btn menu-btn--green" aria-label="Профиль" type="submit">
-                    <span class="menu-btn__icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="10.5" cy="10.5" r="6.5" class="icon-stroke" stroke-width="1.8" />
-                            <line x1="15.5" y1="15.5" x2="21" y2="21" class="icon-stroke" stroke-width="1.8" stroke-linecap="round" />
-                        </svg>
-                    </span>
-                    <span class="menu-btn__text">Найти</span>
-                </button>
-            </form>
-            <div id="users-result">
-
-            </div>
-            <div id="users-pages">
-                <!--<button onclick="select_page(1)" class="menu-btn menu-btn--green">
-                    <span class="menu-btn__text">1</span>
-                </button>-->
-            </div>
-        </div>
-        {% endif %}
+        
     </div>
     {% else %}
     <div class="login-box">

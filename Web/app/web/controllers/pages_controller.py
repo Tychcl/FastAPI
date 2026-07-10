@@ -13,12 +13,8 @@ async def get_index(request: Request):
     return templates.TemplateResponse(request=request, name="pages/index.html")
 
 @pages_controller.get("/profile")
-async def get_index(request: Request, 
-                    RoleService: IRoleService = Depends(role_service)):
+async def get_index(request: Request):
     context: dict = {}
-    if request.state.user:
-        roles = await RoleService.get_all_roles()
-        context['roles'] = [r.to_dict for r in roles]
     return templates.TemplateResponse(request=request, name="pages/profile.html", context=context)
 
 def get_user_context(request: Request) -> dict:

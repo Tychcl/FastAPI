@@ -1,40 +1,12 @@
 from fastapi.templating import Jinja2Templates
 import os
+import ssl
 import logging
 from pydantic_settings import BaseSettings
 from fastapi import HTTPException, status, Request
 from typing import Optional
 from .api.models import UserBase
 from functools import wraps
-
-class Settings(BaseSettings):
-    BASE_DIR: str = os.path.dirname(os.path.abspath(__file__))
-    DB_HOST: str
-    DB_PORT: int
-    DB_NAME: str
-    DB_USER: str
-    DB_PASSWORD: str
-    JWT_LIFETIME: int
-    JWT_STRING: str
-    JWT_SECRET: str
-    REFRESH_LIFETIME: int
-    REFRESH_STRING: str
-    REFRESH_SECRET: str
-    ALGORITHM_SECRET: str
-
-    @property
-    def DB_URL(self) -> str:
-        return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-
-    @property
-    def AUTH_DATA(self) -> dict:
-        return {"JWT": self.JWT_SECRET, "REFRESH": self.REFRESH_SECRET, "ALGORITHM": self.ALGORITHM_SECRET}
-
-settings = Settings()
-templates = Jinja2Templates(directory=os.path.join(settings.BASE_DIR, "web/templates"))
-logger = logging.getLogger(__name__)
-
-templates.context_processors.append(lambda request: {"user": request.state.user.__repr__() if request.state.user else None})
 
 async def auth_check(request: Request) -> UserBase:
     try:
@@ -59,3 +31,47 @@ def role_required(role_required: int):
             return await func(*args, **kwargs)
         return wrapper
     return decorator
+
+class Settings(BaseSettings):
+    BASE_DIR: str = os.path.dirname(os.path.abspath(__file__))
+    
+    REDIS_PASSWORD: str
+    REDIS_USER: str
+    REDIS_USER_PASSWORD: str
+    REDIS_HOST: str
+    REDIS_PORT: int
+    
+    DB_HOST: str
+    DB_PORT: int
+    DB_NAME: str
+    DB_USER: str
+    DB_PASSWORD: str
+    
+    JWT_LIFETIME: int
+    JWT_STRING: str
+    JWT_SECRET: str
+    
+    REFRESH_LIFETIME: int
+    REFRESH_STRING: str
+    REFRESH_SECRET: str
+    
+    ALGORITHM_SECRET: str
+
+    @property
+    def DB_URL(self) -> str:
+        return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+
+    @property
+    def AUTH_DATA(self) -> dict:
+        return {"JWT": self.JWT_SECRET, "REFRESH": self.REFRESH_SECRET, "ALGORITHM": self.ALGORITHM_SECRET}
+    
+    @property
+    def REDIS_URL(self):
+        return f"rediss://:{self.REDIS_PASSWORD}@{self.REDIS_HOST}:{self.REDIS_PORT}/0"
+
+ssl_options = {"ssl_cert_reqs": ssl.CERT_NONE}
+settings = Settings()
+templates = Jinja2Templates(directory=os.path.join(settings.BASE_DIR, "web/templates"))
+logger = logging.getLogger(__name__)
+
+templates.context_processors.append(lambda request: {"user": request.state.user.__repr__() if request.state.user else None})

@@ -2,15 +2,34 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from app.api.v1.router import api_router 
 from app.web.router import web_router
-from .database import lifespan
+from app.database import lifespan
 from fastapi.responses import JSONResponse
-from .config import logger
+from app.config import logger
+from . import settings, ssl_options
 from .api.v1.middlewares import user_middleware
 from .api.v1.services import JWTService, CookieService
+from celery import Celery
+
+celery_app = Celery(
+    "celery_worker",  # Имя приложения Celery
+    broker=settings.REDIS_URL,  # URL брокера задач (Redis)
+    backend=settings.REDIS_URL  # URL для хранения результатов выполнения задач
+)
+
+celery_app.conf.update(
+    broker_use_ssl=ssl_options,
+    redis_backend_use_ssl=ssl_options,
+    task_serializer='json',
+    result_serializer='json',
+    accept_content=['json'],
+    enable_utc=True,  # Убедитесь, что UTC включен
+    timezone='Europe/Moscow',  # Устанавливаем московское время
+    broker_connection_retry_on_startup=True,
+    task_acks_late=True,
+    task_reject_on_worker_lost=True,
+)
 
 app = FastAPI(lifespan=lifespan)
-
-from app.api.v1.services import JWTService, CookieService
 
 app.state.jwt_service = JWTService()
 app.state.cookie_service = CookieService()
