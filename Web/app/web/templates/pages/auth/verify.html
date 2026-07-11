@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block script %}
+<script src="{{ url_for('static', path='/js/auth/verify.js') }}"></script>
+{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/auth/verify.css') }}">
+{% endblock %}
+{% block main %}
+<div class="verify-box">
+    <h2>Верификация почты</h2>
+    {% if email %}
+    <p>Код отправлен на почту: <strong>{{ email }}</strong><br></p>
+    {% endif %}
+    <form id="verifyForm" method="post" action="/api/v1/email/verify">
+        <div class="form-group">
+            <label for="code">Код</label>
+            <input type="code" id="code" name="code" required>
+        </div>
+        <button type="submit">Подтвердить</button>
+    </form>
+</div>
+{% endblock %}

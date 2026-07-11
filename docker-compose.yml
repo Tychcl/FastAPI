@@ -69,6 +69,7 @@ services:
       REFRESH_STRING: ${REFRESH_STRING}
       REFRESH_SECRET: ${REFRESH_SECRET}
       ALGORITHM_SECRET: ${ALGORITHM_SECRET}
+      SESSION_SECRET: ${SESSION_SECRET}
     restart: unless-stopped
 
   redis:
@@ -101,8 +102,8 @@ services:
         echo "requirepass $REDIS_PASSWORD" >> /usr/local/etc/redis/redis.conf &&
         echo "appendonly yes" >> /usr/local/etc/redis/redis.conf &&
         echo "appendfsync everysec" >> /usr/local/etc/redis/redis.conf &&
-        echo "user default on nopass ~* +@all" > /usr/local/etc/redis/users.acl &&
-        echo "user $REDIS_USER on >$REDIS_USER_PASSWORD ~* +@all" >> /usr/local/etc/redis/users.acl &&
+        echo "user default on >$REDIS_PASSWORD ~* &* +@all" > /usr/local/etc/redis/users.acl &&
+        echo "user $REDIS_USER on >$REDIS_USER_PASSWORD ~* &* +@all" >> /usr/local/etc/redis/users.acl &&
         redis-server /usr/local/etc/redis/redis.conf --aclfile /usr/local/etc/redis/users.acl
       '
     healthcheck:
@@ -113,6 +114,25 @@ services:
     restart: unless-stopped
     tty: true
     stdin_open: true
+
+  celery:
+    build: ./web
+    container_name: Celery
+    env_file:
+      - .env
+    command: celery -A app.celery worker -l INFO
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    networks:
+      - bookshelf
+    restart: unless-stopped
 
 networks:
   bookshelf:

@@ -9,31 +9,37 @@ from typing import Optional
 from fastapi.responses import JSONResponse
 
 async def user_middleware(request: Request, call_next):
-    
     jwt_service: IJWTService = request.app.state.jwt_service
     cookie_service: ICookieService = request.app.state.cookie_service
-    
-    user: Optional[UserBase] = None
+    user = None
     token_upd = False
-    access_token:str = request.cookies.get(settings.JWT_STRING)
-    refresh_token:str = request.cookies.get(settings.REFRESH_STRING)
-    
-    if refresh_token is not None and access_token is None:
+    access_token = request.cookies.get(settings.JWT_STRING)
+    refresh_token = request.cookies.get(settings.REFRESH_STRING)
+    payload = None
+    if refresh_token and not access_token:
         access_token = jwt_service.refresh_access_token(refresh_token)
-        token_upd = access_token is not None
-    
-    if access_token is not None and refresh_token is not None:
-        payload: Optional[dict] = jwt_service.get_access_payload(access_token)
-        if payload:
-            user_id: Optional[int] = payload.get("user_id", None)
-            if user_id:
-                async with AsyncSessionLocal() as session:
-                    sql = select(UserBase).options(selectinload(UserBase.role)).where(UserBase.id == user_id)
-                    result = await session.execute(sql)
-                    user = result.scalar_one_or_none()
-    
+        if access_token:
+            token_upd = True
+            payload = jwt_service.get_access_payload(access_token)
+    elif access_token and refresh_token:
+        payload = jwt_service.get_access_payload(access_token)
+        if not payload:
+            access_token = jwt_service.refresh_access_token(refresh_token)
+            if access_token:
+                token_upd = True
+                payload = jwt_service.get_access_payload(access_token)
+    if payload:
+        user = await get_user_by_id(payload.get("user_id"))
     request.state.user = user
-    response: Response = await call_next(request)
-    if token_upd:
+    response = await call_next(request)
+    if token_upd and access_token:
         cookie_service.set_cookie(response, settings.JWT_STRING, access_token, settings.JWT_LIFETIME)
     return response
+
+async def get_user_by_id(user_id: Optional[int] = None) -> Optional[UserBase]:
+    if user_id:
+        async with AsyncSessionLocal() as session:
+            sql = select(UserBase).options(selectinload(UserBase.role)).where(UserBase.id == user_id)
+            result = await session.execute(sql)
+            return result.scalar_one_or_none()
+    return None

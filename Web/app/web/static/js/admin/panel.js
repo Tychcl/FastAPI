@@ -39,10 +39,12 @@ async function find_users(event) {
 
     const idsInput = form.querySelector('#ids');
     const usernameInput = form.querySelector('#username');
+    const emailInput = form.querySelector('#email');
     const role_idSelect = form.querySelector('#role_id');
 
     const idsRaw = idsInput.value.trim();
     const username = usernameInput.value.trim();
+    const email = emailInput.value.trim()
     const role_id = role_idSelect.value;
 
     const params = new URLSearchParams();
@@ -52,6 +54,7 @@ async function find_users(event) {
         idsArray.forEach(id => params.append('ids', id));
     }
     if (username) params.append('username', username);
+    if (email) params.append('email', email);
     if (role_id) params.append('role_id', role_id);
 
     // Если сервер поддерживает пагинацию, можно раскомментировать:

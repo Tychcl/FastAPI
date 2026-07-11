@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 from ...models.user import UserBase
 from ..interfaces import IUserService
-from sqlalchemy import select, func
+from sqlalchemy import select, func, or_
 from typing import Optional, List, Tuple
 
 class UserService(IUserService):
@@ -11,9 +11,9 @@ class UserService(IUserService):
         self.session = session
         
     async def create_user(self, user: UserBase) -> None:
-        exists: Optional[UserBase] = await self.get_user_by_username(user.username)
-        if exists is not None:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, f"user {user.username} already exists")
+        exists: bool = await self.check_user_exists(username=user.username, email=user.email)
+        if exists:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, f"user with that username or email already exists")
         try:
             self.session.add(user)
         except:
@@ -31,6 +31,15 @@ class UserService(IUserService):
         sql = select(UserBase).options(selectinload(UserBase.role)).where(UserBase.username == username)
         result = await self.session.execute(sql)
         return result.scalar_one_or_none()
+    
+    async def check_user_exists(self, id: Optional[int] = None, username: Optional[str] = None, email: Optional[str] = None) -> bool:
+        sql = select(UserBase).where(or_(
+            UserBase.id == id,
+            UserBase.username == username, 
+            UserBase.email == email))
+        result = await self.session.execute(sql)
+        user: Optional[UserBase] = result.scalar_one_or_none()
+        return user is not None
 
     async def count_users_by_filters(self, conditions: Optional[list] = None) -> int:
         sql = select(func.count()).select_from(UserBase)
@@ -42,12 +51,13 @@ class UserService(IUserService):
         self,
         ids: Optional[List[int]] = None,
         username: Optional[str] = None,
+        email: Optional[str] = None,
         role_id: Optional[int] = None,
         page: int = 1,
         per_page: int = 25
     ) -> Tuple[List[UserBase], int, int]:
         sql = select(UserBase)
-        conditions = self._build_conditions(ids, username, role_id)
+        conditions = self._build_conditions(ids, username, email, role_id)
         if conditions:
             sql = sql.where(*conditions)
         sql = sql.options(selectinload(UserBase.role))
@@ -59,12 +69,18 @@ class UserService(IUserService):
             count_filter = await self.count_users_by_filters(conditions)
         return result.scalars().all(), count_filter, count
     
-    def _build_conditions(self, ids, username, role_id):
+    def _build_conditions(self, 
+                          ids: Optional[List[int]] = None, 
+                          username: Optional[str] = None, 
+                          email: Optional[str] = None, 
+                          role_id: Optional[int] = None):
         conditions = []
-        if ids is not None:
+        if ids is not None and ids.count > 0:
             conditions.append(UserBase.id.in_(ids))
         if username is not None:
             conditions.append(UserBase.username.ilike(f'%{username}%'))
+        if email is not None:
+            conditions.append(UserBase.email.ilike(f'%{email}%'))
         if role_id is not None:
             conditions.append(UserBase.role_id == role_id)
         return conditions

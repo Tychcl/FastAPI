@@ -11,16 +11,17 @@ from ..v1.requests import SignupRequest
 class UserBase(Base):
 	__tablename__ = "users"
 
-	id: Mapped[int] = mapped_column(primary_key=True)
-	username: Mapped[str] = mapped_column(String(15))
-	password: Mapped[str] = mapped_column(String())
+	id: Mapped[int] = mapped_column(primary_key=True, nullable=False)
+	username: Mapped[str] = mapped_column(String(15), unique=True, nullable=False)
+	email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
+	password: Mapped[str] = mapped_column(String(), nullable=False)
 
-	role_id: Mapped[int] = mapped_column(ForeignKey("user_roles.id"))
+	role_id: Mapped[int] = mapped_column(ForeignKey("user_roles.id"), nullable=False)
 	role: ClassVar[UserRoleBase] = relationship("UserRoleBase", back_populates="users")
 
 	def __repr__(self) -> dict:
-		return {"user_id": self.id, "username": self.username, "role_id": self.role_id, "role_name": self.role.name}
+		return {"user_id": self.id, "username": self.username, "email": self.email, "role_id": self.role_id, "role_name": self.role.name}
 
 	@property
 	def to_dict(self):
-		return {"id": self.id, "username": self.username, "role_id": self.role_id}
+		return {"id": self.id, "username": self.username, "email": self.email, "role_id": self.role_id}

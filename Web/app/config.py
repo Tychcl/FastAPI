@@ -8,13 +8,24 @@ from typing import Optional
 from .api.models import UserBase
 from functools import wraps
 
-async def auth_check(request: Request) -> UserBase:
+async def get_authorized_user(request: Request) -> Optional[UserBase]:
     try:
         user: Optional[UserBase] = request.state.user
     except AttributeError:
         user = None
     if user is None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "unauthorized")
+    return user
+
+async def get_user(request: Request) -> Optional[UserBase]:
+    try:
+        user: Optional[UserBase] = request.state.user
+    except AttributeError:
+        user = None
+    return user
+
+async def auth_check(request: Request) -> UserBase:
+    user: Optional[UserBase] = await get_authorized_user(request)
     endpoint = request.scope.get("endpoint")
     if endpoint is None:
         raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "endpoint is none")
@@ -34,28 +45,31 @@ def role_required(role_required: int):
 
 class Settings(BaseSettings):
     BASE_DIR: str = os.path.dirname(os.path.abspath(__file__))
-    
+    #Redis
     REDIS_PASSWORD: str
     REDIS_USER: str
     REDIS_USER_PASSWORD: str
     REDIS_HOST: str
     REDIS_PORT: int
-    
+    #DataBase
     DB_HOST: str
     DB_PORT: int
     DB_NAME: str
     DB_USER: str
     DB_PASSWORD: str
-    
+    #JWT
     JWT_LIFETIME: int
     JWT_STRING: str
     JWT_SECRET: str
-    
     REFRESH_LIFETIME: int
     REFRESH_STRING: str
     REFRESH_SECRET: str
-    
     ALGORITHM_SECRET: str
+    #SESSION
+    SESSION_SECRET: str
+    #SMTP
+    SMTP_MAIL: str
+    SMTP_MAIL_PWD: str
 
     @property
     def DB_URL(self) -> str:
@@ -67,7 +81,7 @@ class Settings(BaseSettings):
     
     @property
     def REDIS_URL(self):
-        return f"rediss://:{self.REDIS_PASSWORD}@{self.REDIS_HOST}:{self.REDIS_PORT}/0"
+        return f"redis://{self.REDIS_USER}:{self.REDIS_USER_PASSWORD}@{self.REDIS_HOST}:{self.REDIS_PORT}/0"
 
 ssl_options = {"ssl_cert_reqs": ssl.CERT_NONE}
 settings = Settings()

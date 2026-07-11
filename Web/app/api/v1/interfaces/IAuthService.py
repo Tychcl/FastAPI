@@ -6,10 +6,10 @@ from typing import Optional
 
 class IAuthService(ABC):
     @abstractmethod
-    async def signin(self, username: str, password: str) -> tuple[Optional[UserBase], Optional[JSONResponse]]: pass
+    async def signin(self, login: str, password: str) -> tuple[Optional[UserBase], Optional[JSONResponse]]: pass
     
     @abstractmethod
-    async def signup(self, username: str, password: str, role_id: int) -> Optional[UserBase]: pass
+    async def signup(self, username: str, email: str, password: str, role_id: int, pwd_hashed: bool = False) -> Optional[UserBase]: pass
     
     @abstractmethod
     def logout(self) -> RedirectResponse: pass

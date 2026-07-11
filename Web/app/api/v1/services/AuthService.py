@@ -1,13 +1,13 @@
 from fastapi.responses import JSONResponse, RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select,  insert
+from sqlalchemy import select, insert, or_
 from sqlalchemy.orm import selectinload
 from ...models.user import UserBase
 from ..interfaces import IAuthService, IPasswordHasherService, IUserService, IJWTService, ICookieService
 from ..requests import SignupRequest, SigninRequest
 from app.config import settings
 from typing import Optional
-from ..validators import is_valid_password
+from ..validators import is_valid_password, is_valid_email
 from fastapi import HTTPException, status
 
 class AuthService(IAuthService):
@@ -22,8 +22,8 @@ class AuthService(IAuthService):
         self.jwt_service = jwt_service
         self.cookie_service = cookie_service
 
-    async def signin(self, username: str, password: str) -> tuple[Optional[UserBase], Optional[JSONResponse]]: 
-        sql = select(UserBase).options(selectinload(UserBase.role)).where(UserBase.username == username)
+    async def signin(self, login: str, password: str) -> tuple[Optional[UserBase], Optional[JSONResponse]]:
+        sql = select(UserBase).options(selectinload(UserBase.role)).where(or_(UserBase.email == login, UserBase.username == login))
         result = await self.session.execute(sql)
         user: Optional[UserBase] = result.scalar_one_or_none()
         if user is not None and self.hasher.verify(password, user.password):
@@ -36,8 +36,9 @@ class AuthService(IAuthService):
             return (user, response)
         return (None, None)
     
-    async def signup(self, username: str, password: str, role_id: int) -> Optional[UserBase]:
-        user: UserBase = UserBase(username=username, password=self.hasher.hash(password), role_id=role_id)
+    async def signup(self, username: str, email: str, password: str, role_id: int, pwd_hashed: bool = False) -> Optional[UserBase]:
+        password: str = self.hasher.hash(password) if not pwd_hashed else password
+        user: UserBase = UserBase(username=username, email=email, password=password, role_id=role_id)
         await self.user_service.create_user(user)
         return user
     
