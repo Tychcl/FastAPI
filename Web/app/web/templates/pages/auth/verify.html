@@ -14,9 +14,10 @@
     <form id="verifyForm" method="post" action="/api/v1/email/verify">
         <div class="form-group">
             <label for="code">Код</label>
-            <input type="code" id="code" name="code" required>
+            <input type="code" id="code" name="code" type="number" required maxlength="4">
         </div>
         <button type="submit">Подтвердить</button>
+        <div id="FormError" class="error"></div>
     </form>
 </div>
 {% endblock %}

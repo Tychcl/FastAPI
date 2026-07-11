@@ -98,7 +98,8 @@ async def email_verify(request: Request,
     new_user: Optional[UserBase] = await AuthService.signup(username, email, password, role_id, True)
     if new_user is None:
         raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "user create error")
-    return RedirectResponse("/profile")
+    await redis_client.delete(key)
+    return JSONResponse(content={"msg": "email verified"}, status_code=status.HTTP_200_OK)
 
 #@auth_controller.post("/password/change")
 #async def password_change(request: Request, 

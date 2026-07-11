@@ -53,7 +53,7 @@ async function loginHandler(event) {
             window.location.href = '/profile';
         } else {
             const data = await response.json().catch(() => ({}));
-            errorEl.textContent = data.detail || 'Неверный логин или пароль';
+            errorEl.textContent = data.message || 'Неверный логин или пароль';
         }
     } catch (e) {
         errorEl.textContent = 'Ошибка соединения';
@@ -96,7 +96,7 @@ async function registerHandler(event) {
             window.location.href = '/authorize/email/verify';
         } else {
             const data = await response.json().catch(() => ({}));
-            errorEl.textContent = data.detail || 'Ошибка регистрации';
+            errorEl.textContent = data.message || 'Ошибка регистрации';
         }
     } catch (e) {
         errorEl.textContent = 'Ошибка соединения';
