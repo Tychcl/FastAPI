@@ -11,8 +11,8 @@ class UserService(IUserService):
         self.session = session
         
     async def create_user(self, user: UserBase) -> None:
-        exists: bool = await self.check_user_exists(username=user.username, email=user.email)
-        if exists:
+        exists_user: Optional[UserBase] = await self.get_user_user_by(username=user.username, email=user.email)
+        if exists_user:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, f"user with that username or email already exists")
         try:
             self.session.add(user)
@@ -21,31 +21,20 @@ class UserService(IUserService):
             raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "user create error")
         else:
             await self.session.commit()
-
-    async def get_user_by_id(self, id: int) -> Optional[UserBase]: 
-        sql = select(UserBase).options(selectinload(UserBase.role)).where(UserBase.id == id)
+    
+    async def get_user_by(self, id: Optional[int] = None, username: Optional[str] = None, email: Optional[str] = None, role_id: Optional[int] = None) -> Optional[UserBase]:
+        conditions: list = []
+        if id:
+            conditions.append(UserBase.id == id)
+        if username:
+            conditions.append(UserBase.username == username)
+        if email:
+            conditions.append(UserBase.email == email)
+        if role_id:
+            conditions.append(UserBase.role_id == role_id)
+        sql = select(UserBase).where(or_(*conditions))
         result = await self.session.execute(sql)
         return result.scalar_one_or_none()
-    
-    async def get_user_by_username(self, username: str) -> Optional[UserBase]: 
-        sql = select(UserBase).options(selectinload(UserBase.role)).where(UserBase.username == username)
-        result = await self.session.execute(sql)
-        return result.scalar_one_or_none()
-    
-    async def check_user_exists(self, id: Optional[int] = None, username: Optional[str] = None, email: Optional[str] = None) -> bool:
-        sql = select(UserBase).where(or_(
-            UserBase.id == id,
-            UserBase.username == username, 
-            UserBase.email == email))
-        result = await self.session.execute(sql)
-        user: Optional[UserBase] = result.scalar_one_or_none()
-        return user is not None
-
-    async def count_users_by_filters(self, conditions: Optional[list] = None) -> int:
-        sql = select(func.count()).select_from(UserBase)
-        if conditions:
-            sql = sql.where(*conditions)
-        return await self.session.scalar(sql) or 0
 
     async def find_users_by_any(
         self,
@@ -68,6 +57,13 @@ class UserService(IUserService):
         if conditions:
             count_filter = await self.count_users_by_filters(conditions)
         return result.scalars().all(), count_filter, count
+    
+    async def count_users_by_filters(self, conditions: Optional[list] = None) -> int:
+        sql = select(func.count()).select_from(UserBase)
+        if conditions:
+            sql = sql.where(*conditions)
+        return await self.session.scalar(sql) or 0
+
     
     def _build_conditions(self, 
                           ids: Optional[List[int]] = None, 

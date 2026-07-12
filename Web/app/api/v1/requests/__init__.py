@@ -1,4 +1,5 @@
 from .SigninRequest import SigninRequest
 from .SignupRequest import SignupRequest
-from .ChangePassword import ChangePassword
+from .password_change_request import PasswordChangeRequest
 from .email_verify_request import EmailVerifyRequest
+from .password_forgot_request import PasswordForgotRequest

@@ -45,10 +45,10 @@ class JWTService(IJWTService):
         payload: Optional[dict] = self.decode_token(refresh_token, is_access=False)
         if payload is None:
             return None
-        user_id: Optional[int] = payload.get("user_id")
+        user_id: Optional[int] = payload.get("id")
         role_id: Optional[int] = payload.get("role_id")
         if user_id is None or role_id is None:
             return None
-        new_access_token: str = self.create_access_token({"user_id": user_id, "role_id": role_id})
+        new_access_token: str = self.create_access_token({"id": user_id, "role_id": role_id})
         return new_access_token
         

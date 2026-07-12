@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Request, Depends, HTTPException, status
-from fastapi.responses import JSONResponse, RedirectResponse
-from ..requests import SigninRequest, SignupRequest, ChangePassword, EmailVerifyRequest
+from fastapi.responses import JSONResponse
+from ..requests import SigninRequest, SignupRequest, PasswordForgotRequest, EmailVerifyRequest, PasswordChangeRequest
 from ..dependences import auth_service, role_service, user_service
 from ..interfaces import IAuthService, IRoleService, IPasswordHasherService, IUserService
 from ...models import UserBase, UserRoleBase
-from app.config import auth_check, role_required, get_user
+from app.config import auth_check, role_required, get_user, get_authorized_user
 from ..validators import is_valid_username, is_valid_password, is_valid_email
 from app.celery import celery_app
 from typing import Optional
@@ -67,21 +67,70 @@ async def signup(request: Request,
         raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, f"Email sending failed: {str(e)}")
     if not success:
         raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "Failed to send verification email")
-    await redis_client.setex(f"temp_user:{code}", 600, json.dumps(user_data))
+    await redis_client.setex(f"email_verify:{code}", 600, json.dumps(user_data))
     return JSONResponse(content={"msg": f"verification code send to {data.email}"}, status_code=status.HTTP_200_OK)#RedirectResponse("/authorize/email/verify")
 
 @auth_controller.post("/signout")
-async def signout(request: Request, AuthService: IAuthService = Depends(auth_service)) -> RedirectResponse:
+async def signout(request: Request, AuthService: IAuthService = Depends(auth_service)) -> JSONResponse:
     return await AuthService.logout()
 
-@auth_controller.post("/email/verify")
+@auth_controller.post("/password/forgot", tags=["password"])
+async def password_forgot(request: Request,
+                          data: PasswordForgotRequest,
+                          UserService: IUserService = Depends(user_service)) -> JSONResponse:
+    user: Optional[UserBase] = await UserService.get_user_by(username=data.login, email=data.login)
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="user with that login not found")
+    user_data: dict = user.to_dict
+    token: str = secrets.token_urlsafe(16)
+    task: AsyncResult = celery_app.send_task(
+        'send_password_forgot_link',
+        args=[user.email, token],
+        queue='celery'
+    )
+    try:
+        success = await asyncio.to_thread(task.get, timeout=30)
+    except TimeoutError:
+        raise HTTPException(status.HTTP_504_GATEWAY_TIMEOUT, "Email service timeout")
+    except Exception as e:
+        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, f"Email sending failed: {str(e)}")
+    if not success:
+        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "Failed to send verification email")
+    redis_client: Redis = request.app.state.redis
+    await redis_client.setex(f"password_forgot:{token}", 600, json.dumps(user_data))
+    return JSONResponse(content={"message": "password change link sended to your email"}, status_code=status.HTTP_200_OK)
+
+@auth_controller.post("/password/change", tags=["password"])
+async def password_change(request: Request,
+                          data: PasswordChangeRequest,
+                          User: Optional[UserBase] = Depends(get_user),
+                          AuthService: IAuthService = Depends(auth_service)) -> JSONResponse:
+    if not is_valid_password(data.password):
+        raise HTTPException(400, "Invalid new password format")
+    if data.password != data.confirm:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="password confirmation error")
+    key = f"password_forgot:{data.token}"
+    redis_client: Redis = request.app.state.redis
+    redis_data = await redis_client.get(key)
+    if redis_data is None and User is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="signup out of time, try again")
+    user_data: dict = json.loads(data)
+    id: Optional[int] = user_data.get("id", None) or User.id
+    if id is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User data not found")
+    await AuthService.change_password(id, data.password)
+    if redis_data:
+        await redis_client.delete(key)
+    return JSONResponse(content={"msg": "password changed"}, status_code=status.HTTP_200_OK)
+
+@auth_controller.post("/email/verify", tags=["email"])
 async def email_verify(request: Request,
                        data: EmailVerifyRequest,
-                       AuthService: IAuthService = Depends(auth_service)) -> RedirectResponse:
+                       AuthService: IAuthService = Depends(auth_service)) -> JSONResponse:
     email: Optional[str] = request.session["email"]
     if email is None:
         raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "email not found in session")
-    key = f"temp_user:{data.code}"
+    key = f"email_verify:{data.code}"
     redis_client: Redis = request.app.state.redis
     data = await redis_client.get(key)
     if data:
@@ -99,29 +148,5 @@ async def email_verify(request: Request,
     if new_user is None:
         raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "user create error")
     await redis_client.delete(key)
+    request.session.pop("email")
     return JSONResponse(content={"msg": "email verified"}, status_code=status.HTTP_200_OK)
-
-#@auth_controller.post("/password/change")
-#async def password_change(request: Request, 
-#                          data: ChangePassword, 
-#                          AuthService: IAuthService = Depends(auth_service),
-#                          User: Optional[UserBase] = Depends(get_user)) -> JSONResponse:
-#    if data.user_id is None or data.new_password is None or data.old_password is None:
-#        raise HTTPException(status.HTTP_400_BAD_REQUEST, "All fields required")
-#    result: bool = await AuthService.change_password(data.user_id, data.new_password, data.old_password, User)
-#    return JSONResponse(content=result, status_code=status.HTTP_200_OK)
-
-#@auth_controller.post("/telegram")
-#async def telegram(request: Request):
-#    path_params = request.path_params
-#    query_params = dict(request.query_params)
-#    headers = dict(request.headers)
-#    cookies = dict(request.cookies)
-#    body = await request.body()
-#    return JSONResponse(content={
-#        "path_params": path_params,
-#        "query_params": query_params,
-#        "headers": headers,
-#        "cookies": cookies,
-#        "body": body.decode() if body else None,
-#    }, status_code=status.HTTP_200_OK)

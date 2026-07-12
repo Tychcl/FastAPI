@@ -41,13 +41,13 @@ async def get_role_by_id(request: Request,
     role: UserRoleBase = await RoleService.get_role_by_id(id)
     return JSONResponse(content=role.to_dict, status_code=200)
 
-@role_required(UserRoleBase.ADMIN().id)
-@user_controller.get("/{id}")
-async def get_user_by_id(request: Request, 
-                         id: Optional[int] = None, 
-                         UserService: IUserService = Depends(user_service),
-                         user: Optional[UserBase] = Depends(auth_check)) -> JSONResponse:
-    if id is None:
-        return HTTPException(content={"error": "id required"}, status_code=400)
-    user = await UserService.get_user_by_id(id)
-    return JSONResponse(content={"user": {"id": user.id, "username": user.username, "role_id": user.role_id, "role_name": user.role.name}}, status_code=200)
+#@role_required(UserRoleBase.ADMIN().id)
+#@user_controller.get("/{id}")
+#async def get_user_by_id(request: Request, 
+#                         id: Optional[int] = None, 
+#                         UserService: IUserService = Depends(user_service),
+#                         user: Optional[UserBase] = Depends(auth_check)) -> JSONResponse:
+#    if id is None:
+#        return HTTPException(content={"error": "id required"}, status_code=400)
+#    user = await UserService.get_user_by(id=id)
+#    return JSONResponse(content={"user": {"id": user.id, "username": user.username, "role_id": user.role_id, "role_name": user.role.name}}, status_code=200)

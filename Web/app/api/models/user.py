@@ -20,7 +20,7 @@ class UserBase(Base):
 	role: ClassVar[UserRoleBase] = relationship("UserRoleBase", back_populates="users")
 
 	def __repr__(self) -> dict:
-		return {"user_id": self.id, "username": self.username, "email": self.email, "role_id": self.role_id, "role_name": self.role.name}
+		return {"id": self.id, "username": self.username, "email": self.email, "role_id": self.role_id, "role_name": self.role.name}
 
 	@property
 	def to_dict(self):

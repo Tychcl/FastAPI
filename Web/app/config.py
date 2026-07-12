@@ -44,6 +44,7 @@ def role_required(role_required: int):
     return decorator
 
 class Settings(BaseSettings):
+    BASE_URL: str
     BASE_DIR: str = os.path.dirname(os.path.abspath(__file__))
     #Redis
     REDIS_PASSWORD: str

@@ -70,6 +70,7 @@ services:
       REFRESH_SECRET: ${REFRESH_SECRET}
       ALGORITHM_SECRET: ${ALGORITHM_SECRET}
       SESSION_SECRET: ${SESSION_SECRET}
+      BASE_URL: ${BASE_URL}
     restart: unless-stopped
 
   redis:

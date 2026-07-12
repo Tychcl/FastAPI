@@ -6,7 +6,7 @@ from app.api.v1.interfaces import IRoleService
 from typing import Optional
 from app.config import auth_check, role_required
 
-admin_controller = APIRouter(prefix="/admin")
+admin_controller = APIRouter(prefix="/admin", tags=["web"])
 
 @role_required(UserRoleBase.ADMIN().id)
 @admin_controller.get("/panel")

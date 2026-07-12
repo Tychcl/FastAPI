@@ -15,4 +15,4 @@ class IAuthService(ABC):
     def logout(self) -> RedirectResponse: pass
     
     @abstractmethod
-    async def change_password(self, id: int, new_password: str, old_password, current_user: UserBase): pass
+    async def change_password(self, id: int, new_password: str) -> bool: pass

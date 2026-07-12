@@ -1,6 +1,8 @@
 from .config import settings, ssl_options
 from celery import Celery
 import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 celery_app = Celery(
     "celery_worker",  # Имя приложения Celery
@@ -27,22 +29,49 @@ celery_app.conf.update(
     max_retries=3,
     default_retry_delay=5
 )
-def send_verify_email(self, user_email: str, code: int) -> bool:
+def send_verify_email(self, email: str, code: int) -> bool:
     import logging
-    logging.info(f"Sending email to {user_email} with code {code}")
+    logging.info(f"Sending verify email to {email} with code {code}")
     try:
-        send_msg(user_email, str(code))
+        body = f"Здравствуйте!\n\nКод для подтверждения почты: {code}\n\nКод действителен 10 минут.\n\nЕсли вы не запрашивали подтверждение, проигнорируйте это письмо."
+        send_msg(email, body, "Подтверждение почты")
         return True
     except Exception as e:
         logging.error(f"Failed to send email: {e}")
         return False
+
+@celery_app.task(
+    name='send_password_forgot_link',
+    bind=True,
+    max_retries=3,
+    default_retry_delay=5
+)
+def send_verify_email(self, email: str, token: str) -> bool:
+    import logging
+    logging.info(f"Sending forgot email to {email} with token {token}")
+    try:
+        reset_link = f"{settings.BASE_URL}/password/change?token={token}"
+        body = f"Здравствуйте!\n\nДля восстановления пароля перейдите по ссылке:\n{reset_link}\n\nСсылка действительна 10 минут.\n\nЕсли вы не запрашивали восстановление, проигнорируйте это письмо."
+        send_msg(email, body, "Восстановление пароля")
+        return True
+    except Exception as e:
+        logging.error(f"Failed to send email: {e}")
+        return False
+
+def send_msg(email: str, body: str, subject: str):
     
-def send_msg(email: str, msg: str):
+    msg = MIMEMultipart()
+    msg['From'] = settings.SMTP_MAIL
+    msg['To'] = email
+    msg['Subject'] = subject
+    msg.attach(MIMEText(body, 'plain', 'utf-8'))
+    
     smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
     smtpObj.starttls()
-    smtpObj.login(settings.SMTP_MAIL,settings.SMTP_MAIL_PWD)
-    smtpObj.sendmail(settings.SMTP_MAIL, email, msg)
+    smtpObj.login(settings.SMTP_MAIL, settings.SMTP_MAIL_PWD)
+    smtpObj.sendmail(settings.SMTP_MAIL, email, msg.as_string())
     smtpObj.quit()
+
 #broker_use_ssl: Указывает, следует ли использовать SSL для соединения с брокером сообщений (в данном случае Redis). Это повышает безопасность передачи данных или, как в нашем случае, отключает проверку.
 #redis_backend_use_ssl: Аналогично предыдущему, эта настройка включает SSL для соединения с бэкендом результатов, что также улучшает безопасность.
 #task_serializer: Определяет формат сериализации задач. В данном случае используется JSON, что позволяет легко передавать данные между процессами.

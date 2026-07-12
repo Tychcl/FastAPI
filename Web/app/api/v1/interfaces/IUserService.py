@@ -7,17 +7,17 @@ class IUserService(ABC):
     async def create_user(self, user: UserBase) -> None: pass
     
     @abstractmethod
-    async def get_user_by_id(self, id: int) -> Optional[UserBase]: pass
+    async def get_user_by(self, 
+                          id: Optional[int] = None, 
+                          username: Optional[str] = None, 
+                          email: Optional[str] = None, 
+                          role_id: Optional[int] = None) -> Optional[UserBase]: pass
     
     @abstractmethod
-    async def get_user_by_username(self, username: str) -> Optional[UserBase]: pass
-    
-    @abstractmethod
-    async def count_users_by_filters(self, conditions: Optional[list] = None) -> int: pass
-    
-    @abstractmethod
-    async def find_users_by_any(self, ids: Optional[List[int]] = None, username: Optional[str] = None, role_id: Optional[int] = None, page: int = 1, per_page: int = 25) -> Tuple[List[UserBase], int, int]: pass
-    
-    @abstractmethod
-    async def check_user_exists(self, id: Optional[int] = None, username: Optional[str] = None, email: Optional[str] = None) -> bool: pass
+    async def find_users_by_any(self, 
+                                ids: Optional[List[int]] = None, 
+                                username: Optional[str] = None, 
+                                role_id: Optional[int] = None, 
+                                page: int = 1, 
+                                per_page: int = 25) -> Tuple[List[UserBase], int, int]: pass
     

@@ -13,13 +13,14 @@
     <div class="auth-tabs">
         <button class="tab-btn active" data-tab="login" onclick="switchTab('login')">Вход</button>
         <button class="tab-btn" data-tab="register" onclick="switchTab('register')">Регистрация</button>
+        <button class="tab-btn" data-tab="forgot" onclick="switchTab('forgot')">Забыв(</button>
     </div>
 
     <!-- Форма входа -->
     <form id="loginForm" method="post" action="/api/v1/auth/signin" class="tab-content active">
         <div class="form-group">
             <label for="login">Логин</label>
-            <input type="text" id="login" name="login" required>
+            <input type="text" id="login" name="login" placeholder="юзернейм или почта" required>
             <span class="error" id="loginError"></span>
         </div>
         <div class="form-group">
@@ -55,6 +56,17 @@
         </div>
         <button type="submit">Зарегистрироваться</button>
         <div id="registerFormError" class="error"></div>
+    </form>
+
+    <!--форма забывчивости-->
+    <form id="forgotForm" method="post" action="/api/v1/auth/password/forgot" class="tab-content">
+        <div class="form-group">
+            <label for="forgotlogin">Логин</label>
+            <input type="text" id="forgotlogin" name="forgotlogin" placeholder="юзернейм или почта" required>
+            <span class="error" id="forgotloginError"></span>
+        </div>
+        <button type="submit">Сброс пароля</button>
+        <div id="forgotFormError" class="error"></div>
     </form>
 </div>
 {% endblock %}

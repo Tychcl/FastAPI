@@ -48,19 +48,28 @@ class AuthService(IAuthService):
         self.cookie_service.delete_cookie(response, settings.REFRESH_STRING)
         return response
     
-    async def change_password(self, id: int, new_password: str, old_password: str, current_user: UserBase) -> bool:
-        if not is_valid_password(new_password):
-            raise HTTPException(400, "Invalid new password format")
+    async def change_password(self, id: int, new_password: str) -> bool:
         sql = select(UserBase).where(UserBase.id == id)
         user = await self.session.scalar(sql)
         if not user:
             raise HTTPException(404, "User not found")
-        if current_user.id != user.id and current_user.role_id >= user.role_id:
-            raise HTTPException(404, "Access denied")
-        elif current_user.id == user.id and not self.hasher.verify(old_password, user.password):
-            raise HTTPException(400, "Old password is incorrect")
-        else:
-            pass #ВОТ ТУТ НАДО БЫ УТОЧНИТЬ МОГУТ ЛИ АДМИНЫ МЕНЯТЬ ПАРОЛИ ЛЮДЕЙ ЕСЛИ ОНИ ИХ ЗАБЫЛИ ИЛИ НАДО СДЕЛАТЬ ВОССТАОВЛЕНИЕ
         user.password = self.hasher.hash(new_password)
         await self.session.commit()
         return True
+    
+    #async def change_password(self, id: int, new_password: str, old_password: str, current_user: UserBase) -> bool:
+    #    if not is_valid_password(new_password):
+    #        raise HTTPException(400, "Invalid new password format")
+    #    sql = select(UserBase).where(UserBase.id == id)
+    #    user = await self.session.scalar(sql)
+    #    if not user:
+    #        raise HTTPException(404, "User not found")
+    #    if current_user.id != user.id and current_user.role_id >= user.role_id:
+    #        raise HTTPException(404, "Access denied")
+    #    elif current_user.id == user.id and not self.hasher.verify(old_password, user.password):
+    #        raise HTTPException(400, "Old password is incorrect")
+    #    else:
+    #        pass #ВОТ ТУТ НАДО БЫ УТОЧНИТЬ МОГУТ ЛИ АДМИНЫ МЕНЯТЬ ПАРОЛИ ЛЮДЕЙ ЕСЛИ ОНИ ИХ ЗАБЫЛИ ИЛИ НАДО СДЕЛАТЬ ВОССТАОВЛЕНИЕ
+    #    user.password = self.hasher.hash(new_password)
+    #    await self.session.commit()
+    #    return True

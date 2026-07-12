@@ -12,7 +12,7 @@ function is_valid_email(email) {
 
 function switchTab(mode) {
     const tabs = document.querySelectorAll('.tab-btn');
-    const forms = document.querySelectorAll('#loginForm, #registerForm');
+    const forms = document.querySelectorAll('#loginForm, #registerForm, #forgotForm');
 
     tabs.forEach(tab => tab.classList.remove('active'));
     forms.forEach(form => form.classList.remove('active'));
@@ -20,9 +20,14 @@ function switchTab(mode) {
     if (mode === 'login') {
         document.querySelector('[data-tab="login"]').classList.add('active');
         document.getElementById('loginForm').classList.add('active');
-    } else {
+    } 
+    if (mode === 'register') {
         document.querySelector('[data-tab="register"]').classList.add('active');
         document.getElementById('registerForm').classList.add('active');
+    }
+    if (mode === 'forgot') {
+        document.querySelector('[data-tab="forgot"]').classList.add('active');
+        document.getElementById('forgotForm').classList.add('active');
     }
     document.querySelectorAll('.error').forEach(el => el.textContent = '');
 }
@@ -103,8 +108,41 @@ async function registerHandler(event) {
     }
 }
 
+async function forgotHandler(event) {
+    event.preventDefault();
+    const login = document.getElementById('forgotlogin').value.trim();
+    const errorEl = document.getElementById('forgotloginFormError');
+
+    if (!login) {
+        document.getElementById('forgotloginError').textContent = 'Введите логин или email';
+        return;
+    }
+    if (!is_valid_username(login) && !is_valid_email(login)){
+        document.getElementById('forgotloginError').textContent = 'Неверный формат логина';
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/v1/auth/password/forgot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ login }),
+        });
+        if (response.ok) {
+            document.getElementById('forgotloginError').textContent = 'На почту была отправлена ссылка для восстановления пароля';
+        } else {
+            const data = await response.json().catch(() => ({}));
+            errorEl.textContent = data.message || 'Неверный логин или пароль';
+        }
+    } catch (e) {
+        errorEl.textContent = 'Ошибка соединения';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('loginForm').addEventListener('submit', loginHandler);
     document.getElementById('registerForm').addEventListener('submit', registerHandler);
+    document.getElementById('forgotForm').addEventListener('submit', forgotHandler);
     switchTab('login');
 });

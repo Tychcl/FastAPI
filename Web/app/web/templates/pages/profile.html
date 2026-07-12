@@ -10,7 +10,7 @@
     <div class="profile-card-shell-shell">
         <div class="profile-card-shell">
             <div class="profile-card">
-                <h2>👤 {{ user.username }}<span style="margin-left: 5px; font-size: 16px; vertical-align: top;">({{ user.user_id }})</span></h2>
+                <h2>👤 {{ user.username }}<span style="margin-left: 5px; font-size: 16px; vertical-align: top;">({{ user.id }})</span></h2>
                 <p>{{ user.email if user.email else 'Не указана почта' }}</p>
                 <p>{{ user.role_name if user.role_name else 'Не указана роль' }}</p>    
                 <button onclick="logout()" class="menu-btn menu-btn--pink" aria-label="Профиль">

@@ -7,7 +7,7 @@ from typing import Optional
 from app.config import auth_check, role_required, get_user
 from fastapi.responses import RedirectResponse
 
-pages_controller = APIRouter()
+pages_controller = APIRouter(tags=["web"])
 
 @pages_controller.get("/")
 async def get_index(request: Request):
