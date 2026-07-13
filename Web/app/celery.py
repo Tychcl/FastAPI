@@ -29,11 +29,12 @@ celery_app.conf.update(
     max_retries=3,
     default_retry_delay=5
 )
-def send_verify_email(self, email: str, code: int) -> bool:
+def send_verify_email(self, email: str, code: int, token: str) -> bool:
     import logging
     logging.info(f"Sending verify email to {email} with code {code}")
     try:
-        body = f"Здравствуйте!\n\nКод для подтверждения почты: {code}\n\nКод действителен 10 минут.\n\nЕсли вы не запрашивали подтверждение, проигнорируйте это письмо."
+        verify_link = f"{settings.BASE_URL}/authorize/email/verify?token={token}"
+        body = f"Здравствуйте!\n\nКод для подтверждения почты: {code}\n\nСсылка на страницу подтверждения: {verify_link}\n\nКод и ссылка действителены 10 минут.\n\nЕсли вы не запрашивали подтверждение, проигнорируйте это письмо."
         send_msg(email, body, "Подтверждение почты")
         return True
     except Exception as e:

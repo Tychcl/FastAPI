@@ -1,3 +1,15 @@
+function is_valid_username(username) {
+    return /^[a-zA-Z]+$/.test(username);
+}
+
+function is_valid_password(password) {
+    return /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:'",.<>/?\\|`~]).{8,}$/.test(password);
+}
+
+function is_valid_email(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     
 });

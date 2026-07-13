@@ -46,29 +46,25 @@ async def signup(request: Request,
     role: Optional[UserRoleBase]= await RoleService.get_role_by_id(data.role_id)
     if role is None:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, f"role with id = {data.role_id} not exists")
-    exists: bool = await UserService.check_user_exists(username=data.username, email=data.email)
+    exists: Optional[UserBase] = await UserService.get_user_by(username=data.username, email=data.email)
     if exists:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, f"user with that username or email already exists")
     hash_service: IPasswordHasherService = request.app.state.hash_service
     code: int = randint(1000,9999)
-    user_data: dict = {"username": data.username, "email": data.email, "password": hash_service.hash(data.password),"role_id": data.role_id}
+    token: str = secrets.token_urlsafe(16)
+    user_data: dict = {"username": data.username, "email": data.email, "password": hash_service.hash(data.password),"role_id": data.role_id, "code": code}
     redis_client: Redis = request.app.state.redis
     request.session["email"] = data.email
-    task: AsyncResult = celery_app.send_task(
-        'send_verify_email_code',
-        args=[data.email, code],
-        queue='celery'
-    )
     try:
-        success = await asyncio.to_thread(task.get, timeout=30)
-    except TimeoutError:
-        raise HTTPException(status.HTTP_504_GATEWAY_TIMEOUT, "Email service timeout")
-    except Exception as e:
-        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, f"Email sending failed: {str(e)}")
-    if not success:
-        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "Failed to send verification email")
-    await redis_client.setex(f"email_verify:{code}", 600, json.dumps(user_data))
-    return JSONResponse(content={"msg": f"verification code send to {data.email}"}, status_code=status.HTTP_200_OK)#RedirectResponse("/authorize/email/verify")
+        celery_app.send_task(
+            'send_verify_email_code',
+            args=[data.email, code, token],
+            queue='celery'
+        )
+    except:
+        raise HTTPException(500, "Email sending failed")
+    await redis_client.setex(f"email_verify:{token}", 600, json.dumps(user_data))
+    return JSONResponse(content={"msg": f"verification code send to {data.email}", "token": token}, status_code=status.HTTP_200_OK)#RedirectResponse("/authorize/email/verify")
 
 @auth_controller.post("/signout")
 async def signout(request: Request, AuthService: IAuthService = Depends(auth_service)) -> JSONResponse:
@@ -83,19 +79,14 @@ async def password_forgot(request: Request,
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="user with that login not found")
     user_data: dict = user.to_dict
     token: str = secrets.token_urlsafe(16)
-    task: AsyncResult = celery_app.send_task(
-        'send_password_forgot_link',
-        args=[user.email, token],
-        queue='celery'
-    )
     try:
-        success = await asyncio.to_thread(task.get, timeout=30)
-    except TimeoutError:
-        raise HTTPException(status.HTTP_504_GATEWAY_TIMEOUT, "Email service timeout")
-    except Exception as e:
-        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, f"Email sending failed: {str(e)}")
-    if not success:
-        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "Failed to send verification email")
+        celery_app.send_task(
+            'send_password_forgot_link',
+            args=[user.email, token],
+            queue='celery'
+        )
+    except:
+        raise HTTPException(500, "Email sending failed")
     redis_client: Redis = request.app.state.redis
     await redis_client.setex(f"password_forgot:{token}", 600, json.dumps(user_data))
     return JSONResponse(content={"message": "password change link sended to your email"}, status_code=status.HTTP_200_OK)
@@ -114,13 +105,12 @@ async def password_change(request: Request,
     redis_data = await redis_client.get(key)
     if redis_data is None and User is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="signup out of time, try again")
-    user_data: dict = json.loads(data)
+    user_data: dict = json.loads(redis_data)
     id: Optional[int] = user_data.get("id", None) or User.id
     if id is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User data not found")
     await AuthService.change_password(id, data.password)
-    if redis_data:
-        await redis_client.delete(key)
+    await redis_client.delete(key)
     return JSONResponse(content={"msg": "password changed"}, status_code=status.HTTP_200_OK)
 
 @auth_controller.post("/email/verify", tags=["email"])
@@ -130,13 +120,17 @@ async def email_verify(request: Request,
     email: Optional[str] = request.session["email"]
     if email is None:
         raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "email not found in session")
-    key = f"email_verify:{data.code}"
+    key = f"email_verify:{data.token}"
     redis_client: Redis = request.app.state.redis
-    data = await redis_client.get(key)
-    if data:
-        user_data: dict = json.loads(data)
+    r_data = await redis_client.get(key)
+    if r_data:
+        user_data: dict = json.loads(r_data)
     else:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "signup out of time, try again")
+    if user_data.get("code", None) is None:
+        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "code data error")
+    if data.code != user_data.get("code", None):
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "wrong code")
     if email != user_data.get("email", None):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "wrong email")
     username: Optional[str] = user_data.get("username", None)

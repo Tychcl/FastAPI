@@ -20,12 +20,12 @@
     <form id="loginForm" method="post" action="/api/v1/auth/signin" class="tab-content active">
         <div class="form-group">
             <label for="login">Логин</label>
-            <input type="text" id="login" name="login" placeholder="юзернейм или почта" required>
+            <input type="text" class="menu-btn menu-btn--purple" id="login" name="login" placeholder="юзернейм или почта" required>
             <span class="error" id="loginError"></span>
         </div>
         <div class="form-group">
             <label for="password">Пароль</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" class="menu-btn menu-btn--purple" id="password" name="password" required>
             <span class="error" id="passwordError"></span>
         </div>
         <button type="submit">Войти</button>
@@ -35,23 +35,23 @@
     <!-- Форма регистрации -->
     <form id="registerForm" method="post" action="/api/v1/auth/signup" class="tab-content">
         <div class="form-group">
-            <label for="reg-username">Логин (только латиница)</label>
-            <input type="text" id="reg-username" name="reg-username" required>
+            <label for="reg-username">юзернейм</label>
+            <input type="text" class="menu-btn menu-btn--purple" id="reg-username" name="reg-username" placeholder="Только латиница" required>
             <span class="error" id="regUsernameError"></span>
         </div>
         <div class="form-group">
             <label for="reg-email">Email</label>
-            <input type="email" id="reg-email" name="reg-email" required>
+            <input type="email" class="menu-btn menu-btn--purple" id="reg-email" name="reg-email" placeholder="example@gmail.com" required>
             <span class="error" id="regEmailError"></span>
         </div>
         <div class="form-group">
             <label for="reg-password">Пароль</label>
-            <input type="password" id="reg-password" name="reg-password" required>
+            <input type="password" class="menu-btn menu-btn--purple" id="reg-password" name="reg-password" required>
             <span class="error" id="regPasswordError"></span>
         </div>
         <div class="form-group">
             <label for="reg-confirm-password">Подтвердите пароль</label>
-            <input type="password" id="reg-confirm-password" name="reg-confirm-password" required>
+            <input type="password" class="menu-btn menu-btn--purple" id="reg-confirm-password" name="reg-confirm-password" required>
             <span class="error" id="regConfirmError"></span>
         </div>
         <button type="submit">Зарегистрироваться</button>
@@ -62,7 +62,7 @@
     <form id="forgotForm" method="post" action="/api/v1/auth/password/forgot" class="tab-content">
         <div class="form-group">
             <label for="forgotlogin">Логин</label>
-            <input type="text" id="forgotlogin" name="forgotlogin" placeholder="юзернейм или почта" required>
+            <input type="text" class="menu-btn menu-btn--purple" id="forgotlogin" name="forgotlogin" placeholder="юзернейм или почта" required>
             <span class="error" id="forgotloginError"></span>
         </div>
         <button type="submit">Сброс пароля</button>

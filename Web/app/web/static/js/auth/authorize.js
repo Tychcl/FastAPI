@@ -1,15 +1,3 @@
-function is_valid_username(username) {
-    return /^[a-zA-Z]+$/.test(username);
-}
-
-function is_valid_password(password) {
-    return /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:'",.<>/?\\|`~]).{8,}$/.test(password);
-}
-
-function is_valid_email(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
 function switchTab(mode) {
     const tabs = document.querySelectorAll('.tab-btn');
     const forms = document.querySelectorAll('#loginForm, #registerForm, #forgotForm');
@@ -97,10 +85,10 @@ async function registerHandler(event) {
             credentials: 'same-origin',
             body: JSON.stringify({ username, email, password, role_id: 3, confirm }),
         });
+        const data = await response.json().catch(() => ({}));
         if (response.ok) {
-            window.location.href = '/authorize/email/verify';
+            window.location.href = `/authorize/email/verify?token=${data.token}`;
         } else {
-            const data = await response.json().catch(() => ({}));
             errorEl.textContent = data.message || 'Ошибка регистрации';
         }
     } catch (e) {

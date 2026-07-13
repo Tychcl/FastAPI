@@ -9,12 +9,12 @@
 <div class="verify-box">
     <h2>Верификация почты</h2>
     {% if email %}
-    <p>Код отправлен на почту: <strong>{{ email }}</strong><br></p>
+    <p>Код отправлен на почту: <strong>{{ email }}</strong><br>Время действия кода 10 минут</p>
     {% endif %}
     <form id="verifyForm" method="post" action="/api/v1/email/verify">
         <div class="form-group">
             <label for="code">Код</label>
-            <input type="code" id="code" name="code" type="number" required maxlength="4">
+            <input class="menu-btn menu-btn--purple" type="code" id="code" name="code" type="number" required maxlength="4">
         </div>
         <button type="submit">Подтвердить</button>
         <div id="FormError" class="error"></div>

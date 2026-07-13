@@ -11,7 +11,7 @@ class UserService(IUserService):
         self.session = session
         
     async def create_user(self, user: UserBase) -> None:
-        exists_user: Optional[UserBase] = await self.get_user_user_by(username=user.username, email=user.email)
+        exists_user: Optional[UserBase] = await self.get_user_by(username=user.username, email=user.email)
         if exists_user:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, f"user with that username or email already exists")
         try:
@@ -63,7 +63,6 @@ class UserService(IUserService):
         if conditions:
             sql = sql.where(*conditions)
         return await self.session.scalar(sql) or 0
-
     
     def _build_conditions(self, 
                           ids: Optional[List[int]] = None, 
