@@ -90,7 +90,6 @@ a.profile-card {
     }
     .panel-container {
         flex-direction: column;
-        padding: 10px;
     }
     .panel-menu-buttons {
         flex: 1 1 100% !important;
@@ -101,7 +100,7 @@ a.profile-card {
         border-radius: 0px 0px 12px 12px;
     }
     .menu-form {
-        column-gap: 10px;
+        column-gap: 14px;
         row-gap: 0px;
     }
     .menu-form .form-group {
@@ -124,7 +123,7 @@ a.profile-card {
         flex: 0 1 auto !important;
         max-width: 100% !important;
         width: auto !important;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
         align-self: end;
     }
     .menu-form .form-group[style*="max-width"] {
@@ -133,6 +132,6 @@ a.profile-card {
 
 }
 .menu-form button {
-        margin-bottom: 16px;
+        margin-bottom: 14px;
         align-self: end;
     }

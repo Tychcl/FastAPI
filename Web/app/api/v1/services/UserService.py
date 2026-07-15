@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
-from ...models.user import UserBase
+from ...models import UserBase, UserPrivacyBase
 from ..interfaces import IUserService
 from sqlalchemy import select, func, or_
 from typing import Optional, List, Tuple
@@ -16,6 +16,9 @@ class UserService(IUserService):
             raise HTTPException(status.HTTP_400_BAD_REQUEST, f"user with that username or email already exists")
         try:
             self.session.add(user)
+            self.session.flush()
+            privacy = UserPrivacyBase(user_id=user.id)
+            self.session.add(privacy)
         except:
             await self.session.rollback()
             raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "user create error")

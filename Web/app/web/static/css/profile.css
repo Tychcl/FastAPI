@@ -55,18 +55,17 @@
     min-height: 200px;
     background: var(--bg-card);
     border-radius: 12px 0px 12px 12px;
-    padding: 14px;
+    padding: 14px 14px 0px 14px;
 }
-
 .profile-data-form {
     display: flex;
     flex-direction: column;
-    gap: 14px;
 }
 .profile-data-form .form-row {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
+    column-gap: 14px;
 }
 .profile-data-form .form-row .form-group {
     flex: 1 1 0;
