@@ -2,10 +2,11 @@ from fastapi import APIRouter, Request, Depends, status, Query
 from app.config import templates
 from app.api.models import UserBase, UserRoleBase
 from app.api.v1.dependences import role_service
-from app.api.v1.interfaces import IRoleService
+from app.api.v1.interfaces import IRoleService, IUserService
 from typing import Optional
 from redis.asyncio import Redis
 from app.config import auth_check, role_required, get_user
+from app.api.v1.dependences import user_service
 from fastapi.responses import RedirectResponse
 import json
 
@@ -17,8 +18,16 @@ async def get_index(request: Request):
     return templates.TemplateResponse(request=request, name="pages/index.html")
 
 @pages_controller.get("/profile")
-async def get_profile(request: Request, User: Optional[UserBase] = Depends(get_user)):
-    context: dict = {}
+async def get_profile(request: Request,
+                      id: Optional[int] = Query(default=None),
+                      UserService: IUserService = Depends(user_service),
+                      User: Optional[UserBase] = Depends(get_user)):
+    context: dict = {'own': True}
+    if id:
+        other_user: Optional[UserBase] = await UserService.get_user_by(id=id)
+        context['own'] = False
+        if other_user:
+            context['other_user'] = other_user.__repr__()
     if User:
         return templates.TemplateResponse(request=request, name="pages/profile.html", context=context)
     else:

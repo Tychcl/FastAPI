@@ -6,18 +6,14 @@
 <link rel="stylesheet" href="{{ url_for('static', path='/css/auth/authorize.css') }}">
 {% endblock %}
 {% block main %}
-<div class="login-box">
+<div class="login-box auth-box">
     <h2>Авторизация</h2>
-
-    <!-- Вкладки -->
     <div class="auth-tabs">
         <button class="tab-btn active" data-tab="login" onclick="switchTab('login')">Вход</button>
         <button class="tab-btn" data-tab="register" onclick="switchTab('register')">Регистрация</button>
         <button class="tab-btn" data-tab="forgot" onclick="switchTab('forgot')">Забыв(</button>
     </div>
-
-    <!-- Форма входа -->
-    <form id="loginForm" method="post" action="/api/v1/auth/signin" class="tab-content active">
+    <form id="loginForm" class="tab-content active">
         <div class="form-group">
             <label for="login">Логин</label>
             <input type="text" class="menu-btn menu-btn--purple" id="login" name="login" placeholder="юзернейм или почта" required>
@@ -28,12 +24,10 @@
             <input type="password" class="menu-btn menu-btn--purple" id="password" name="password" required>
             <span class="error" id="passwordError"></span>
         </div>
-        <button type="submit">Войти</button>
+        <button type="submit" class="menu-btn menu-btn--purple">Войти</button>
         <div id="loginFormError" class="error"></div>
     </form>
-
-    <!-- Форма регистрации -->
-    <form id="registerForm" method="post" action="/api/v1/auth/signup" class="tab-content">
+    <form id="registerForm" class="tab-content">
         <div class="form-group">
             <label for="reg-username">юзернейм</label>
             <input type="text" class="menu-btn menu-btn--purple" id="reg-username" name="reg-username" placeholder="Только латиница" required>
@@ -54,18 +48,16 @@
             <input type="password" class="menu-btn menu-btn--purple" id="reg-confirm-password" name="reg-confirm-password" required>
             <span class="error" id="regConfirmError"></span>
         </div>
-        <button type="submit">Зарегистрироваться</button>
+        <button type="submit" class="menu-btn menu-btn--purple">Зарегистрироваться</button>
         <div id="registerFormError" class="error"></div>
     </form>
-
-    <!--форма забывчивости-->
-    <form id="forgotForm" method="post" action="/api/v1/auth/password/forgot" class="tab-content">
+    <form id="forgotForm" class="tab-content">
         <div class="form-group">
             <label for="forgotlogin">Логин</label>
             <input type="text" class="menu-btn menu-btn--purple" id="forgotlogin" name="forgotlogin" placeholder="юзернейм или почта" required>
             <span class="error" id="forgotloginError"></span>
         </div>
-        <button type="submit">Сброс пароля</button>
+        <button type="submit" class="menu-btn menu-btn--purple">Сброс пароля</button>
         <div id="forgotFormError" class="error"></div>
     </form>
 </div>

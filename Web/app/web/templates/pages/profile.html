@@ -6,13 +6,15 @@
 <link rel="stylesheet" href="{{ url_for('static', path='/css/profile.css') }}">
 {% endblock %}
 {% block main %}
+{% if user %}
 <div class="profile-container">
     <div class="profile-card-shell-shell">
         <div class="profile-card-shell">
             <div class="profile-card">
-                <h2>👤 {{ user.username }}<span style="margin-left: 5px; font-size: 16px; vertical-align: top;">({{ user.id }})</span></h2>
-                <p>{{ user.email if user.email else 'Не указана почта' }}</p>
-                <p>{{ user.role_name if user.role_name else 'Не указана роль' }}</p>    
+                <h2>👤 {{ user.username if own else other_user.username }}<span style="margin-left: 5px; font-size: 16px; vertical-align: top;">({{ user.id if own else other_user.id }})</span></h2>
+                <p>{{ user.email if own else other_user.email }}</p>
+                <p>{{ user.role_name if own else other_user.role_name }}</p>
+                {% if own %}
                 <button onclick="logout()" class="menu-btn menu-btn--pink" aria-label="Профиль">
                     <span class="menu-btn__icon">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
@@ -21,27 +23,77 @@
                     </span>
                     <span class="menu-btn__text">Выйти</span>
                 </button>
+                {% endif %}
             </div>
         </div>
     </div>
     <div class="profile-menu-buttons">
         <div class="buttons">
-            {% if user.role_id < 3 %}
-            <button onclick="show('users')" class="profile-menu-btn menu-btn menu-btn--green" aria-label="Профиль">
+            <button onclick="show('user-data')" class="profile-menu-btn menu-btn menu-btn--green" aria-label="Профиль">
                 <span class="menu-btn__icon">
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="8" r="4" class="icon-stroke" stroke-width="1.8" />
-                        <path d="M5 20C5 16.5 8 14 12 14C16 14 19 16.5 19 20" class="icon-stroke" stroke-width="1.8"
-                            stroke-linecap="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                        <path class="icon-stroke icon-fill" d="M202.87-202.87v-554.26 162.02-15.17 407.41ZM321.43-440h141.24q17 0 28.5-11.5t11.5-28.5q0-17-11.5-28.5t-28.5-11.5H321.43q-17 0-28.5 11.5t-11.5 28.5q0 17 11.5 28.5t28.5 11.5Zm0 158.57h141.22q17.02 0 28.52-11.5t11.5-28.5q0-17-11.5-28.5t-28.52-11.5H321.43q-17 0-28.5 11.5t-11.5 28.5q0 17 11.5 28.5t28.5 11.5Zm0-317.14h317.14q17 0 28.5-11.5t11.5-28.5q0-17-11.5-28.5t-28.5-11.5H321.43q-17 0-28.5 11.5t-11.5 28.5q0 17 11.5 28.5t28.5 11.5Zm-118.56 486.7q-37.78 0-64.39-26.61t-26.61-64.39v-554.26q0-37.78 26.61-64.39t64.39-26.61h554.26q37.78 0 64.39 26.61t26.61 64.39v155.76q0 19.15-13.17 32.33-13.18 13.17-32.33 13.17t-32.33-13.17q-13.17-13.18-13.17-32.33v-155.76H202.87v554.26h153.54q19.16 0 32.33 13.17 13.17 13.18 13.17 32.33t-13.17 32.33q-13.17 13.17-32.33 13.17H202.87Zm409.72-238.09q-30.68-30.67-30.68-74.82 0-44.15 30.68-74.83 30.67-30.67 74.82-30.67 44.16 0 74.83 30.67 30.67 30.68 30.67 74.83t-30.67 74.82q-30.67 30.68-74.83 30.68-44.15 0-74.82-30.68Zm74.88 67.09q39.66 0 78.64 7.38 38.98 7.38 75.46 22.86 24.43 9.96 37.89 31.81 13.45 21.86 13.45 47.45v16q0 19.15-13.17 32.33-13.17 13.17-32.33 13.17h-320q-19.15 0-32.32-13.17-13.18-13.18-13.18-32.33v-16q0-25.59 13.34-47.45 13.34-21.85 37.77-31.81 36.48-15.48 75.63-22.86 39.16-7.38 78.82-7.38Z"/>
                     </svg>
                 </span>
-                <span class="profile-menu-btn__text menu-btn__text">Пользователи</span>
+                <span class="profile-menu-btn__text menu-btn__text">Данные</span>
             </button>
-            {% endif %}
         </div>
     </div>
     <div id="menu-wrapper" class="profile-menu">
-        
+        <div id="user-data">
+            <form id="update-user-data" class="profile-data-form">
+                <div class="form-row">
+                    <div class="form-group" style="max-width: 150px;">
+                        <label for="username">Юзернейм</label>
+                        <input value="{{ user.username if own else other_user.username }}" type="text" class="menu-btn menu-btn--purple" id="username" name="username" placeholder="юзернейм" required {% if not own %}disabled{% endif %}>
+                        <span class="error" id="usernameError"></span>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="email">Почта</label>
+                        <input value="{{ user.email if own else other_user.email }}" type="text" class="menu-btn menu-btn--purple" id="email" name="email" placeholder="Почта" required {% if not own %}disabled{% endif %}>
+                        <span class="error" id="emailError"></span>
+                    </div>
+                    <div class="form-group" style="max-width: 95px;">
+                        <label >Роль</label>
+                        <input value="{{ user.role_name if own else other_user.role_name }}" type="text" class="menu-btn menu-btn--purple" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="about">О себе</label>
+                        <input type="text" class="menu-btn menu-btn--purple" id="about" name="about" placeholder="Что-нибудь о себе" {% if not own %}disabled{% endif %}>
+                    </div>
+                </div>
+                {% if own %}
+                <div class="form-row password-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="current-password">Текущий пароль</label>
+                        <input type="password" class="menu-btn menu-btn--purple" id="current-password" name="current_password" placeholder="Текущий пароль">
+                        <span class="error" id="currentPasswordError"></span>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="new-password">Новый пароль</label>
+                        <input type="password" class="menu-btn menu-btn--purple" id="new-password" name="new_password" placeholder="Новый пароль">
+                        <span class="error" id="newPasswordError"></span>
+                    </div>
+                    <div class="form-group" style="flex: 0 1 auto; align-self: flex-end;">
+                        <button type="submit" class="menu-btn menu-btn--green" aria-label="Применить изменения">
+                            <span class="menu-btn__icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                    <path class="icon-stroke icon-fill" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                                </svg>
+                            </span>
+                            <span class="menu-btn__text">Применить</span>
+                        </button>
+                        <div id="update-user-dataFormError" class="error"></div>
+                    </div>
+                </div>
+                {% endif %}
+            </form>
+        </div>
     </div>
 </div>
+{% else %}
+<div>Пользователь не найден</div>
+{% endif %}
 {% endblock %}

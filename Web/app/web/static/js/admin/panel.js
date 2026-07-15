@@ -2,11 +2,12 @@ let roleMap = {};
 let page = 1;
 let per_page = 25;
 
-function mini_profile_html(id, username, role_id){
-    return `<div class="profile-card profile-card-result">
+function mini_profile_html(id, username, email, role_id){
+    return `<a href="/profile?id=${id}" class="profile-card profile-card-result">
                 <p class="username"><strong>👤 ${username}<span>(${id})</span></strong></p>
-                <p><strong>Роль:</strong> ${getRoleName(role_id)}</p>
-            </div>`;
+                <p>${email}</p>
+                <p>${getRoleName(role_id)}</p>
+            </a>`;
 }
 
 function page_button_html(n){
@@ -81,7 +82,7 @@ async function find_users(event) {
         if (data.users && data.users.length > 0) {
             let html = ``;
             data.users.forEach(user => {
-                html += mini_profile_html(user.id, user.username, user.role_id);
+                html += mini_profile_html(user.id, user.username, user.email, user.role_id);
             });
             resultDiv.innerHTML = html;
             pages = Math.max(1, Math.ceil(data.filtered / per_page))

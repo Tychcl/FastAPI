@@ -1,3 +1,31 @@
+/* style.css — глобальные стили и переменные темы */
+
+:root {
+    --bg-body: #edeff3;
+    --bg-header: rgba(255, 255, 255, 0.6);
+    --bg-card: #ffffff;
+    --bg-secondary: #edeff3;      /* для фона обёрток, например */
+    --bg-input: rgba(255, 255, 255, 0.45);
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --border-color: rgba(0, 0, 0, 0.06);
+    --border-header: rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme {
+    --bg-body: #1a1a1a;
+    --bg-header: rgba(30, 30, 30, 0.8);
+    --bg-card: #2a2a2a;
+    --bg-secondary: #222222;
+    --bg-input: rgba(50, 50, 50, 0.7);
+    --text-primary: #eeeeee;
+    --text-secondary: #bbbbbb;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-header: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,10 +33,12 @@
 }
 
 body {
-    background: #edeff3;
+    background: var(--bg-body);
     min-height: 100vh;
     padding-top: 70px;
     font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-primary);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .header {
@@ -17,10 +47,10 @@ body {
     left: 0;
     width: 100%;
     height: 70px;
-    background: rgba(255, 255, 255, 0.6);
+    background: var(--bg-header);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border-header);
     display: flex;
     align-items: center;
     padding: 0 14px;
@@ -29,8 +59,18 @@ body {
 
 .header__nav {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.header__nav-left {
+    display: flex;
     align-items: center;
     gap: 10px;
+}
+.header__nav-right {
+    display: flex;
+    align-items: center;
 }
 
 @media (max-width: 605px) {
@@ -39,7 +79,5 @@ body {
         padding: 0 12px;
         height: 60px;
     }
-    .header__nav {
-        gap: 6px;
-    }
+    .header__nav-left { gap: 6px; }
 }

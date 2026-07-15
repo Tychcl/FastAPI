@@ -3,44 +3,39 @@
     flex-wrap: wrap;
     padding: 14px;
 }
-
 .profile-card-shell-shell {
-    background: white;
-    flex: 0 1 auto;  
+    background: var(--bg-card);
+    flex: 0 1 auto;
 }
 .profile-card-shell {
     padding: 0 14px 14px 0;
-    background: #edeff3;
+    background: var(--bg-body);
     border-radius: 0 0 26px 0;
 }
 .profile-card {
     width: fit-content;
     max-width: 500px;
-    background: white;
+    background: var(--bg-card);
     border-radius: 12px;
     padding: 14px;
     z-index: 1;
 }
-
 .profile-card h2 {
     margin-top: 0;
-    color: #2c3e50;
+    color: var(--text-primary);
 }
-
 .profile-menu-buttons {
-    flex: 1 1 0;              
-    min-width: 0;             
-    background: white;
+    flex: 1 1 0;
+    min-width: 0;
+    background: var(--bg-card);
     border-radius: 12px 12px 0 0;
     padding: 14px;
 }
-
 .profile-menu-buttons .buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
 }
-
 .profile-menu-buttons .buttons .profile-menu-btn {
     flex: 1 1 auto;
     min-width: 120px;
@@ -48,7 +43,6 @@
     padding-right: 15px;
     height: 50px;
 }
-
 .profile-menu-btn__text {
     opacity: 1;
     max-width: 150px;
@@ -56,16 +50,76 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 .profile-menu {
-    flex: 0 0 100%;           
+    flex: 0 0 100%;
     min-height: 200px;
-    background: white;
+    background: var(--bg-card);
     border-radius: 12px 0px 12px 12px;
     padding: 14px;
 }
 
-@media (max-width: 605px) {
+.profile-data-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.profile-data-form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.profile-data-form .form-row .form-group {
+    flex: 1 1 0;
+    min-width: 0;
+}
+.profile-data-form .form-row .form-group label {
+    display: block;
+    margin-bottom: 4px;
+}
+.profile-data-form .form-row.password-row .form-group {
+    flex: 1 1 0;
+}
+.profile-data-form .form-row.password-row .form-group:last-child {
+    flex: 0 1 auto;
+    align-self: flex-end;
+}
+.profile-data-form .form-row.password-row .form-group:last-child button {
+    margin-bottom: 0;
+}
+
+.visible { visibility: visible; }
+.hidden { visibility: hidden; }
+
+.profile-card-result {
+    box-shadow: 0 8px 30px var(--shadow-color);
+}
+.profile-card-result .username {
+    font-size: 18px;
+}
+.profile-card-result span {
+    font-size: 14px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+#users-result {
+    margin: 14px 0px;
+    gap: 14px;
+    display: flex;
+}
+#users-pages .menu-btn__text {
+    opacity: 1;
+    max-width: 44px;
+    width: stretch;
+}
+#users-pages .menu-btn:hover {
+    padding-right: 0px;
+}
+.pages-separator {
+    vertical-align: bottom;
+    margin: 10px;
+}
+
+@media (max-width: 750px) {
     .profile-card {
         width: auto;
         max-width: none;
@@ -90,73 +144,4 @@
         padding-top: 0px;
         border-radius: 0px 0px 12px 12px;
     }
-    .profile-menu-form {
-        flex-direction: column;
-        gap: 16px;
-    }
-    .profile-menu-form .form-group {
-        flex: none;
-        width: 100%;
-    }
-}
-
-.profile-menu-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    align-items: flex-start;
-}
-
-.profile-menu-form .form-group {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1;
-    min-width: 0px;
-}
-
-.profile-menu-form .form-group * {
-    min-width: 0px;
-}
-
-.visible {
-    visibility: visible;
-}
-
-.hidden {
-    visibility: hidden;
-}
-
-.profile-card-result{
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-}
-
-.profile-card-result .username{
-    font-size: 18px;
-}
-
-.profile-card-result span{
-    font-size: 14px;
-    margin-left: 5px;
-    vertical-align: top;
-}
-
-#users-result{
-    margin: 14px 0px;
-    gap: 14px;
-    display: flex;
-}
-
-#users-pages .menu-btn__text {
-    opacity: 1;
-    max-width: 44px;
-    width: stretch;
-}
-
-#users-pages .menu-btn:hover {
-    padding-right: 0px;
-}
-
-.pages-separator{
-    vertical-align: bottom;
-    margin: 10px;
 }

@@ -32,7 +32,7 @@ class UserService(IUserService):
             conditions.append(UserBase.email == email)
         if role_id:
             conditions.append(UserBase.role_id == role_id)
-        sql = select(UserBase).where(or_(*conditions))
+        sql = select(UserBase).options(selectinload(UserBase.role)).where(or_(*conditions))
         result = await self.session.execute(sql)
         return result.scalar_one_or_none()
 

@@ -1,13 +1,7 @@
-.login-box h2 {
-    text-align: center;
-    margin-bottom: 14px;
-}
-
 .auth-tabs {
     display: flex;
-    margin: 0px -14px 20px -14px;
+    margin: 0 -14px 20px -14px;
 }
-
 .tab-btn {
     background: none;
     border: none;
@@ -21,45 +15,17 @@
     border-bottom-color: #888;
     flex: 1;
 }
-
 .tab-btn.active {
-    color: #333;
+    color: var(--text-primary);
     border-bottom-color: #7c5cf0;
 }
-
 .tab-btn:hover {
     color: #555;
     border-bottom-color: #555;
 }
-
 .tab-content {
     display: none;
 }
-
 .tab-content.active {
     display: block;
-}
-
-.login-box {
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
-    padding: 14px;
-    background: white;
-    margin-top: 14px;
-    margin-bottom: 14px;
-    border-radius: 12px;
-    min-width: 300px;
-}
-
-form .form-group * {
-    display: block;
-    margin-bottom: 10px;
-}
-
-@media (max-width: 605px) {
-    .login-box {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
 }
