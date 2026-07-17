@@ -5,6 +5,7 @@ async function logout() {
             credentials: 'same-origin'
         });
         if (response.ok) {
+            localStorage.removeItem("user");
             window.location.href = '/profile';
         } else {
             alert('Ошибка при выходе');

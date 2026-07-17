@@ -61,6 +61,13 @@ async def http_exception_handler(request: Request, exc: HTTPException):
         content={"message": exc.detail, "path": request.url.path}
     )
     
+@app.exception_handler(ValueError)
+async def value_error_handler(request: Request, exc: ValueError):
+    return JSONResponse(
+        status_code=400,
+        content={"message": str(exc), "path": request.url.path}
+    )
+    
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.error(f"Unexpected error: {exc}", exc_info=True)

@@ -3,9 +3,11 @@ from abc import ABC, abstractmethod
 from typing import Optional, List, Tuple
 
 class IUserService(ABC):
+    #create
     @abstractmethod
     async def create_user(self, user: UserBase) -> None: pass
     
+    #read
     @abstractmethod
     async def get_user_by(self, 
                           id: Optional[int] = None, 
@@ -20,4 +22,7 @@ class IUserService(ABC):
                                 role_id: Optional[int] = None, 
                                 page: int = 1, 
                                 per_page: int = 25) -> Tuple[List[UserBase], int, int]: pass
+    
+    #update
+    async def update_user(self, user_id: int, update_data: dict) -> UserBase: pass
     

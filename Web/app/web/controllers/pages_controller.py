@@ -14,7 +14,6 @@ pages_controller = APIRouter(tags=["web"])
 
 @pages_controller.get("/")
 async def get_index(request: Request):
-    #context: dict = get_user_context(request)
     return templates.TemplateResponse(request=request, name="pages/index.html")
 
 @pages_controller.get("/profile")
@@ -27,7 +26,7 @@ async def get_profile(request: Request,
         other_user: Optional[UserBase] = await UserService.get_user_by(id=id)
         context['own'] = False
         if other_user:
-            context['other_user'] = other_user.__repr__()
+            context['other_user'] = other_user.to_dict
     if User:
         return templates.TemplateResponse(request=request, name="pages/profile.html", context=context)
     else:
@@ -57,10 +56,3 @@ async def get_password_change(request: Request, token: Optional[str] = None):
     if not data:
         return RedirectResponse("/profile")
     return templates.TemplateResponse(request=request, name="pages/auth/change_password.html")
-
-def get_user_context(request: Request) -> dict:
-    context: dict = {"user": None}
-    user: Optional[UserBase] = request.state.user
-    if user is not None:
-        context['user'] = user.__repr__()
-    return context

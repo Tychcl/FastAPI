@@ -2,18 +2,22 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 from ...models import UserBase, UserPrivacyBase
-from ..interfaces import IUserService
+from ..interfaces import IUserService, IPasswordHasherService
 from sqlalchemy import select, func, or_
 from typing import Optional, List, Tuple
 
 class UserService(IUserService):
-    def __init__(self, session: AsyncSession):
+    def __init__(self, session: AsyncSession, hasher: IPasswordHasherService):
         self.session = session
-        
+        self.hasher = hasher
+    
+    #create
     async def create_user(self, user: UserBase) -> None:
         exists_user: Optional[UserBase] = await self.get_user_by(username=user.username, email=user.email)
-        if exists_user:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, f"user with that username or email already exists")
+        if exists_user.email == user.email:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Email already taken")
+        if exists_user.username == user.username:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Username already taken")
         try:
             self.session.add(user)
             self.session.flush()
@@ -25,6 +29,7 @@ class UserService(IUserService):
         else:
             await self.session.commit()
     
+    #read
     async def get_user_by(self, id: Optional[int] = None, username: Optional[str] = None, email: Optional[str] = None, role_id: Optional[int] = None) -> Optional[UserBase]:
         conditions: list = []
         if id:
@@ -60,6 +65,26 @@ class UserService(IUserService):
         if conditions:
             count_filter = await self.count_users_by_filters(conditions)
         return result.scalars().all(), count_filter, count
+    
+    #update
+    async def update_user(self, user_id: int, update_data: dict) -> UserBase:
+        user = await self.get_user_by(id=user_id)
+        if not user:
+            raise HTTPException(404, "User not found")
+        un: Optional[str] = update_data.get('username', None)
+        e: Optional[str] = update_data.get('email', None)
+        exists_user: Optional[UserBase] = await self.get_user_by(username=un, email=e)
+        if exists_user.email == e:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Email already taken")
+        if exists_user.username == un:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Username already taken")
+        if 'new_password' in update_data:
+            update_data['new_password'] = self.hasher.hash(update_data['new_password'])
+        for field, value in update_data.items():
+            setattr(user, field, value)
+        await self.session.commit()
+        await self.session.refresh(user)
+        return user
     
     async def count_users_by_filters(self, conditions: Optional[list] = None) -> int:
         sql = select(func.count()).select_from(UserBase)

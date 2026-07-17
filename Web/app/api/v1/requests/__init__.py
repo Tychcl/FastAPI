@@ -3,3 +3,4 @@ from .SignupRequest import SignupRequest
 from .password_change_request import PasswordChangeRequest
 from .email_verify_request import EmailVerifyRequest
 from .password_forgot_request import PasswordForgotRequest
+from .update_user_request import UserUpdateRequest

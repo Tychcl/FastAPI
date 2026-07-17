@@ -4,9 +4,18 @@ from ..interfaces import IUserService, IRoleService
 from ..dependences import user_service, role_service
 from app.config import auth_check, role_required, get_authorized_user
 from ...models import UserBase, UserRoleBase
-from typing import Optional, List, Tuple
+from typing import Optional, List
+from ..requests import UserUpdateRequest
 
 user_controller = APIRouter(prefix="/user", tags=["user"])
+
+@user_controller.patch("")
+async def update_user(request: Request, 
+                      data: UserUpdateRequest,
+                      UserService: IUserService = Depends(user_service),
+                      User: UserBase = Depends(get_authorized_user)) -> JSONResponse:
+    updated_user: UserBase = await UserService.update_user(User.id, data.model_dump(exclude_unset=True))
+    return JSONResponse(content=updated_user.to_dict, status_code=200)
 
 @role_required(UserRoleBase.ADMIN().id)
 @user_controller.get("/find")

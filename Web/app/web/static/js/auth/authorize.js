@@ -42,10 +42,11 @@ async function loginHandler(event) {
             credentials: 'same-origin',
             body: JSON.stringify({ login, password }),
         });
+        const data = await response.json().catch(() => ({}));
         if (response.ok) {
+            localStorage.setItem("user", data);
             window.location.href = '/profile';
         } else {
-            const data = await response.json().catch(() => ({}));
             errorEl.textContent = data.message || 'Неверный логин или пароль';
         }
     } catch (e) {

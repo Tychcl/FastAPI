@@ -87,7 +87,7 @@
 }
 
 .visible { visibility: visible; }
-.hidden { visibility: hidden; }
+.hidden { visibility: hidden; height: 0px; }
 
 .profile-card-result {
     box-shadow: 0 8px 30px var(--shadow-color);

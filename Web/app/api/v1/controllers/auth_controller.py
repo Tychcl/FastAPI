@@ -33,16 +33,7 @@ async def signup(request: Request,
                 data: SignupRequest,
                 RoleService: IRoleService = Depends(role_service),
                 UserService: IUserService = Depends(user_service)) -> JSONResponse:
-    if not is_valid_username(data.username):
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid username format")
-    if not is_valid_email(data.email):
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid email format")
-    if not is_valid_password(data.password):
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid password format")
-    if data.password != data.confirm:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, "password confirmation error")
-    if data.role_id is None:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, "role required")
+    data.role_id = UserRoleBase.USER().id
     role: Optional[UserRoleBase]= await RoleService.get_role_by_id(data.role_id)
     if role is None:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, f"role with id = {data.role_id} not exists")

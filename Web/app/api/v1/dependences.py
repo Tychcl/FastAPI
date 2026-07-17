@@ -10,8 +10,9 @@ async def jwt_service() -> IJWTService:
 async def password_hasher_service() -> IPasswordHasherService:
     return PasswordHasherService()
 
-async def user_service(session: AsyncSession = Depends(get_context)) -> IUserService:
-    return UserService(session)
+async def user_service(session: AsyncSession = Depends(get_context),
+                       hasher: IPasswordHasherService = Depends(password_hasher_service)) -> IUserService:
+    return UserService(session, hasher)
 
 async def role_service(session: AsyncSession = Depends(get_context)) -> IRoleService:
     return RoleService(session)

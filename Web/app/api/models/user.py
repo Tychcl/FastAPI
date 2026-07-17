@@ -25,4 +25,4 @@ class UserBase(Base):
 
     @property
     def to_dict(self) -> dict:
-        return {"id": self.id, "username": self.username, "email": self.email, "role_id": self.role_id}
+        return {"id": self.id, "username": self.username, "email": self.email, "role_id": self.role_id, "role_name": self.role.name if self.role else None}

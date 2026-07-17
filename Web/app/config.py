@@ -89,4 +89,4 @@ settings = Settings()
 templates = Jinja2Templates(directory=os.path.join(settings.BASE_DIR, "web/templates"))
 logger = logging.getLogger(__name__)
 
-templates.context_processors.append(lambda request: {"user": request.state.user.__repr__() if request.state.user else None})
+templates.context_processors.append(lambda request: {"user": request.state.user.to_dict if request.state.user else None})

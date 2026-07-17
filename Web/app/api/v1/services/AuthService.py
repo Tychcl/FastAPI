@@ -27,7 +27,7 @@ class AuthService(IAuthService):
         result = await self.session.execute(sql)
         user: Optional[UserBase] = result.scalar_one_or_none()
         if user is not None and self.hasher.verify(password, user.password):
-            user_data: dict = user.__repr__()
+            user_data: dict = user.to_dict
             access_token: str = self.jwt_service.create_access_token(user_data)
             refresh_token: str = self.jwt_service.create_refresh_token(user_data)
             response: JSONResponse = JSONResponse(content=user_data, status_code=200)
