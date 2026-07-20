@@ -29,12 +29,11 @@ celery_app.conf.update(
     max_retries=3,
     default_retry_delay=5
 )
-def send_verify_email(self, email: str, code: int, token: str) -> bool:
+def send_verify_email(self, email: str, code: int) -> bool:
     import logging
     logging.info(f"Sending verify email to {email} with code {code}")
     try:
-        verify_link = f"{settings.BASE_URL}/authorize/email/verify?token={token}"
-        body = f"Здравствуйте!\n\nКод для подтверждения почты: {code}\n\nСсылка на страницу подтверждения: {verify_link}\n\nКод и ссылка действителены 10 минут.\n\nЕсли вы не запрашивали подтверждение, проигнорируйте это письмо."
+        body = f"Здравствуйте!\n\nКод для подтверждения почты: {code}\n\nКод действителен 10 минут.\n\nЕсли вы не запрашивали подтверждение, проигнорируйте это письмо."
         send_msg(email, body, "Подтверждение почты")
         return True
     except Exception as e:
@@ -54,6 +53,24 @@ def send_verify_email(self, email: str, token: str) -> bool:
         reset_link = f"{settings.BASE_URL}/password/change?token={token}"
         body = f"Здравствуйте!\n\nДля восстановления пароля перейдите по ссылке:\n{reset_link}\n\nСсылка действительна 10 минут.\n\nЕсли вы не запрашивали восстановление, проигнорируйте это письмо."
         send_msg(email, body, "Восстановление пароля")
+        return True
+    except Exception as e:
+        logging.error(f"Failed to send email: {e}")
+        return False
+    
+@celery_app.task(
+    name='send_email_change_link',
+    bind=True,
+    max_retries=3,
+    default_retry_delay=5
+)
+def send_verify_email(self, email: str, token: str) -> bool:
+    import logging
+    logging.info(f"Sending change email to {email} with token {token}")
+    try:
+        change_link = f"{settings.BASE_URL}/email/change?token={token}"
+        body = f"Здравствуйте!\n\nДля смены почты перейдите по ссылке:\n{change_link}\n\nСсылка действительна 10 минут.\n\nЕсли вы не запрашивали смену почты, проигнорируйте это письмо."
+        send_msg(email, body, "смена почты")
         return True
     except Exception as e:
         logging.error(f"Failed to send email: {e}")

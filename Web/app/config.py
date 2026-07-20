@@ -5,7 +5,7 @@ import logging
 from pydantic_settings import BaseSettings
 from fastapi import HTTPException, status, Request
 from typing import Optional
-from .api.models import UserBase
+from .api.models import UserBase, UserRoleBase, UserPrivacyBase
 from functools import wraps
 
 async def get_authorized_user(request: Request) -> Optional[UserBase]:
@@ -42,6 +42,16 @@ def role_required(role_required: int):
             return await func(*args, **kwargs)
         return wrapper
     return decorator
+
+def dict_to_user(data: dict) -> UserBase:
+    column_names = [col.name for col in UserBase.__table__.c]
+    user_data = {key: data[key] for key in column_names if key in data}
+    user = UserBase(**user_data)
+    if data.get('role'):
+        user.role = UserRoleBase(**data['role'])
+    if data.get('privacy'):
+        user.privacy = UserPrivacyBase(**data['privacy'])
+    return user
 
 class Settings(BaseSettings):
     BASE_URL: str

@@ -9,10 +9,6 @@ class UserRoleBase(Base):
 
     users = relationship("UserBase", back_populates="role")
     
-    @property
-    def to_dict(self):
-        return {"id": self.id, "name": self.name}
-    
     def S_ADMIN() -> "UserRoleBase":
         return UserRoleBase(id=1, name="super admin")
     

@@ -8,6 +8,7 @@ class UserBase(Base):
     id: Mapped[int] = mapped_column(primary_key=True, nullable=False)
     username: Mapped[str] = mapped_column(String(15), unique=True, nullable=False)
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
+    about: Mapped[str] = mapped_column(String(255), nullable=True)
     password: Mapped[str] = mapped_column(String(255), nullable=False)
 
     role_id: Mapped[int] = mapped_column(ForeignKey("user_roles.id"), nullable=False)
@@ -25,4 +26,10 @@ class UserBase(Base):
 
     @property
     def to_dict(self) -> dict:
-        return {"id": self.id, "username": self.username, "email": self.email, "role_id": self.role_id, "role_name": self.role.name if self.role else None}
+        data: dict = super().to_dict
+        data.pop('password', None)
+        if self.role is not None:
+            data['role'] = self.role.to_dict
+        if self.privacy is not None:
+            data['privacy'] = self.privacy.to_dict
+        return data

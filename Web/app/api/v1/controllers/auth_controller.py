@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Request, Depends, HTTPException, status
 from fastapi.responses import JSONResponse
-from ..requests import SigninRequest, SignupRequest, PasswordForgotRequest, EmailVerifyRequest, PasswordChangeRequest
+from ..requests import SigninRequest, SignupRequest, PasswordForgotRequest, EmailVerifyRequest, PasswordChangeRequest, EmailChangeRequest
 from ..dependences import auth_service, role_service, user_service
 from ..interfaces import IAuthService, IRoleService, IPasswordHasherService, IUserService
 from ...models import UserBase, UserRoleBase
-from app.config import auth_check, role_required, get_user, get_authorized_user
+from app.config import auth_check, role_required, get_user, get_authorized_user, settings
 from ..validators import is_valid_username, is_valid_password, is_valid_email
 from app.celery import celery_app
 from typing import Optional
@@ -49,7 +49,7 @@ async def signup(request: Request,
     try:
         celery_app.send_task(
             'send_verify_email_code',
-            args=[data.email, code, token],
+            args=[data.email, code],
             queue='celery'
         )
     except:
@@ -104,10 +104,29 @@ async def password_change(request: Request,
     await redis_client.delete(key)
     return JSONResponse(content={"msg": "password changed"}, status_code=status.HTTP_200_OK)
 
+@auth_controller.post("/email/change", tags=["email"])
+async def email_change(request: Request,
+                       data: EmailChangeRequest,
+                       User: UserBase = Depends(get_authorized_user),
+                       UserService: IUserService = Depends(user_service)) -> JSONResponse:
+    if User.email == data.new_email:
+        raise HTTPException(400, "This is your current email")
+    exists: Optional[UserBase] = await UserService.get_user_by(email=data.new_email)
+    if exists:
+        raise HTTPException(400, "Email already taken")
+    redis_client: Redis = request.app.state.redis
+    token: str = secrets.token_urlsafe(16)
+    code: int = randint(1000,9999)
+    redis_data: dict = {"email": data.new_email, "code": code}
+    request.session["email"] = data.new_email
+    await redis_client.setex(f"email_verify:{token}", 600, json.dumps(redis_data))
+
 @auth_controller.post("/email/verify", tags=["email"])
 async def email_verify(request: Request,
                        data: EmailVerifyRequest,
-                       AuthService: IAuthService = Depends(auth_service)) -> JSONResponse:
+                       AuthService: IAuthService = Depends(auth_service),
+                       UserService: IUserService = Depends(user_service),
+                       User: Optional[UserBase] = Depends(get_user)) -> JSONResponse:
     email: Optional[str] = request.session["email"]
     if email is None:
         raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "email not found in session")
@@ -115,23 +134,29 @@ async def email_verify(request: Request,
     redis_client: Redis = request.app.state.redis
     r_data = await redis_client.get(key)
     if r_data:
-        user_data: dict = json.loads(r_data)
+        redis_data: dict = json.loads(r_data)
     else:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "signup out of time, try again")
-    if user_data.get("code", None) is None:
-        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "code data error")
-    if data.code != user_data.get("code", None):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Email verify out of time, try again")
+    if redis_data.get("code", None) is None:
+            raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "code data error")
+    if data.code != redis_data.get("code", None):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "wrong code")
-    if email != user_data.get("email", None):
+    if email != redis_data.get("email", None):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "wrong email")
-    username: Optional[str] = user_data.get("username", None)
-    password: Optional[str] = user_data.get("password", None)
-    role_id: Optional[int] = user_data.get("role_id", None)
-    if username is None or password is None or role_id is None:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, "fields is none")
-    new_user: Optional[UserBase] = await AuthService.signup(username, email, password, role_id, True)
-    if new_user is None:
-        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "user create error")
+    
+    if User is None:
+        username: Optional[str] = redis_data.get("username", None)
+        password: Optional[str] = redis_data.get("password", None)
+        role_id: Optional[int] = redis_data.get("role_id", None)
+        if username is None or password is None or role_id is None:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, "fields is none")
+        new_user: Optional[UserBase] = await AuthService.signup(username, email, password, role_id, True)
+        if new_user is None:
+            raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "user create error")
+    else:
+        await UserService.update_user(User.id, {"email": email})
+        await redis_client.delete(f"user:{request.cookies.get(settings.JWT_STRING)}")
+    
     await redis_client.delete(key)
     request.session.pop("email")
     return JSONResponse(content={"msg": "email verified"}, status_code=status.HTTP_200_OK)

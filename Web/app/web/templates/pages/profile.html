@@ -13,7 +13,7 @@
             <div class="profile-card">
                 <h2>👤 {{ user.username if own else other_user.username }}<span style="margin-left: 5px; font-size: 16px; vertical-align: top;">({{ user.id if own else other_user.id }})</span></h2>
                 <p>{{ user.email if own else other_user.email }}</p>
-                <p>{{ user.role_name if own else other_user.role_name }}</p>
+                <p>{{ user.role.name if own else other_user.role.name }}</p>
                 {% if own %}
                 <button onclick="logout()" class="menu-btn menu-btn--pink" aria-label="Профиль">
                     <span class="menu-btn__icon">
@@ -58,22 +58,26 @@
                         <input value="{{ user.username if own else other_user.username }}" type="text" class="menu-btn menu-btn--purple" id="username" name="username" placeholder="юзернейм" required {% if not own %}disabled{% endif %}>
                         <span class="error" id="usernameError"></span>
                     </div>
+                    {% if own or other_user and other_user.privacy.show_email %}
                     <div class="form-group" style="flex: 1;">
                         <label for="email">Почта</label>
-                        <input value="{{ user.email if own else other_user.email }}" type="text" class="menu-btn menu-btn--purple" id="email" name="email" placeholder="Почта" required {% if not own %}disabled{% endif %}>
+                        <input value="{{ user.email if own else other_user.email }}" type="text" class="menu-btn menu-btn--purple" id="email" name="email" placeholder="Почта" readonly>
                         <span class="error" id="emailError"></span>
                     </div>
+                    {% endif %}
                     <div class="form-group" style="max-width: 95px;">
                         <label >Роль</label>
-                        <input value="{{ user.role_name if own else other_user.role_name }}" type="text" class="menu-btn menu-btn--purple" disabled>
+                        <input value="{{ user.role.name if own else other_user.role.name }}" type="text" class="menu-btn menu-btn--purple" disabled>
                     </div>
                 </div>
+                {% if own or other_user and other_user.privacy.show_about %}
                 <div class="form-row">
                     <div class="form-group" style="flex: 1;">
                         <label for="about">О себе</label>
                         <input type="text" class="menu-btn menu-btn--purple" id="about" name="about" placeholder="Что-нибудь о себе" {% if not own %}disabled{% endif %}>
                     </div>
                 </div>
+                {% endif %}
                 {% if own %}
                 <div class="form-row password-row">
                     <div class="form-group" style="flex: 1;">
@@ -107,7 +111,7 @@
                 <div class="toggle-group">
                     <div class="toggle-item">
                         <label class="toggle-switch">
-                            <input type="checkbox" name="show_email" 
+                            <input type="checkbox" id="show_email" name="show_email" 
                                    {% if user.privacy and user.privacy.show_email %}checked{% endif %}>
                             <span class="toggle-slider"></span>
                         </label>
@@ -115,7 +119,7 @@
                     </div>
                     <div class="toggle-item">
                         <label class="toggle-switch">
-                            <input type="checkbox" name="show_about" 
+                            <input type="checkbox" id="show_about" name="show_about" 
                                    {% if user.privacy and user.privacy.show_about %}checked{% endif %}>
                             <span class="toggle-slider"></span>
                         </label>

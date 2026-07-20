@@ -7,7 +7,7 @@ from typing import Optional
 from redis.asyncio import Redis
 from app.config import auth_check, role_required, get_user
 from app.api.v1.dependences import user_service
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 import json
 
 pages_controller = APIRouter(tags=["web"])
@@ -23,7 +23,7 @@ async def get_profile(request: Request,
                       User: Optional[UserBase] = Depends(get_user)):
     context: dict = {'own': True}
     if id:
-        other_user: Optional[UserBase] = await UserService.get_user_by(id=id)
+        other_user: Optional[UserBase] = await UserService.get_user_by(id=id, load_privacy=True)
         context['own'] = False
         if other_user:
             context['other_user'] = other_user.to_dict

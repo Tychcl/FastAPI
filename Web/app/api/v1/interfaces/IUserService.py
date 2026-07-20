@@ -13,7 +13,9 @@ class IUserService(ABC):
                           id: Optional[int] = None, 
                           username: Optional[str] = None, 
                           email: Optional[str] = None, 
-                          role_id: Optional[int] = None) -> Optional[UserBase]: pass
+                          role_id: Optional[int] = None,
+                          load_role: bool = True,
+                          load_privacy: bool = False) -> Optional[UserBase]: pass
     
     @abstractmethod
     async def find_users_by_any(self, 

@@ -4,7 +4,8 @@ from ..validators import is_valid_username, is_valid_password
 
 class UserUpdateRequest(BaseModel):
     username: Optional[str] = None
-    email: Optional[EmailStr] = None
+    about: Optional[str] = None
+    #email: Optional[EmailStr] = None
     password: Optional[str] = None
     new_password: Optional[str] = None
 

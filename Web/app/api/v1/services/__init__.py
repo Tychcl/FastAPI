@@ -4,3 +4,4 @@ from .UserService import UserService
 from .AuthService import AuthService
 from .CookieService import CookieService
 from .RoleService import RoleService
+from .UserPrivacyService import UserPrivacyService

@@ -1,5 +1,5 @@
-from .interfaces import IJWTService, IPasswordHasherService, IUserService, IAuthService, ICookieService, IRoleService
-from .services import JWTService, PasswordHasherService, UserService, AuthService, CookieService, RoleService
+from .interfaces import IJWTService, IPasswordHasherService, IUserService, IAuthService, ICookieService, IRoleService, IUserPrivacyService
+from .services import JWTService, PasswordHasherService, UserService, AuthService, CookieService, RoleService, UserPrivacyService
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends
 from app.database import get_context
@@ -16,6 +16,9 @@ async def user_service(session: AsyncSession = Depends(get_context),
 
 async def role_service(session: AsyncSession = Depends(get_context)) -> IRoleService:
     return RoleService(session)
+
+async def privacy_service(session: AsyncSession = Depends(get_context)) -> IUserPrivacyService:
+    return UserPrivacyService(session)
 
 async def cookie_service() -> ICookieService:
     return CookieService()

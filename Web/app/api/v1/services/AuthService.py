@@ -23,9 +23,7 @@ class AuthService(IAuthService):
         self.cookie_service = cookie_service
 
     async def signin(self, login: str, password: str) -> tuple[Optional[UserBase], Optional[JSONResponse]]:
-        sql = select(UserBase).options(selectinload(UserBase.role)).where(or_(UserBase.email == login, UserBase.username == login))
-        result = await self.session.execute(sql)
-        user: Optional[UserBase] = result.scalar_one_or_none()
+        user: Optional[UserBase] = await self.user_service.get_user_by(email=login, username=login, load_role=True, load_privacy=True)
         if user is not None and self.hasher.verify(password, user.password):
             user_data: dict = user.to_dict
             access_token: str = self.jwt_service.create_access_token(user_data)

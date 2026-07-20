@@ -4,3 +4,5 @@ from .password_change_request import PasswordChangeRequest
 from .email_verify_request import EmailVerifyRequest
 from .password_forgot_request import PasswordForgotRequest
 from .update_user_request import UserUpdateRequest
+from .PrivacyUpdateRequest import PrivacyUpdateRequest
+from .email_change_request import EmailChangeRequest

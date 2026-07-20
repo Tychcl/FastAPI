@@ -13,7 +13,7 @@ class UserService(IUserService):
     
     #create
     async def create_user(self, user: UserBase) -> None:
-        exists_user: Optional[UserBase] = await self.get_user_by(username=user.username, email=user.email)
+        exists_user: Optional[UserBase] = await self.get_user_by(username=user.username, email=user.email, load_role=False)
         if exists_user.email == user.email:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Email already taken")
         if exists_user.username == user.username:
@@ -30,7 +30,17 @@ class UserService(IUserService):
             await self.session.commit()
     
     #read
-    async def get_user_by(self, id: Optional[int] = None, username: Optional[str] = None, email: Optional[str] = None, role_id: Optional[int] = None) -> Optional[UserBase]:
+    async def get_user_by(self, id: Optional[int] = None, 
+                          username: Optional[str] = None, 
+                          email: Optional[str] = None, 
+                          role_id: Optional[int] = None,
+                          load_role: bool = True,
+                          load_privacy: bool = False) -> Optional[UserBase]:
+        opt: list = []
+        if load_role:
+            opt.append(selectinload(UserBase.role))
+        if load_privacy:
+            opt.append(selectinload(UserBase.privacy))
         conditions: list = []
         if id:
             conditions.append(UserBase.id == id)
@@ -40,7 +50,11 @@ class UserService(IUserService):
             conditions.append(UserBase.email == email)
         if role_id:
             conditions.append(UserBase.role_id == role_id)
-        sql = select(UserBase).options(selectinload(UserBase.role)).where(or_(*conditions))
+        sql = select(UserBase)
+        if len(opt) > 0:
+            sql = sql.options(*opt)
+        if len(conditions) > 0:
+            sql = sql.where(or_(*conditions))
         result = await self.session.execute(sql)
         return result.scalar_one_or_none()
 
@@ -98,7 +112,7 @@ class UserService(IUserService):
                           email: Optional[str] = None, 
                           role_id: Optional[int] = None):
         conditions = []
-        if ids is not None and ids.count > 0:
+        if ids is not None and len(ids) > 0:
             conditions.append(UserBase.id.in_(ids))
         if username is not None:
             conditions.append(UserBase.username.ilike(f'%{username}%'))

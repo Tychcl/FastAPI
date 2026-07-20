@@ -1,21 +1,34 @@
 from fastapi import APIRouter, Request, Query, Depends, HTTPException
 from fastapi.responses import JSONResponse
-from ..interfaces import IUserService, IRoleService
-from ..dependences import user_service, role_service
+from ..interfaces import IUserService, IRoleService, IUserPrivacyService
+from ..dependences import user_service, role_service, privacy_service
 from app.config import auth_check, role_required, get_authorized_user
 from ...models import UserBase, UserRoleBase
 from typing import Optional, List
-from ..requests import UserUpdateRequest
+from ..requests import UserUpdateRequest, PrivacyUpdateRequest
 
 user_controller = APIRouter(prefix="/user", tags=["user"])
 
-@user_controller.patch("")
+@user_controller.patch("/me", tags=['me'])
 async def update_user(request: Request, 
                       data: UserUpdateRequest,
                       UserService: IUserService = Depends(user_service),
                       User: UserBase = Depends(get_authorized_user)) -> JSONResponse:
     updated_user: UserBase = await UserService.update_user(User.id, data.model_dump(exclude_unset=True))
     return JSONResponse(content=updated_user.to_dict, status_code=200)
+
+@user_controller.patch("/me/privacy", tags=['me'])
+async def update_my_privacy(
+    data: PrivacyUpdateRequest,
+    current_user: UserBase = Depends(auth_check),
+    privacy_service: IUserPrivacyService = Depends(privacy_service)
+):
+    updated = await privacy_service.update_privacy(
+        current_user.id,
+        show_email=data.show_email,
+        show_about=data.show_about
+    )
+    return JSONResponse(content=updated.to_dict)
 
 @role_required(UserRoleBase.ADMIN().id)
 @user_controller.get("/find")
@@ -49,14 +62,3 @@ async def get_role_by_id(request: Request,
         return HTTPException(content={"error": "id required"}, status_code=400)
     role: UserRoleBase = await RoleService.get_role_by_id(id)
     return JSONResponse(content=role.to_dict, status_code=200)
-
-#@role_required(UserRoleBase.ADMIN().id)
-#@user_controller.get("/{id}")
-#async def get_user_by_id(request: Request, 
-#                         id: Optional[int] = None, 
-#                         UserService: IUserService = Depends(user_service),
-#                         user: Optional[UserBase] = Depends(auth_check)) -> JSONResponse:
-#    if id is None:
-#        return HTTPException(content={"error": "id required"}, status_code=400)
-#    user = await UserService.get_user_by(id=id)
-#    return JSONResponse(content={"user": {"id": user.id, "username": user.username, "role_id": user.role_id, "role_name": user.role.name}}, status_code=200)
