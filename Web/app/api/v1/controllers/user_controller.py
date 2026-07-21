@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Request, Query, Depends, HTTPException
 from fastapi.responses import JSONResponse
-from ..interfaces import IUserService, IRoleService, IUserPrivacyService
-from ..dependences import user_service, role_service, privacy_service
-from app.config import auth_check, role_required, get_authorized_user
+from ..interfaces import IUserService, IRoleService, IUserPrivacyService, IPasswordHasherService
+from ..dependences import user_service, role_service, privacy_service, password_hasher_service
+from app.config import auth_check, role_required, get_authorized_user, clear_user_cache
 from ...models import UserBase, UserRoleBase
 from typing import Optional, List
 from ..requests import UserUpdateRequest, PrivacyUpdateRequest
@@ -14,11 +14,18 @@ async def update_user(request: Request,
                       data: UserUpdateRequest,
                       UserService: IUserService = Depends(user_service),
                       User: UserBase = Depends(get_authorized_user)) -> JSONResponse:
+    verify = await UserService.verify_password(User.id, data.password)
+    if not verify:
+        raise HTTPException(400, "Wrong password")
     updated_user: UserBase = await UserService.update_user(User.id, data.model_dump(exclude_unset=True))
-    return JSONResponse(content=updated_user.to_dict, status_code=200)
+    await clear_user_cache(request)
+    return_data: dict = updated_user.to_dict
+    return_data.pop('password', None)
+    return JSONResponse(content=return_data, status_code=200)
 
 @user_controller.patch("/me/privacy", tags=['me'])
 async def update_my_privacy(
+    request: Request,
     data: PrivacyUpdateRequest,
     current_user: UserBase = Depends(auth_check),
     privacy_service: IUserPrivacyService = Depends(privacy_service)
@@ -28,6 +35,7 @@ async def update_my_privacy(
         show_email=data.show_email,
         show_about=data.show_about
     )
+    await clear_user_cache(request)
     return JSONResponse(content=updated.to_dict)
 
 @role_required(UserRoleBase.ADMIN().id)

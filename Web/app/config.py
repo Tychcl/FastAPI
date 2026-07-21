@@ -7,6 +7,7 @@ from fastapi import HTTPException, status, Request
 from typing import Optional
 from .api.models import UserBase, UserRoleBase, UserPrivacyBase
 from functools import wraps
+from redis import Redis
 
 async def get_authorized_user(request: Request) -> Optional[UserBase]:
     try:
@@ -52,6 +53,11 @@ def dict_to_user(data: dict) -> UserBase:
     if data.get('privacy'):
         user.privacy = UserPrivacyBase(**data['privacy'])
     return user
+
+async def clear_user_cache(request: Request, redis_client: Optional[Redis] = None):
+    if redis_client is None:
+        redis_client = request.app.state.redis
+    await redis_client.delete(f"user:{request.cookies.get(settings.JWT_STRING)}")
 
 class Settings(BaseSettings):
     BASE_URL: str

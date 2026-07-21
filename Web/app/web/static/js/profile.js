@@ -1,3 +1,5 @@
+let user;
+
 async function logout() {
     try {
         const response = await fetch('/api/v1/auth/signout', {
@@ -18,11 +20,61 @@ async function logout() {
 
 async function dataHandler(event) {
     event.preventDefault();
-    try{
+    const form = document.getElementById('update-user-data');
+    try {
+        const password = form.querySelector('input#current-password').value;
+        if (!is_valid_password(password)){
+            alert("Неверный формат пароля");
+            return;
+        }
+        const new_password = form.querySelector('input#new-password').value;
+        if (new_password && !is_valid_password(new_password)){
+            alert("Неверный формат нового пароля");
+            return;
+        }
+        
+        const inputs = form.querySelectorAll('input');
+        const user_keys = Object.keys(user);
+        let send_data = {};
+        
+        for (let i = 0; i < inputs.length; i++) {
+            const id = inputs[i].id;
+            if (id !== 'current-password' && id !== 'new-password' && 
+                user_keys.includes(id) && inputs[i].value != user[id]) {
+                send_data[id] = inputs[i].value;
+            }
+        }
+        send_data.password = password;
+        
+        if (new_password) {
+            send_data.new_password = new_password;
+        }
+        
+        console.log(send_data)
+
+        const response = await fetch('/api/v1/user/me', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(send_data)
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok) {
+            alert('Данные обновлены');
+            localStorage.setItem("user", JSON.stringify(data));
+            document.getElementById('username-mini').innerHTML = send_data['username']
+            user = data;
+        } else {
+            alert(data.detail || 'Ошибка обновления');
+        }
 
     } catch (error) {
         console.error('Ошибка:', error);
-        alert('Произошла ошибка при выходе');
+        alert('Произошла ошибка при обновлении');
     }
 }
 
@@ -77,7 +129,8 @@ async function changeEmail() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-     document.getElementById('email').addEventListener('click', changeEmail);
+    user = JSON.parse(localStorage.getItem('user'));
+    document.getElementById('emailInput').addEventListener('click', changeEmail);
     document.getElementById('update-user-data').addEventListener('submit', dataHandler);
     document.getElementById('update-user-privacy').addEventListener('submit', privacyHandler);
 });

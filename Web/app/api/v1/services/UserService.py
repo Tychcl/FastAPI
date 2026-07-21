@@ -30,6 +30,14 @@ class UserService(IUserService):
             await self.session.commit()
     
     #read
+    async def verify_password(self, user_id: int, password: str) -> bool:
+        sql = select(UserBase.password).where(UserBase.id == user_id)
+        result = await self.session.execute(sql)
+        hashed_password = result.scalar_one_or_none()
+        if hashed_password is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+        return self.hasher.verify(password, hashed_password)
+        
     async def get_user_by(self, id: Optional[int] = None, 
                           username: Optional[str] = None, 
                           email: Optional[str] = None, 
@@ -93,12 +101,16 @@ class UserService(IUserService):
                 raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Email already taken")
             if exists_user.username == un:
                 raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Username already taken")
+        update_data.pop('password', None)
         if 'new_password' in update_data:
-            update_data['new_password'] = self.hasher.hash(update_data['new_password'])
+            update_data['password'] = self.hasher.hash(update_data['new_password'])
+            update_data.pop('new_password', None)
+
         for field, value in update_data.items():
             setattr(user, field, value)
         await self.session.commit()
-        await self.session.refresh(user)
+        #await self.session.refresh(user, attribute_names=['role', 'privacy'])
+        user = await self.get_user_by(id=user_id)
         return user
     
     async def count_users_by_filters(self, conditions: Optional[list] = None) -> int:

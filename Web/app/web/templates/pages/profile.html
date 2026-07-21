@@ -11,7 +11,7 @@
     <div class="profile-card-shell-shell">
         <div class="profile-card-shell">
             <div class="profile-card">
-                <h2>👤 {{ user.username if own else other_user.username }}<span style="margin-left: 5px; font-size: 16px; vertical-align: top;">({{ user.id if own else other_user.id }})</span></h2>
+                <h2>👤 <span id="username-mini">{{ user.username if own else other_user.username }}</span><span style="margin-left: 5px; font-size: 16px; vertical-align: top;">({{ user.id if own else other_user.id }})</span></h2>
                 <p>{{ user.email if own else other_user.email }}</p>
                 <p>{{ user.role.name if own else other_user.role.name }}</p>
                 {% if own %}
@@ -61,7 +61,7 @@
                     {% if own or other_user and other_user.privacy.show_email %}
                     <div class="form-group" style="flex: 1;">
                         <label for="email">Почта</label>
-                        <input value="{{ user.email if own else other_user.email }}" type="text" class="menu-btn menu-btn--purple" id="email" name="email" placeholder="Почта" readonly>
+                        <input value="{{ user.email if own else other_user.email }}" type="text" class="menu-btn menu-btn--purple" id="emailInput" name="email" placeholder="Почта" readonly>
                         <span class="error" id="emailError"></span>
                     </div>
                     {% endif %}
@@ -74,7 +74,7 @@
                 <div class="form-row">
                     <div class="form-group" style="flex: 1;">
                         <label for="about">О себе</label>
-                        <input type="text" class="menu-btn menu-btn--purple" id="about" name="about" placeholder="Что-нибудь о себе" {% if not own %}disabled{% endif %}>
+                        <input value="{{ user.about if own else other_user.about }}" maxlength="255" type="text" class="menu-btn menu-btn--purple" id="about" name="about" placeholder="Что-нибудь о себе" {% if not own %}disabled{% endif %}>
                     </div>
                 </div>
                 {% endif %}

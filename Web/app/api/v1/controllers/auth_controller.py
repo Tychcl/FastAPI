@@ -4,7 +4,7 @@ from ..requests import SigninRequest, SignupRequest, PasswordForgotRequest, Emai
 from ..dependences import auth_service, role_service, user_service
 from ..interfaces import IAuthService, IRoleService, IPasswordHasherService, IUserService
 from ...models import UserBase, UserRoleBase
-from app.config import auth_check, role_required, get_user, get_authorized_user, settings
+from app.config import auth_check, role_required, get_user, get_authorized_user, settings, clear_user_cache
 from ..validators import is_valid_username, is_valid_password, is_valid_email
 from app.celery import celery_app
 from typing import Optional
@@ -67,7 +67,7 @@ async def signout(request: Request, AuthService: IAuthService = Depends(auth_ser
 async def password_forgot(request: Request,
                           data: PasswordForgotRequest,
                           UserService: IUserService = Depends(user_service)) -> JSONResponse:
-    user: Optional[UserBase] = await UserService.get_user_by(username=data.login, email=data.login)
+    user: Optional[UserBase] = await UserService.get_user_by(username=data.login, email=data.login, load_privacy=True)
     if user is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="user with that login not found")
     user_data: dict = user.to_dict
@@ -174,7 +174,7 @@ async def email_verify(request: Request,
             raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "user create error")
     else:
         await UserService.update_user(User.id, {"email": email})
-        await redis_client.delete(f"user:{request.cookies.get(settings.JWT_STRING)}")
+        await clear_user_cache(request)
     
     await redis_client.delete(key)
     request.session.pop("email")

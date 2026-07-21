@@ -28,8 +28,8 @@ class UserBase(Base):
     def to_dict(self) -> dict:
         data: dict = super().to_dict
         data.pop('password', None)
-        if self.role is not None:
+        if 'role' in self.__dict__ and self.role is not None:
             data['role'] = self.role.to_dict
-        if self.privacy is not None:
+        if 'privacy' in self.__dict__ and self.privacy is not None:
             data['privacy'] = self.privacy.to_dict
         return data

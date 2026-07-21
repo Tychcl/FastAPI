@@ -9,6 +9,9 @@ class IUserService(ABC):
     
     #read
     @abstractmethod
+    async def verify_password(self, user_id: int, password: str) -> bool: pass
+    
+    @abstractmethod
     async def get_user_by(self, 
                           id: Optional[int] = None, 
                           username: Optional[str] = None, 

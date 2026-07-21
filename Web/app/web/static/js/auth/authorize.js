@@ -44,7 +44,7 @@ async function loginHandler(event) {
         });
         const data = await response.json().catch(() => ({}));
         if (response.ok) {
-            localStorage.setItem("user", data);
+            localStorage.setItem("user", JSON.stringify(data));
             window.location.href = '/profile';
         } else {
             errorEl.textContent = data.message || 'Неверный логин или пароль';

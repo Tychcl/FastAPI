@@ -12,6 +12,6 @@ class UserPrivacyBase(Base):
         nullable=False
     )
     show_email: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
-    show_about: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    show_about: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
 
     user: Mapped["UserBase"] = relationship("UserBase", back_populates="privacy")
