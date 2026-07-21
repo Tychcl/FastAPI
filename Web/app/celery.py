@@ -29,7 +29,7 @@ celery_app.conf.update(
     max_retries=3,
     default_retry_delay=5
 )
-def send_verify_email(self, email: str, code: int) -> bool:
+def send_verify_email_code(self, email: str, code: int) -> bool:
     import logging
     logging.info(f"Sending verify email to {email} with code {code}")
     try:
@@ -46,7 +46,7 @@ def send_verify_email(self, email: str, code: int) -> bool:
     max_retries=3,
     default_retry_delay=5
 )
-def send_verify_email(self, email: str, token: str) -> bool:
+def send_password_forgot_link(self, email: str, token: str) -> bool:
     import logging
     logging.info(f"Sending forgot email to {email} with token {token}")
     try:
@@ -64,11 +64,11 @@ def send_verify_email(self, email: str, token: str) -> bool:
     max_retries=3,
     default_retry_delay=5
 )
-def send_verify_email(self, email: str, token: str) -> bool:
+def send_email_change_link(self, email: str, token: str) -> bool:
     import logging
     logging.info(f"Sending change email to {email} with token {token}")
     try:
-        change_link = f"{settings.BASE_URL}/email/change?token={token}"
+        change_link = f"{settings.BASE_URL}/authorize/email/verify?token={token}"
         body = f"Здравствуйте!\n\nДля смены почты перейдите по ссылке:\n{change_link}\n\nСсылка действительна 10 минут.\n\nЕсли вы не запрашивали смену почты, проигнорируйте это письмо."
         send_msg(email, body, "смена почты")
         return True

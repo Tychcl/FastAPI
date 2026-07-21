@@ -59,6 +59,8 @@ async def signup(request: Request,
 
 @auth_controller.post("/signout")
 async def signout(request: Request, AuthService: IAuthService = Depends(auth_service)) -> JSONResponse:
+    redis_client: Redis = request.app.state.redis
+    await redis_client.delete(f"user:{request.cookies.get(settings.JWT_STRING)}")
     return await AuthService.logout()
 
 @auth_controller.post("/password/forgot", tags=["password"])
@@ -120,6 +122,23 @@ async def email_change(request: Request,
     redis_data: dict = {"email": data.new_email, "code": code}
     request.session["email"] = data.new_email
     await redis_client.setex(f"email_verify:{token}", 600, json.dumps(redis_data))
+    try:
+        celery_app.send_task(
+            'send_verify_email_code',
+            args=[data.new_email, code],
+            queue='celery'
+        )
+    except:
+        raise HTTPException(500, "Email change code sending failed")
+    try:
+        celery_app.send_task(
+            'send_email_change_link',
+            args=[User.email, token],
+            queue='celery'
+        )
+    except:
+        raise HTTPException(500, "Email change link sending failed")
+    return JSONResponse(content={"msg": f"Change link send to {User.email}\nVerification code send to {data.new_email}", "token": token}, status_code=status.HTTP_200_OK)
 
 @auth_controller.post("/email/verify", tags=["email"])
 async def email_verify(request: Request,

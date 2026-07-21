@@ -52,10 +52,27 @@ async function privacyHandler(event) {
     }
 }
 
-function changeEmail() {
-    const change = confirm('Желаете сменить почту?');
-    if (change) {
-        
+async function changeEmail() {
+    const new_email = prompt('Желаете сменить почту?', "");
+    console.log(new_email)
+    if (is_valid_email(new_email)) {
+        try {
+            const response = await fetch('/api/v1/auth/email/change', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
+                body: JSON.stringify({ new_email }),
+            });
+            const data = await response.json().catch(() => ({}));
+            if (response.ok) {
+                alert("На вашу текущую почту была отправлена ссылка для смена\nНа новую почту был отправлен код");
+                window.location.href = `/authorize/email/verify?token=${data.token}`;
+            } else {
+                alert(data.message);
+            }
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 

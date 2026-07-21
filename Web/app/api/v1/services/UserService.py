@@ -83,15 +83,16 @@ class UserService(IUserService):
     #update
     async def update_user(self, user_id: int, update_data: dict) -> UserBase:
         user = await self.get_user_by(id=user_id)
-        if not user:
+        if user is None:
             raise HTTPException(404, "User not found")
         un: Optional[str] = update_data.get('username', None)
         e: Optional[str] = update_data.get('email', None)
         exists_user: Optional[UserBase] = await self.get_user_by(username=un, email=e)
-        if exists_user.email == e:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Email already taken")
-        if exists_user.username == un:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Username already taken")
+        if exists_user:
+            if exists_user.email == e:
+                raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Email already taken")
+            if exists_user.username == un:
+                raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Username already taken")
         if 'new_password' in update_data:
             update_data['new_password'] = self.hasher.hash(update_data['new_password'])
         for field, value in update_data.items():
