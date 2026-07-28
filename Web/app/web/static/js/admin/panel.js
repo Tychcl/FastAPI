@@ -64,7 +64,7 @@ async function find_users(event) {
 
     try {
         const response = await fetch(`/api/v1/user/find?${params.toString()}`, {
-            method: 'GET',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'same-origin'
         });

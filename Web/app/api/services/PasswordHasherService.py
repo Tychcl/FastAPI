@@ -1,5 +1,5 @@
 from passlib.context import CryptContext
-from app.api.v1.interfaces import IPasswordHasherService
+from ..interfaces import IPasswordHasherService
 
 class PasswordHasherService(IPasswordHasherService):
     def __init__(self):

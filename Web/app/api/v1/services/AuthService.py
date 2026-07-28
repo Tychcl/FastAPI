@@ -1,43 +1,38 @@
 from fastapi.responses import JSONResponse, RedirectResponse
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, insert, or_
-from sqlalchemy.orm import selectinload
+from ..repositories import UserRepo
 from ...models.user import UserBase
-from ..interfaces import IAuthService, IPasswordHasherService, IUserService, IJWTService, ICookieService
-from ..requests import SignupRequest, SigninRequest
+from ..interfaces import IAuthService
+from ...interfaces import IPasswordHasherService, IJWTService, ICookieService
+from ..schemas import UserSignin, UserResponse, UserSignup
 from app.config import settings
-from typing import Optional
-from ..validators import is_valid_password, is_valid_email
-from fastapi import HTTPException, status
+from typing import Optional, Tuple
 
 class AuthService(IAuthService):
-    def __init__(self, session: AsyncSession, 
-                 hasher:IPasswordHasherService, 
-                 user_service: IUserService,
+    def __init__(self, 
+                 repo: UserRepo, 
+                 hasher: IPasswordHasherService,
                  jwt_service: IJWTService,
                  cookie_service: ICookieService ):
-        self.session = session
+        self.repo = repo
         self.hasher = hasher
-        self.user_service = user_service
         self.jwt_service = jwt_service
         self.cookie_service = cookie_service
 
-    async def signin(self, login: str, password: str) -> tuple[Optional[UserBase], Optional[JSONResponse]]:
-        user: Optional[UserBase] = await self.user_service.get_user_by(email=login, username=login, load_role=True, load_privacy=True)
-        if user is not None and self.hasher.verify(password, user.password):
+    async def signin(self, data: UserSignin) -> Tuple[Optional[UserResponse], Optional[JSONResponse]]:
+        user: Optional[UserBase] = await self.repo.get_by(email=data.login, username=data.login, load_role=True, load_privacy=True)
+        if user is not None and self.hasher.verify(data.password, user.password):
             user_data: dict = user.to_dict
             access_token: str = self.jwt_service.create_access_token(user_data)
             refresh_token: str = self.jwt_service.create_refresh_token(user_data)
             response: JSONResponse = JSONResponse(content=user_data, status_code=200)
             self.cookie_service.set_cookie(response, settings.JWT_STRING, access_token, settings.JWT_LIFETIME)
             self.cookie_service.set_cookie(response, settings.REFRESH_STRING, refresh_token, settings.REFRESH_LIFETIME)
-            return (user, response)
+            return (UserResponse.model_validate(user), response)
         return (None, None)
     
-    async def signup(self, username: str, email: str, password: str, role_id: int, pwd_hashed: bool = False) -> Optional[UserBase]:
-        password: str = self.hasher.hash(password) if not pwd_hashed else password
-        user: UserBase = UserBase(username=username, email=email, password=password, role_id=role_id)
-        await self.user_service.create_user(user)
+    async def signup(self, data: UserSignup, pwd_hashed: bool = False) -> Optional[UserResponse]:
+        data.password = self.hasher.hash(data.password) if not pwd_hashed else data.password
+        user = await self.repo.create(data)
         return user
     
     async def logout(self) -> RedirectResponse:
@@ -47,13 +42,14 @@ class AuthService(IAuthService):
         return response
     
     async def change_password(self, id: int, new_password: str) -> bool:
-        sql = select(UserBase).where(UserBase.id == id)
-        user = await self.session.scalar(sql)
-        if not user:
-            raise HTTPException(404, "User not found")
-        user.password = self.hasher.hash(new_password)
-        await self.session.commit()
-        return True
+        try:
+            user: UserBase = await self.repo.get_by(id=id)
+            data: dict = {"password": self.hasher.hash(new_password)}
+            await self.repo.update(user, data)
+            return True
+        except Exception as e:
+            return False
+            
     
     #async def change_password(self, id: int, new_password: str, old_password: str, current_user: UserBase) -> bool:
     #    if not is_valid_password(new_password):

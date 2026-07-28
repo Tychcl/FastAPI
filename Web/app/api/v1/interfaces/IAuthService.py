@@ -1,15 +1,14 @@
-from ...models.user import UserBase
 from abc import ABC, abstractmethod
-from ..requests import SignupRequest, SigninRequest
+from ..schemas import UserSignin, UserResponse, UserSignup
 from fastapi.responses import JSONResponse, RedirectResponse
-from typing import Optional
+from typing import Optional, Tuple
 
 class IAuthService(ABC):
     @abstractmethod
-    async def signin(self, login: str, password: str) -> tuple[Optional[UserBase], Optional[JSONResponse]]: pass
+    async def signin(self, data: UserSignin) -> Tuple[Optional[UserResponse], Optional[JSONResponse]]: pass
     
     @abstractmethod
-    async def signup(self, username: str, email: str, password: str, role_id: int, pwd_hashed: bool = False) -> Optional[UserBase]: pass
+    async def signup(self, data: UserSignup, pwd_hashed: bool = False) -> Optional[UserResponse]: pass
     
     @abstractmethod
     def logout(self) -> RedirectResponse: pass

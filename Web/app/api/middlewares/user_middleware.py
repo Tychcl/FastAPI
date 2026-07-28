@@ -1,13 +1,12 @@
-from fastapi import Request, Response, status
+from fastapi import Request
 from ..interfaces import IJWTService, ICookieService
-from ...models import UserBase, UserRoleBase, UserPrivacyBase
+from ..models import UserBase
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 from app.config import settings, dict_to_user
 from app.database import AsyncSessionLocal
 from typing import Optional
 from redis.asyncio import Redis
-from fastapi.responses import JSONResponse
 import json
 
 async def user_middleware(request: Request, call_next):
@@ -18,7 +17,6 @@ async def user_middleware(request: Request, call_next):
     access_token = request.cookies.get(settings.JWT_STRING)
     refresh_token = request.cookies.get(settings.REFRESH_STRING)
     payload = None
-    #Обновление access token
     if refresh_token and not access_token:
         access_token = jwt_service.refresh_access_token(refresh_token)
         if access_token:
@@ -31,7 +29,6 @@ async def user_middleware(request: Request, call_next):
             if access_token:
                 token_upd = True
                 payload = jwt_service.get_access_payload(access_token)
-    #загрузка пользователя
     if payload:
         user_id: Optional[int] = payload.get("id", None)
         if user_id:

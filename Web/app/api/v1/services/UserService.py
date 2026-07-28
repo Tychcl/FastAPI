@@ -1,101 +1,66 @@
 from fastapi import HTTPException, status
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
-from ...models import UserBase, UserPrivacyBase
-from ..interfaces import IUserService, IPasswordHasherService
-from sqlalchemy import select, func, or_
+from ...models import UserBase
+from ..interfaces import IUserService
+from ...interfaces import IPasswordHasherService
 from typing import Optional, List, Tuple
+from ..schemas import UserCreate, UserResponse, UsersFind, UserUpdate
+from ..repositories import UserRepo, PrivacyRepo
 
 class UserService(IUserService):
-    def __init__(self, session: AsyncSession, hasher: IPasswordHasherService):
-        self.session = session
+    def __init__(self, user_repo: UserRepo, 
+                privacy_repo: PrivacyRepo, 
+                hasher: IPasswordHasherService):
+        self.user_repo = user_repo
+        self.privacy_repo = privacy_repo
         self.hasher = hasher
     
     #create
-    async def create_user(self, user: UserBase) -> None:
-        exists_user: Optional[UserBase] = await self.get_user_by(username=user.username, email=user.email, load_role=False)
-        if exists_user.email == user.email:
+    async def create_user(self, data: UserCreate) -> UserResponse:
+        exists_user: Optional[UserBase] = await self.user_repo.get_by(username=data.username, email=data.email, load_role=False)
+        if exists_user.email == data.email:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Email already taken")
-        if exists_user.username == user.username:
+        if exists_user.username == data.username:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Username already taken")
         try:
-            self.session.add(user)
-            self.session.flush()
-            privacy = UserPrivacyBase(user_id=user.id)
-            self.session.add(privacy)
+            data.password = self.hasher.hash(data.password)
+            u: UserBase = await self.user_repo.create(data)
+            await self.privacy_repo.create(u.id)
+            return UserResponse.model_validate(u)
         except:
-            await self.session.rollback()
             raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "user create error")
-        else:
-            await self.session.commit()
     
     #read
     async def verify_password(self, user_id: int, password: str) -> bool:
-        sql = select(UserBase.password).where(UserBase.id == user_id)
-        result = await self.session.execute(sql)
-        hashed_password = result.scalar_one_or_none()
+        user: UserBase = await self.user_repo.get_by(id=user_id)
+        hashed_password = user.password
         if hashed_password is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
         return self.hasher.verify(password, hashed_password)
         
-    async def get_user_by(self, id: Optional[int] = None, 
-                          username: Optional[str] = None, 
-                          email: Optional[str] = None, 
-                          role_id: Optional[int] = None,
-                          load_role: bool = True,
-                          load_privacy: bool = False) -> Optional[UserBase]:
-        opt: list = []
-        if load_role:
-            opt.append(selectinload(UserBase.role))
-        if load_privacy:
-            opt.append(selectinload(UserBase.privacy))
-        conditions: list = []
-        if id:
-            conditions.append(UserBase.id == id)
-        if username:
-            conditions.append(UserBase.username == username)
-        if email:
-            conditions.append(UserBase.email == email)
-        if role_id:
-            conditions.append(UserBase.role_id == role_id)
-        sql = select(UserBase)
-        if len(opt) > 0:
-            sql = sql.options(*opt)
-        if len(conditions) > 0:
-            sql = sql.where(or_(*conditions))
-        result = await self.session.execute(sql)
-        return result.scalar_one_or_none()
+    async def get_user_by(self,
+                        id: Optional[int] = None, 
+                        username: Optional[str] = None, 
+                        email: Optional[str] = None,
+                        load_role: bool = True,
+                        load_privacy: bool = False) -> Optional[UserResponse]:
+        user: Optional[UserBase] = await self.user_repo.get_by(id=id, username=username, email=email, load_role=load_role, load_privacy=load_privacy)
+        if user:
+            return UserResponse.model_validate(user)
+        return None
 
-    async def find_users_by_any(
-        self,
-        ids: Optional[List[int]] = None,
-        username: Optional[str] = None,
-        email: Optional[str] = None,
-        role_id: Optional[int] = None,
-        page: int = 1,
-        per_page: int = 25
-    ) -> Tuple[List[UserBase], int, int]:
-        sql = select(UserBase)
-        conditions = self._build_conditions(ids, username, email, role_id)
-        if conditions:
-            sql = sql.where(*conditions)
-        sql = sql.options(selectinload(UserBase.role))
-        sql = sql.offset((page - 1) * per_page).limit(per_page)
-        result = await self.session.execute(sql)
-        count: int = await self.count_users_by_filters()
-        count_filter: int = count
-        if conditions:
-            count_filter = await self.count_users_by_filters(conditions)
-        return result.scalars().all(), count_filter, count
+    async def find_users_by_any(self, data: UsersFind) -> Tuple[List[UserResponse], int, int]:
+        users, f, a = await self.user_repo.find_users_by_any(data)
+        return [UserResponse.model_validate(user) for user in users], f, a
     
     #update
-    async def update_user(self, user_id: int, update_data: dict) -> UserBase:
-        user = await self.get_user_by(id=user_id)
-        if user is None:
+    async def update_user(self, user_id: int, data: UserUpdate) -> UserResponse:
+        user_orm: Optional[UserBase] = await self.user_repo.get_by(id=user_id, load_role=True, load_privacy=True)
+        if user_orm is None:
             raise HTTPException(404, "User not found")
+        update_data = data.model_dump(exclude_unset=True, exclude_none=True)
         un: Optional[str] = update_data.get('username', None)
         e: Optional[str] = update_data.get('email', None)
-        exists_user: Optional[UserBase] = await self.get_user_by(username=un, email=e)
+        exists_user: Optional[UserBase] = await self.user_repo.get_by(username=un, email=e)
         if exists_user:
             if exists_user.email == e:
                 raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Email already taken")
@@ -105,32 +70,5 @@ class UserService(IUserService):
         if 'new_password' in update_data:
             update_data['password'] = self.hasher.hash(update_data['new_password'])
             update_data.pop('new_password', None)
-
-        for field, value in update_data.items():
-            setattr(user, field, value)
-        await self.session.commit()
-        #await self.session.refresh(user, attribute_names=['role', 'privacy'])
-        user = await self.get_user_by(id=user_id)
-        return user
-    
-    async def count_users_by_filters(self, conditions: Optional[list] = None) -> int:
-        sql = select(func.count()).select_from(UserBase)
-        if conditions:
-            sql = sql.where(*conditions)
-        return await self.session.scalar(sql) or 0
-    
-    def _build_conditions(self, 
-                          ids: Optional[List[int]] = None, 
-                          username: Optional[str] = None, 
-                          email: Optional[str] = None, 
-                          role_id: Optional[int] = None):
-        conditions = []
-        if ids is not None and len(ids) > 0:
-            conditions.append(UserBase.id.in_(ids))
-        if username is not None:
-            conditions.append(UserBase.username.ilike(f'%{username}%'))
-        if email is not None:
-            conditions.append(UserBase.email.ilike(f'%{email}%'))
-        if role_id is not None:
-            conditions.append(UserBase.role_id == role_id)
-        return conditions
+        updated_orm = await self.user_repo.update(user_orm, update_data)
+        return UserResponse.model_validate(updated_orm)

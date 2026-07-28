@@ -1,6 +1,6 @@
 from fastapi import Response
 from typing import Optional
-from app.api.v1.interfaces import ICookieService
+from ..interfaces import ICookieService
 
 class CookieService(ICookieService):
     def __init__(
