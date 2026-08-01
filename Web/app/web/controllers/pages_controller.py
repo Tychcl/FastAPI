@@ -3,6 +3,7 @@ from app.config import templates
 from app.api.models import UserBase, UserRoleBase
 from app.api.v1.dependences import role_service
 from app.api.v1.interfaces import IRoleService, IUserService
+from app.api.v1.schemas import UserResponse
 from typing import Optional
 from redis.asyncio import Redis
 from app.config import auth_check, role_required, get_user

@@ -8,6 +8,7 @@ from typing import Optional
 from .api.models import UserBase, UserRoleBase, UserPrivacyBase
 from functools import wraps
 from redis import Redis
+from .api.v1.schemas import UserResponse
 
 async def get_authorized_user(request: Request) -> Optional[UserBase]:
     try:

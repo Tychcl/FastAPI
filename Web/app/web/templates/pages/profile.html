@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 {% block script %}
 <script src="{{ url_for('static', path='/js/profile.js') }}"></script>
+{% if own %}
+<script src="{{ url_for('static', path='/js/other/emoji_panel.js') }}"></script>
+{% endif %}
 {% endblock %}
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', path='/css/profile.css') }}">
+{% if own %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/other/emoji_panel.css') }}">
+{% endif %}
 {% endblock %}
 {% block main %}
 {% if user %}
@@ -11,7 +17,7 @@
     <div class="profile-card-shell-shell">
         <div class="profile-card-shell">
             <div class="profile-card">
-                <h2>👤 <span id="username-mini">{{ user.username if own else other_user.username }}</span><span style="margin-left: 5px; font-size: 16px; vertical-align: top;">({{ user.id if own else other_user.id }})</span></h2>
+                <h2><span id="ico-mini">{{ user.ico if own else other_user.ico }}</span> <span id="username-mini">{{ user.username if own else other_user.username }}</span><span style="margin-left: 5px; font-size: 16px; vertical-align: top;">({{ user.id if own else other_user.id }})</span></h2>
                 <p>{{ user.email if own else other_user.email }}</p>
                 <p>{{ user.role.name if own else other_user.role.name }}</p>
                 {% if own %}
@@ -51,8 +57,14 @@
     </div>
     <div id="menu-wrapper" class="profile-menu">
         <div id="user-data">
+            {% if own %}{% include "/other/emoji_panel.html" %}{% endif %}
             <form id="update-user-data" class="profile-data-form">
                 <div class="form-row">
+                    <div class="form-group" style="max-width: 44px;">
+                        <label for="ico">Ико</label>
+                        <input {% if own %}onclick="toggleBox('div.emoji-box')"{% endif %} value="{{ user.ico if own else other_user.ico }}" type="text" class="menu-btn ico menu-btn--purple" id="ico" name="ico" readonly>
+                        <span class="error" id="icoError"></span>
+                    </div>
                     <div class="form-group" style="max-width: 150px;">
                         <label for="username">Юзернейм</label>
                         <input value="{{ user.username if own else other_user.username }}" type="text" class="menu-btn menu-btn--purple" id="username" name="username" placeholder="юзернейм" required {% if not own %}disabled{% endif %}>

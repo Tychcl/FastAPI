@@ -6,6 +6,7 @@ class UserBase(Base):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(primary_key=True, nullable=False)
+    ico: Mapped[str] = mapped_column(String(1), nullable=False, default='👤')
     username: Mapped[str] = mapped_column(String(15), unique=True, nullable=False)
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
     about: Mapped[str] = mapped_column(String(255), nullable=True)

@@ -5,6 +5,7 @@ from .role import RoleResponse
 from .privacy import PrivacyResponse
 
 class UserSignup(BaseModel):
+    ico: str = '👤'
     username: str
     email: EmailStr
     password: str
@@ -92,6 +93,7 @@ class UsersFind(BaseModel):
     per_page: int = 25
 
 class UserUpdate(BaseModel):
+    ico: Optional[str] = None
     username: Optional[str] = None
     about: Optional[str] = None
     email: Optional[EmailStr] = None
@@ -111,6 +113,7 @@ class UserUpdate(BaseModel):
         return v
 
 class UserCreate(BaseModel):
+    ico: str = '👤'
     username: str
     email: EmailStr
     password: str
@@ -130,6 +133,7 @@ class UserCreate(BaseModel):
 
 class UserResponse(BaseModel):
     id: int
+    ico: str
     username: str
     email: str
     about: Optional[str] = None

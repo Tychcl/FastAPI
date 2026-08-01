@@ -66,7 +66,8 @@ async function dataHandler(event) {
         if (response.ok) {
             alert('Данные обновлены');
             localStorage.setItem("user", JSON.stringify(data));
-            document.getElementById('username-mini').innerHTML = send_data['username']
+            document.getElementById('username-mini').innerHTML = data['username'];
+            document.getElementById('ico-mini').innerHTML = data['ico'];
             user = data;
         } else {
             alert(data.detail || 'Ошибка обновления');

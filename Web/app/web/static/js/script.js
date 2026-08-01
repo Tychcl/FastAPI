@@ -34,6 +34,18 @@ function show(id, wrap = 'menu-wrapper'){
     }
 }
 
+function toggleBox(query){
+    const box = document.querySelector(query)
+    if (box.classList.contains('hidden')){
+        box.classList.remove('hidden');
+        box.classList.add('visible');
+    }
+    else{
+        box.classList.remove('visible');
+        box.classList.add('hidden');
+    }
+}
+
 function toggleTheme() {
     document.body.classList.toggle('dark-theme');
     const isDark = document.body.classList.contains('dark-theme');

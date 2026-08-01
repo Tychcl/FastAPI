@@ -1,0 +1,4985 @@
+[
+  {
+    "symbol": "😂",
+    "name": "Emotion",
+    "id": "0",
+    "emojis": [
+      {
+        "symbol": "😀",
+        "name": "grinning face"
+      },
+      {
+        "symbol": "😁",
+        "name": "beaming face with smiling eyes"
+      },
+      {
+        "symbol": "😂",
+        "name": "face with tears of joy"
+      },
+      {
+        "symbol": "😃",
+        "name": "grinning face with big eyes"
+      },
+      {
+        "symbol": "😄",
+        "name": "grinning face with smiling eyes"
+      },
+      {
+        "symbol": "😅",
+        "name": "grinning face with sweat"
+      },
+      {
+        "symbol": "😆",
+        "name": "grinning squinting face"
+      },
+      {
+        "symbol": "😇",
+        "name": "smiling face with halo"
+      },
+      {
+        "symbol": "😉",
+        "name": "winking face"
+      },
+      {
+        "symbol": "😊",
+        "name": "smiling face with smiling eyes"
+      },
+      {
+        "symbol": "🙂",
+        "name": "slightly smiling face"
+      },
+      {
+        "symbol": "🙃",
+        "name": "upside-down face"
+      },
+      {
+        "symbol": "🤣",
+        "name": "rolling on the floor laughing"
+      },
+      {
+        "symbol": "☺️",
+        "name": "smiling face"
+      },
+      {
+        "symbol": "😍",
+        "name": "smiling face with heart-eyes"
+      },
+      {
+        "symbol": "😗",
+        "name": "kissing face"
+      },
+      {
+        "symbol": "😘",
+        "name": "face blowing a kiss"
+      },
+      {
+        "symbol": "😙",
+        "name": "kissing face with smiling eyes"
+      },
+      {
+        "symbol": "😚",
+        "name": "kissing face with closed eyes"
+      },
+      {
+        "symbol": "🤩",
+        "name": "star-struck"
+      },
+      {
+        "symbol": "🥰",
+        "name": "smiling face with hearts"
+      },
+      {
+        "symbol": "😋",
+        "name": "face savoring food"
+      },
+      {
+        "symbol": "😛",
+        "name": "face with tongue"
+      },
+      {
+        "symbol": "😜",
+        "name": "winking face with tongue"
+      },
+      {
+        "symbol": "😝",
+        "name": "squinting face with tongue"
+      },
+      {
+        "symbol": "🤑",
+        "name": "money-mouth face"
+      },
+      {
+        "symbol": "🤪",
+        "name": "zany face"
+      },
+      {
+        "symbol": "🤔",
+        "name": "thinking face"
+      },
+      {
+        "symbol": "🤗",
+        "name": "smiling face with open hands"
+      },
+      {
+        "symbol": "🤫",
+        "name": "shushing face"
+      },
+      {
+        "symbol": "🤭",
+        "name": "face with hand over mouth"
+      },
+      {
+        "symbol": "😏",
+        "name": "smirking face"
+      },
+      {
+        "symbol": "😐",
+        "name": "neutral face"
+      },
+      {
+        "symbol": "😑",
+        "name": "expressionless face"
+      },
+      {
+        "symbol": "😒",
+        "name": "unamused face"
+      },
+      {
+        "symbol": "😬",
+        "name": "grimacing face"
+      },
+      {
+        "symbol": "😶",
+        "name": "face without mouth"
+      },
+      {
+        "symbol": "🙄",
+        "name": "face with rolling eyes"
+      },
+      {
+        "symbol": "🤐",
+        "name": "zipper-mouth face"
+      },
+      {
+        "symbol": "🤥",
+        "name": "lying face"
+      },
+      {
+        "symbol": "🤨",
+        "name": "face with raised eyebrow"
+      },
+      {
+        "symbol": "😌",
+        "name": "relieved face"
+      },
+      {
+        "symbol": "😔",
+        "name": "pensive face"
+      },
+      {
+        "symbol": "😪",
+        "name": "sleepy face"
+      },
+      {
+        "symbol": "😴",
+        "name": "sleeping face"
+      },
+      {
+        "symbol": "🤤",
+        "name": "drooling face"
+      },
+      {
+        "symbol": "😵",
+        "name": "face with crossed-out eyes"
+      },
+      {
+        "symbol": "😷",
+        "name": "face with medical mask"
+      },
+      {
+        "symbol": "🤒",
+        "name": "face with thermometer"
+      },
+      {
+        "symbol": "🤕",
+        "name": "face with head-bandage"
+      },
+      {
+        "symbol": "🤢",
+        "name": "nauseated face"
+      },
+      {
+        "symbol": "🤧",
+        "name": "sneezing face"
+      },
+      {
+        "symbol": "🤮",
+        "name": "face vomiting"
+      },
+      {
+        "symbol": "🤯",
+        "name": "exploding head"
+      },
+      {
+        "symbol": "🥴",
+        "name": "woozy face"
+      },
+      {
+        "symbol": "🥵",
+        "name": "hot face"
+      },
+      {
+        "symbol": "🥶",
+        "name": "cold face"
+      },
+      {
+        "symbol": "🤠",
+        "name": "cowboy hat face"
+      },
+      {
+        "symbol": "🥳",
+        "name": "partying face"
+      },
+      {
+        "symbol": "😎",
+        "name": "smiling face with sunglasses"
+      },
+      {
+        "symbol": "🤓",
+        "name": "nerd face"
+      },
+      {
+        "symbol": "🧐",
+        "name": "face with monocle"
+      },
+      {
+        "symbol": "☹️",
+        "name": "frowning face"
+      },
+      {
+        "symbol": "😓",
+        "name": "downcast face with sweat"
+      },
+      {
+        "symbol": "😕",
+        "name": "confused face"
+      },
+      {
+        "symbol": "😖",
+        "name": "confounded face"
+      },
+      {
+        "symbol": "😞",
+        "name": "disappointed face"
+      },
+      {
+        "symbol": "😟",
+        "name": "worried face"
+      },
+      {
+        "symbol": "😢",
+        "name": "crying face"
+      },
+      {
+        "symbol": "😣",
+        "name": "persevering face"
+      },
+      {
+        "symbol": "😥",
+        "name": "sad but relieved face"
+      },
+      {
+        "symbol": "😦",
+        "name": "frowning face with open mouth"
+      },
+      {
+        "symbol": "😧",
+        "name": "anguished face"
+      },
+      {
+        "symbol": "😨",
+        "name": "fearful face"
+      },
+      {
+        "symbol": "😩",
+        "name": "weary face"
+      },
+      {
+        "symbol": "😫",
+        "name": "tired face"
+      },
+      {
+        "symbol": "😭",
+        "name": "loudly crying face"
+      },
+      {
+        "symbol": "😮",
+        "name": "face with open mouth"
+      },
+      {
+        "symbol": "😯",
+        "name": "hushed face"
+      },
+      {
+        "symbol": "😰",
+        "name": "anxious face with sweat"
+      },
+      {
+        "symbol": "😱",
+        "name": "face screaming in fear"
+      },
+      {
+        "symbol": "😲",
+        "name": "astonished face"
+      },
+      {
+        "symbol": "😳",
+        "name": "flushed face"
+      },
+      {
+        "symbol": "🙁",
+        "name": "slightly frowning face"
+      },
+      {
+        "symbol": "🥱",
+        "name": "yawning face"
+      },
+      {
+        "symbol": "🥺",
+        "name": "pleading face"
+      },
+      {
+        "symbol": "☠️",
+        "name": "skull and crossbones"
+      },
+      {
+        "symbol": "👿",
+        "name": "angry face with horns"
+      },
+      {
+        "symbol": "💀",
+        "name": "skull"
+      },
+      {
+        "symbol": "😈",
+        "name": "smiling face with horns"
+      },
+      {
+        "symbol": "😠",
+        "name": "angry face"
+      },
+      {
+        "symbol": "😡",
+        "name": "enraged face"
+      },
+      {
+        "symbol": "😤",
+        "name": "face with steam from nose"
+      },
+      {
+        "symbol": "🤬",
+        "name": "face with symbols on mouth"
+      },
+      {
+        "symbol": "👹",
+        "name": "ogre"
+      },
+      {
+        "symbol": "👺",
+        "name": "goblin"
+      },
+      {
+        "symbol": "👻",
+        "name": "ghost"
+      },
+      {
+        "symbol": "👽",
+        "name": "alien"
+      },
+      {
+        "symbol": "👾",
+        "name": "alien monster"
+      },
+      {
+        "symbol": "💩",
+        "name": "pile of poo"
+      },
+      {
+        "symbol": "🤖",
+        "name": "robot"
+      },
+      {
+        "symbol": "🤡",
+        "name": "clown face"
+      },
+      {
+        "symbol": "👁️‍🗨️",
+        "name": "eye in speech bubble"
+      },
+      {
+        "symbol": "💋",
+        "name": "kiss mark"
+      },
+      {
+        "symbol": "💢",
+        "name": "anger symbol"
+      },
+      {
+        "symbol": "💤",
+        "name": "ZZZ"
+      },
+      {
+        "symbol": "💥",
+        "name": "collision"
+      },
+      {
+        "symbol": "💦",
+        "name": "sweat droplets"
+      },
+      {
+        "symbol": "💨",
+        "name": "dashing away"
+      },
+      {
+        "symbol": "💫",
+        "name": "dizzy"
+      },
+      {
+        "symbol": "💬",
+        "name": "speech balloon"
+      },
+      {
+        "symbol": "💭",
+        "name": "thought balloon"
+      },
+      {
+        "symbol": "💯",
+        "name": "hundred points"
+      },
+      {
+        "symbol": "🕳️",
+        "name": "hole"
+      },
+      {
+        "symbol": "🗨️",
+        "name": "left speech bubble"
+      },
+      {
+        "symbol": "🗯️",
+        "name": "right anger bubble"
+      }
+    ],
+    "subCategories": [
+      {
+        "symbol": "😸",
+        "name": "Cat Face",
+        "inMode": true,
+        "emojis": [
+          {
+            "symbol": "😸",
+            "name": "grinning cat with smiling eyes"
+          },
+          {
+            "symbol": "😹",
+            "name": "cat with tears of joy"
+          },
+          {
+            "symbol": "😺",
+            "name": "grinning cat"
+          },
+          {
+            "symbol": "😻",
+            "name": "smiling cat with heart-eyes"
+          },
+          {
+            "symbol": "😼",
+            "name": "cat with wry smile"
+          },
+          {
+            "symbol": "😽",
+            "name": "kissing cat"
+          },
+          {
+            "symbol": "😾",
+            "name": "pouting cat"
+          },
+          {
+            "symbol": "😿",
+            "name": "crying cat"
+          },
+          {
+            "symbol": "🙀",
+            "name": "weary cat"
+          }
+        ]
+      },
+      {
+        "symbol": "🙈",
+        "name": "Monkey Face",
+        "inMode": true,
+        "emojis": [
+          {
+            "symbol": "🙈",
+            "name": "see-no-evil monkey"
+          },
+          {
+            "symbol": "🙉",
+            "name": "hear-no-evil monkey"
+          },
+          {
+            "symbol": "🙊",
+            "name": "speak-no-evil monkey"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "symbol": "✌️",
+    "name": "Body",
+    "id": "1",
+    "emojis": [
+      {
+        "symbol": "✋",
+        "name": "raised hand"
+      },
+      {
+        "symbol": "👋",
+        "name": "waving hand"
+      },
+      {
+        "symbol": "🖐️",
+        "name": "hand with fingers splayed"
+      },
+      {
+        "symbol": "🖖",
+        "name": "vulcan salute"
+      },
+      {
+        "symbol": "🤚",
+        "name": "raised back of hand"
+      },
+      {
+        "symbol": "✌️",
+        "name": "victory hand"
+      },
+      {
+        "symbol": "👌",
+        "name": "OK hand"
+      },
+      {
+        "symbol": "🤏",
+        "name": "pinching hand"
+      },
+      {
+        "symbol": "🤘",
+        "name": "sign of the horns"
+      },
+      {
+        "symbol": "🤙",
+        "name": "call me hand"
+      },
+      {
+        "symbol": "🤞",
+        "name": "crossed fingers"
+      },
+      {
+        "symbol": "🤟",
+        "name": "love-you gesture"
+      },
+      {
+        "symbol": "☝️",
+        "name": "index pointing up"
+      },
+      {
+        "symbol": "👆",
+        "name": "backhand index pointing up"
+      },
+      {
+        "symbol": "👇",
+        "name": "backhand index pointing down"
+      },
+      {
+        "symbol": "👈",
+        "name": "backhand index pointing left"
+      },
+      {
+        "symbol": "👉",
+        "name": "backhand index pointing right"
+      },
+      {
+        "symbol": "🖕",
+        "name": "middle finger"
+      },
+      {
+        "symbol": "✊",
+        "name": "raised fist"
+      },
+      {
+        "symbol": "👊",
+        "name": "oncoming fist"
+      },
+      {
+        "symbol": "👍",
+        "name": "thumbs up"
+      },
+      {
+        "symbol": "👍",
+        "name": "thumbs up"
+      },
+      {
+        "symbol": "🤛",
+        "name": "left-facing fist"
+      },
+      {
+        "symbol": "🤜",
+        "name": "right-facing fist"
+      },
+      {
+        "symbol": "👏",
+        "name": "clapping hands"
+      },
+      {
+        "symbol": "👐",
+        "name": "open hands"
+      },
+      {
+        "symbol": "🙌",
+        "name": "raising hands"
+      },
+      {
+        "symbol": "🙏",
+        "name": "folded hands"
+      },
+      {
+        "symbol": "🤝",
+        "name": "handshake"
+      },
+      {
+        "symbol": "🤲",
+        "name": "palms up together"
+      },
+      {
+        "symbol": "✍️",
+        "name": "writing hand"
+      },
+      {
+        "symbol": "💅",
+        "name": "nail polish"
+      },
+      {
+        "symbol": "🤳",
+        "name": "selfie"
+      },
+      {
+        "symbol": "👀",
+        "name": "eyes"
+      },
+      {
+        "symbol": "👁️",
+        "name": "eye"
+      },
+      {
+        "symbol": "👂",
+        "name": "ear"
+      },
+      {
+        "symbol": "👃",
+        "name": "nose"
+      },
+      {
+        "symbol": "👄",
+        "name": "mouth"
+      },
+      {
+        "symbol": "👅",
+        "name": "tongue"
+      },
+      {
+        "symbol": "💪",
+        "name": "flexed biceps"
+      },
+      {
+        "symbol": "🦴",
+        "name": "bone"
+      },
+      {
+        "symbol": "🦵",
+        "name": "leg"
+      },
+      {
+        "symbol": "🦶",
+        "name": "foot"
+      },
+      {
+        "symbol": "🦷",
+        "name": "tooth"
+      },
+      {
+        "symbol": "🦻",
+        "name": "ear with hearing aid"
+      },
+      {
+        "symbol": "🦾",
+        "name": "mechanical arm"
+      },
+      {
+        "symbol": "🦿",
+        "name": "mechanical leg"
+      },
+      {
+        "symbol": "🧠",
+        "name": "brain"
+      }
+    ]
+  },
+  {
+    "symbol": "🐵",
+    "name": "Animals",
+    "id": "2",
+    "emojis": [
+      {
+        "symbol": "🐀",
+        "name": "rat"
+      },
+      {
+        "symbol": "🐁",
+        "name": "mouse"
+      },
+      {
+        "symbol": "🐂",
+        "name": "ox"
+      },
+      {
+        "symbol": "🐃",
+        "name": "water buffalo"
+      },
+      {
+        "symbol": "🐄",
+        "name": "cow"
+      },
+      {
+        "symbol": "🐅",
+        "name": "tiger"
+      },
+      {
+        "symbol": "🐆",
+        "name": "leopard"
+      },
+      {
+        "symbol": "🐇",
+        "name": "rabbit"
+      },
+      {
+        "symbol": "🐈",
+        "name": "cat"
+      },
+      {
+        "symbol": "🐎",
+        "name": "horse"
+      },
+      {
+        "symbol": "🐏",
+        "name": "ram"
+      },
+      {
+        "symbol": "🐐",
+        "name": "goat"
+      },
+      {
+        "symbol": "🐑",
+        "name": "ewe"
+      },
+      {
+        "symbol": "🐒",
+        "name": "monkey"
+      },
+      {
+        "symbol": "🐕",
+        "name": "dog"
+      },
+      {
+        "symbol": "🐕‍🦺",
+        "name": "service dog"
+      },
+      {
+        "symbol": "🐖",
+        "name": "pig"
+      },
+      {
+        "symbol": "🐗",
+        "name": "boar"
+      },
+      {
+        "symbol": "🐘",
+        "name": "elephant"
+      },
+      {
+        "symbol": "🐨",
+        "name": "koala"
+      },
+      {
+        "symbol": "🐩",
+        "name": "poodle"
+      },
+      {
+        "symbol": "🐪",
+        "name": "camel"
+      },
+      {
+        "symbol": "🐫",
+        "name": "two-hump camel"
+      },
+      {
+        "symbol": "🐭",
+        "name": "mouse face"
+      },
+      {
+        "symbol": "🐮",
+        "name": "cow face"
+      },
+      {
+        "symbol": "🐯",
+        "name": "tiger face"
+      },
+      {
+        "symbol": "🐰",
+        "name": "rabbit face"
+      },
+      {
+        "symbol": "🐱",
+        "name": "cat face"
+      },
+      {
+        "symbol": "🐴",
+        "name": "horse face"
+      },
+      {
+        "symbol": "🐵",
+        "name": "monkey face"
+      },
+      {
+        "symbol": "🐶",
+        "name": "dog face"
+      },
+      {
+        "symbol": "🐷",
+        "name": "pig face"
+      },
+      {
+        "symbol": "🐹",
+        "name": "hamster"
+      },
+      {
+        "symbol": "🐺",
+        "name": "wolf"
+      },
+      {
+        "symbol": "🐻",
+        "name": "bear"
+      },
+      {
+        "symbol": "🐼",
+        "name": "panda"
+      },
+      {
+        "symbol": "🐽",
+        "name": "pig nose"
+      },
+      {
+        "symbol": "🐾",
+        "name": "paw prints"
+      },
+      {
+        "symbol": "🐿️",
+        "name": "chipmunk"
+      },
+      {
+        "symbol": "🦁",
+        "name": "lion"
+      },
+      {
+        "symbol": "🦄",
+        "name": "unicorn"
+      },
+      {
+        "symbol": "🦇",
+        "name": "bat"
+      },
+      {
+        "symbol": "🦊",
+        "name": "fox"
+      },
+      {
+        "symbol": "🦌",
+        "name": "deer"
+      },
+      {
+        "symbol": "🦍",
+        "name": "gorilla"
+      },
+      {
+        "symbol": "🦏",
+        "name": "rhinoceros"
+      },
+      {
+        "symbol": "🦒",
+        "name": "giraffe"
+      },
+      {
+        "symbol": "🦓",
+        "name": "zebra"
+      },
+      {
+        "symbol": "🦔",
+        "name": "hedgehog"
+      },
+      {
+        "symbol": "🦘",
+        "name": "kangaroo"
+      },
+      {
+        "symbol": "🦙",
+        "name": "llama"
+      },
+      {
+        "symbol": "🦛",
+        "name": "hippopotamus"
+      },
+      {
+        "symbol": "🦝",
+        "name": "raccoon"
+      },
+      {
+        "symbol": "🦡",
+        "name": "badger"
+      },
+      {
+        "symbol": "🦥",
+        "name": "sloth"
+      },
+      {
+        "symbol": "🦦",
+        "name": "otter"
+      },
+      {
+        "symbol": "🦧",
+        "name": "orangutan"
+      },
+      {
+        "symbol": "🦨",
+        "name": "skunk"
+      },
+      {
+        "symbol": "🦮",
+        "name": "guide dog"
+      },
+      {
+        "symbol": "🐓",
+        "name": "rooster"
+      },
+      {
+        "symbol": "🐔",
+        "name": "chicken"
+      },
+      {
+        "symbol": "🐣",
+        "name": "hatching chick"
+      },
+      {
+        "symbol": "🐤",
+        "name": "baby chick"
+      },
+      {
+        "symbol": "🐥",
+        "name": "front-facing baby chick"
+      },
+      {
+        "symbol": "🐦",
+        "name": "bird"
+      },
+      {
+        "symbol": "🐧",
+        "name": "penguin"
+      },
+      {
+        "symbol": "🕊️",
+        "name": "dove"
+      },
+      {
+        "symbol": "🦃",
+        "name": "turkey"
+      },
+      {
+        "symbol": "🦅",
+        "name": "eagle"
+      },
+      {
+        "symbol": "🦆",
+        "name": "duck"
+      },
+      {
+        "symbol": "🦉",
+        "name": "owl"
+      },
+      {
+        "symbol": "🦚",
+        "name": "peacock"
+      },
+      {
+        "symbol": "🦜",
+        "name": "parrot"
+      },
+      {
+        "symbol": "🦢",
+        "name": "swan"
+      },
+      {
+        "symbol": "🦩",
+        "name": "flamingo"
+      },
+      {
+        "symbol": "🐸",
+        "name": "frog"
+      },
+      {
+        "symbol": "🐉",
+        "name": "dragon"
+      },
+      {
+        "symbol": "🐊",
+        "name": "crocodile"
+      },
+      {
+        "symbol": "🐍",
+        "name": "snake"
+      },
+      {
+        "symbol": "🐢",
+        "name": "turtle"
+      },
+      {
+        "symbol": "🐲",
+        "name": "dragon face"
+      },
+      {
+        "symbol": "🦎",
+        "name": "lizard"
+      },
+      {
+        "symbol": "🦕",
+        "name": "sauropod"
+      },
+      {
+        "symbol": "🦖",
+        "name": "T-Rex"
+      },
+      {
+        "symbol": "🐋",
+        "name": "whale"
+      },
+      {
+        "symbol": "🐙",
+        "name": "octopus"
+      },
+      {
+        "symbol": "🐚",
+        "name": "spiral shell"
+      },
+      {
+        "symbol": "🐟",
+        "name": "fish"
+      },
+      {
+        "symbol": "🐠",
+        "name": "tropical fish"
+      },
+      {
+        "symbol": "🐡",
+        "name": "blowfish"
+      },
+      {
+        "symbol": "🐬",
+        "name": "dolphin"
+      },
+      {
+        "symbol": "🐳",
+        "name": "spouting whale"
+      },
+      {
+        "symbol": "🦀",
+        "name": "crab"
+      },
+      {
+        "symbol": "🦈",
+        "name": "shark"
+      },
+      {
+        "symbol": "🦐",
+        "name": "shrimp"
+      },
+      {
+        "symbol": "🦑",
+        "name": "squid"
+      },
+      {
+        "symbol": "🦞",
+        "name": "lobster"
+      },
+      {
+        "symbol": "🦪",
+        "name": "oyster"
+      }
+    ]
+  },
+  {
+    "symbol": "🐛",
+    "name": "Bugs",
+    "id": "3",
+    "emojis": [
+      {
+        "symbol": "🐌",
+        "name": "snail"
+      },
+      {
+        "symbol": "🐛",
+        "name": "bug"
+      },
+      {
+        "symbol": "🐜",
+        "name": "ant"
+      },
+      {
+        "symbol": "🐝",
+        "name": "honeybee"
+      },
+      {
+        "symbol": "🐞",
+        "name": "lady beetle"
+      },
+      {
+        "symbol": "🕷️",
+        "name": "spider"
+      },
+      {
+        "symbol": "🕸️",
+        "name": "spider web"
+      },
+      {
+        "symbol": "🦂",
+        "name": "scorpion"
+      },
+      {
+        "symbol": "🦋",
+        "name": "butterfly"
+      },
+      {
+        "symbol": "🦗",
+        "name": "cricket"
+      },
+      {
+        "symbol": "🦟",
+        "name": "mosquito"
+      },
+      {
+        "symbol": "🦠",
+        "name": "microbe"
+      }
+    ]
+  },
+  {
+    "symbol": "🌹",
+    "name": "Plants",
+    "id": "4",
+    "emojis": [
+      {
+        "symbol": "🌷",
+        "name": "tulip"
+      },
+      {
+        "symbol": "🌸",
+        "name": "cherry blossom"
+      },
+      {
+        "symbol": "🌹",
+        "name": "rose"
+      },
+      {
+        "symbol": "🌺",
+        "name": "hibiscus"
+      },
+      {
+        "symbol": "🌻",
+        "name": "sunflower"
+      },
+      {
+        "symbol": "🌼",
+        "name": "blossom"
+      },
+      {
+        "symbol": "🏵️",
+        "name": "rosette"
+      },
+      {
+        "symbol": "💐",
+        "name": "bouquet"
+      },
+      {
+        "symbol": "💮",
+        "name": "white flower"
+      },
+      {
+        "symbol": "🥀",
+        "name": "wilted flower"
+      },
+      {
+        "symbol": "☘️",
+        "name": "shamrock"
+      },
+      {
+        "symbol": "🌱",
+        "name": "seedling"
+      },
+      {
+        "symbol": "🌲",
+        "name": "evergreen tree"
+      },
+      {
+        "symbol": "🌳",
+        "name": "deciduous tree"
+      },
+      {
+        "symbol": "🌴",
+        "name": "palm tree"
+      },
+      {
+        "symbol": "🌵",
+        "name": "cactus"
+      },
+      {
+        "symbol": "🌾",
+        "name": "sheaf of rice"
+      },
+      {
+        "symbol": "🌿",
+        "name": "herb"
+      },
+      {
+        "symbol": "🍀",
+        "name": "four leaf clover"
+      },
+      {
+        "symbol": "🍁",
+        "name": "maple leaf"
+      },
+      {
+        "symbol": "🍂",
+        "name": "fallen leaf"
+      },
+      {
+        "symbol": "🍃",
+        "name": "leaf fluttering in wind"
+      },
+      {
+        "symbol": "🍄",
+        "name": "mushroom"
+      }
+    ]
+  },
+  {
+    "symbol": "🍕",
+    "name": "Food",
+    "id": "5",
+    "subCategories": [
+      {
+        "symbol": "🍓",
+        "name": "Fruit",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🍅",
+            "name": "tomato"
+          },
+          {
+            "symbol": "🍇",
+            "name": "grapes"
+          },
+          {
+            "symbol": "🍈",
+            "name": "melon"
+          },
+          {
+            "symbol": "🍉",
+            "name": "watermelon"
+          },
+          {
+            "symbol": "🍊",
+            "name": "tangerine"
+          },
+          {
+            "symbol": "🍋",
+            "name": "lemon"
+          },
+          {
+            "symbol": "🍌",
+            "name": "banana"
+          },
+          {
+            "symbol": "🍍",
+            "name": "pineapple"
+          },
+          {
+            "symbol": "🍎",
+            "name": "red apple"
+          },
+          {
+            "symbol": "🍏",
+            "name": "green apple"
+          },
+          {
+            "symbol": "🍐",
+            "name": "pear"
+          },
+          {
+            "symbol": "🍑",
+            "name": "peach"
+          },
+          {
+            "symbol": "🍒",
+            "name": "cherries"
+          },
+          {
+            "symbol": "🍓",
+            "name": "strawberry"
+          },
+          {
+            "symbol": "🥝",
+            "name": "kiwi fruit"
+          },
+          {
+            "symbol": "🥥",
+            "name": "coconut"
+          },
+          {
+            "symbol": "🥭",
+            "name": "mango"
+          }
+        ]
+      },
+      {
+        "symbol": "🥬",
+        "name": "Vegetable",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🌰",
+            "name": "chestnut"
+          },
+          {
+            "symbol": "🌶️",
+            "name": "hot pepper"
+          },
+          {
+            "symbol": "🌽",
+            "name": "ear of corn"
+          },
+          {
+            "symbol": "🍄‍🟫",
+            "name": "brown mushroom"
+          },
+          {
+            "symbol": "🍆",
+            "name": "eggplant"
+          },
+          {
+            "symbol": "🥑",
+            "name": "avocado"
+          },
+          {
+            "symbol": "🥒",
+            "name": "cucumber"
+          },
+          {
+            "symbol": "🥔",
+            "name": "potato"
+          },
+          {
+            "symbol": "🥕",
+            "name": "carrot"
+          },
+          {
+            "symbol": "🥜",
+            "name": "peanuts"
+          },
+          {
+            "symbol": "🥦",
+            "name": "broccoli"
+          },
+          {
+            "symbol": "🥬",
+            "name": "leafy green"
+          },
+          {
+            "symbol": "🧄",
+            "name": "garlic"
+          },
+          {
+            "symbol": "🧅",
+            "name": "onion"
+          }
+        ]
+      },
+      {
+        "symbol": "🍕",
+        "name": "Prepared",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🌭",
+            "name": "hot dog"
+          },
+          {
+            "symbol": "🌮",
+            "name": "taco"
+          },
+          {
+            "symbol": "🌯",
+            "name": "burrito"
+          },
+          {
+            "symbol": "🍔",
+            "name": "hamburger"
+          },
+          {
+            "symbol": "🍕",
+            "name": "pizza"
+          },
+          {
+            "symbol": "🍖",
+            "name": "meat on bone"
+          },
+          {
+            "symbol": "🍗",
+            "name": "poultry leg"
+          },
+          {
+            "symbol": "🍞",
+            "name": "bread"
+          },
+          {
+            "symbol": "🍟",
+            "name": "french fries"
+          },
+          {
+            "symbol": "🍲",
+            "name": "pot of food"
+          },
+          {
+            "symbol": "🍳",
+            "name": "cooking"
+          },
+          {
+            "symbol": "🍿",
+            "name": "popcorn"
+          },
+          {
+            "symbol": "🥐",
+            "name": "croissant"
+          },
+          {
+            "symbol": "🥓",
+            "name": "bacon"
+          },
+          {
+            "symbol": "🥖",
+            "name": "baguette bread"
+          },
+          {
+            "symbol": "🥗",
+            "name": "green salad"
+          },
+          {
+            "symbol": "🥘",
+            "name": "shallow pan of food"
+          },
+          {
+            "symbol": "🥙",
+            "name": "stuffed flatbread"
+          },
+          {
+            "symbol": "🥚",
+            "name": "egg"
+          },
+          {
+            "symbol": "🥞",
+            "name": "pancakes"
+          },
+          {
+            "symbol": "🥣",
+            "name": "bowl with spoon"
+          },
+          {
+            "symbol": "🥨",
+            "name": "pretzel"
+          },
+          {
+            "symbol": "🥩",
+            "name": "cut of meat"
+          },
+          {
+            "symbol": "🥪",
+            "name": "sandwich"
+          },
+          {
+            "symbol": "🥫",
+            "name": "canned food"
+          },
+          {
+            "symbol": "🥯",
+            "name": "bagel"
+          },
+          {
+            "symbol": "🧀",
+            "name": "cheese wedge"
+          },
+          {
+            "symbol": "🧂",
+            "name": "salt"
+          },
+          {
+            "symbol": "🧆",
+            "name": "falafel"
+          },
+          {
+            "symbol": "🧇",
+            "name": "waffle"
+          },
+          {
+            "symbol": "🧈",
+            "name": "butter"
+          }
+        ]
+      },
+      {
+        "symbol": "🍚",
+        "name": "Asian",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🍘",
+            "name": "rice cracker"
+          },
+          {
+            "symbol": "🍙",
+            "name": "rice ball"
+          },
+          {
+            "symbol": "🍚",
+            "name": "cooked rice"
+          },
+          {
+            "symbol": "🍛",
+            "name": "curry rice"
+          },
+          {
+            "symbol": "🍜",
+            "name": "steaming bowl"
+          },
+          {
+            "symbol": "🍝",
+            "name": "spaghetti"
+          },
+          {
+            "symbol": "🍠",
+            "name": "roasted sweet potato"
+          },
+          {
+            "symbol": "🍡",
+            "name": "dango"
+          },
+          {
+            "symbol": "🍢",
+            "name": "oden"
+          },
+          {
+            "symbol": "🍣",
+            "name": "sushi"
+          },
+          {
+            "symbol": "🍤",
+            "name": "fried shrimp"
+          },
+          {
+            "symbol": "🍥",
+            "name": "fish cake with swirl"
+          },
+          {
+            "symbol": "🍱",
+            "name": "bento box"
+          },
+          {
+            "symbol": "🥟",
+            "name": "dumpling"
+          },
+          {
+            "symbol": "🥠",
+            "name": "fortune cookie"
+          },
+          {
+            "symbol": "🥡",
+            "name": "takeout box"
+          },
+          {
+            "symbol": "🥮",
+            "name": "moon cake"
+          }
+        ]
+      },
+      {
+        "symbol": "🍦",
+        "name": "Dessert",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🍦",
+            "name": "soft ice cream"
+          },
+          {
+            "symbol": "🍧",
+            "name": "shaved ice"
+          },
+          {
+            "symbol": "🍨",
+            "name": "ice cream"
+          },
+          {
+            "symbol": "🍩",
+            "name": "doughnut"
+          },
+          {
+            "symbol": "🍪",
+            "name": "cookie"
+          },
+          {
+            "symbol": "🍫",
+            "name": "chocolate bar"
+          },
+          {
+            "symbol": "🍬",
+            "name": "candy"
+          },
+          {
+            "symbol": "🍭",
+            "name": "lollipop"
+          },
+          {
+            "symbol": "🍮",
+            "name": "custard"
+          },
+          {
+            "symbol": "🍯",
+            "name": "honey pot"
+          },
+          {
+            "symbol": "🍰",
+            "name": "shortcake"
+          },
+          {
+            "symbol": "🎂",
+            "name": "birthday cake"
+          },
+          {
+            "symbol": "🥧",
+            "name": "pie"
+          },
+          {
+            "symbol": "🧁",
+            "name": "cupcake"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "symbol": "☕️",
+    "name": "Drink",
+    "id": "6",
+    "emojis": [
+      {
+        "symbol": "☕",
+        "name": "hot beverage"
+      },
+      {
+        "symbol": "🍵",
+        "name": "teacup without handle"
+      },
+      {
+        "symbol": "🍶",
+        "name": "sake"
+      },
+      {
+        "symbol": "🍷",
+        "name": "wine glass"
+      },
+      {
+        "symbol": "🍸",
+        "name": "cocktail glass"
+      },
+      {
+        "symbol": "🍹",
+        "name": "tropical drink"
+      },
+      {
+        "symbol": "🍺",
+        "name": "beer mug"
+      },
+      {
+        "symbol": "🍻",
+        "name": "clinking beer mugs"
+      },
+      {
+        "symbol": "🍼",
+        "name": "baby bottle"
+      },
+      {
+        "symbol": "🍾",
+        "name": "bottle with popping cork"
+      },
+      {
+        "symbol": "🥂",
+        "name": "clinking glasses"
+      },
+      {
+        "symbol": "🥃",
+        "name": "tumbler glass"
+      },
+      {
+        "symbol": "🥛",
+        "name": "glass of milk"
+      },
+      {
+        "symbol": "🥤",
+        "name": "cup with straw"
+      },
+      {
+        "symbol": "🧃",
+        "name": "beverage box"
+      },
+      {
+        "symbol": "🧉",
+        "name": "mate"
+      },
+      {
+        "symbol": "🧊",
+        "name": "ice"
+      }
+    ]
+  },
+  {
+    "symbol": "🗺️",
+    "name": "World",
+    "id": "7",
+    "subCategories": [
+      {
+        "symbol": "☂️",
+        "name": "Weather",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "☀️",
+            "name": "sun"
+          },
+          {
+            "symbol": "☁️",
+            "name": "cloud"
+          },
+          {
+            "symbol": "☂️",
+            "name": "umbrella"
+          },
+          {
+            "symbol": "☃️",
+            "name": "snowman"
+          },
+          {
+            "symbol": "☄️",
+            "name": "comet"
+          },
+          {
+            "symbol": "☔",
+            "name": "umbrella with rain drops"
+          },
+          {
+            "symbol": "⚡",
+            "name": "high voltage"
+          },
+          {
+            "symbol": "⛄",
+            "name": "snowman without snow"
+          },
+          {
+            "symbol": "⛅",
+            "name": "sun behind cloud"
+          },
+          {
+            "symbol": "⛈️",
+            "name": "cloud with lightning and rain"
+          },
+          {
+            "symbol": "⛱️",
+            "name": "umbrella on ground"
+          },
+          {
+            "symbol": "❄️",
+            "name": "snowflake"
+          },
+          {
+            "symbol": "⭐",
+            "name": "star"
+          },
+          {
+            "symbol": "🌀",
+            "name": "cyclone"
+          },
+          {
+            "symbol": "🌂",
+            "name": "closed umbrella"
+          },
+          {
+            "symbol": "🌈",
+            "name": "rainbow"
+          },
+          {
+            "symbol": "🌊",
+            "name": "water wave"
+          },
+          {
+            "symbol": "🌌",
+            "name": "milky way"
+          },
+          {
+            "symbol": "🌑",
+            "name": "new moon"
+          },
+          {
+            "symbol": "🌒",
+            "name": "waxing crescent moon"
+          },
+          {
+            "symbol": "🌓",
+            "name": "first quarter moon"
+          },
+          {
+            "symbol": "🌔",
+            "name": "waxing gibbous moon"
+          },
+          {
+            "symbol": "🌕",
+            "name": "full moon"
+          },
+          {
+            "symbol": "🌖",
+            "name": "waning gibbous moon"
+          },
+          {
+            "symbol": "🌗",
+            "name": "last quarter moon"
+          },
+          {
+            "symbol": "🌘",
+            "name": "waning crescent moon"
+          },
+          {
+            "symbol": "🌙",
+            "name": "crescent moon"
+          },
+          {
+            "symbol": "🌚",
+            "name": "new moon face"
+          },
+          {
+            "symbol": "🌛",
+            "name": "first quarter moon face"
+          },
+          {
+            "symbol": "🌜",
+            "name": "last quarter moon face"
+          },
+          {
+            "symbol": "🌝",
+            "name": "full moon face"
+          },
+          {
+            "symbol": "🌞",
+            "name": "sun with face"
+          },
+          {
+            "symbol": "🌟",
+            "name": "glowing star"
+          },
+          {
+            "symbol": "🌠",
+            "name": "shooting star"
+          },
+          {
+            "symbol": "🌡️",
+            "name": "thermometer"
+          },
+          {
+            "symbol": "🌤️",
+            "name": "sun behind small cloud"
+          },
+          {
+            "symbol": "🌥️",
+            "name": "sun behind large cloud"
+          },
+          {
+            "symbol": "🌦️",
+            "name": "sun behind rain cloud"
+          },
+          {
+            "symbol": "🌧️",
+            "name": "cloud with rain"
+          },
+          {
+            "symbol": "🌨️",
+            "name": "cloud with snow"
+          },
+          {
+            "symbol": "🌩️",
+            "name": "cloud with lightning"
+          },
+          {
+            "symbol": "🌪️",
+            "name": "tornado"
+          },
+          {
+            "symbol": "🌫️",
+            "name": "fog"
+          },
+          {
+            "symbol": "🌬️",
+            "name": "wind face"
+          },
+          {
+            "symbol": "💧",
+            "name": "droplet"
+          },
+          {
+            "symbol": "🔥",
+            "name": "fire"
+          },
+          {
+            "symbol": "🪐",
+            "name": "ringed planet"
+          }
+        ]
+      },
+      {
+        "symbol": "🧭",
+        "name": "Geography",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🌍",
+            "name": "globe showing Europe-Africa"
+          },
+          {
+            "symbol": "🌎",
+            "name": "globe showing Americas"
+          },
+          {
+            "symbol": "🌏",
+            "name": "globe showing Asia-Australia"
+          },
+          {
+            "symbol": "🌐",
+            "name": "globe with meridians"
+          },
+          {
+            "symbol": "🗺️",
+            "name": "world map"
+          },
+          {
+            "symbol": "🗾",
+            "name": "map of Japan"
+          },
+          {
+            "symbol": "🧭",
+            "name": "compass"
+          },
+          {
+            "symbol": "⛰️",
+            "name": "mountain"
+          },
+          {
+            "symbol": "🌋",
+            "name": "volcano"
+          },
+          {
+            "symbol": "🏔️",
+            "name": "snow-capped mountain"
+          },
+          {
+            "symbol": "🏕️",
+            "name": "camping"
+          },
+          {
+            "symbol": "🏖️",
+            "name": "beach with umbrella"
+          },
+          {
+            "symbol": "🏜️",
+            "name": "desert"
+          },
+          {
+            "symbol": "🏝️",
+            "name": "desert island"
+          },
+          {
+            "symbol": "🏞️",
+            "name": "national park"
+          },
+          {
+            "symbol": "🗻",
+            "name": "mount fuji"
+          }
+        ]
+      },
+      {
+        "symbol": "🏗️",
+        "name": "Building",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🏗️",
+            "name": "building construction"
+          },
+          {
+            "symbol": "🏘️",
+            "name": "houses"
+          },
+          {
+            "symbol": "🏚️",
+            "name": "derelict house"
+          },
+          {
+            "symbol": "🏛️",
+            "name": "classical building"
+          },
+          {
+            "symbol": "🏟️",
+            "name": "stadium"
+          },
+          {
+            "symbol": "🏠",
+            "name": "house"
+          },
+          {
+            "symbol": "🏡",
+            "name": "house with garden"
+          },
+          {
+            "symbol": "🏢",
+            "name": "office building"
+          },
+          {
+            "symbol": "🏣",
+            "name": "Japanese post office"
+          },
+          {
+            "symbol": "🏤",
+            "name": "post office"
+          },
+          {
+            "symbol": "🏥",
+            "name": "hospital"
+          },
+          {
+            "symbol": "🏦",
+            "name": "bank"
+          },
+          {
+            "symbol": "🏨",
+            "name": "hotel"
+          },
+          {
+            "symbol": "🏩",
+            "name": "love hotel"
+          },
+          {
+            "symbol": "🏪",
+            "name": "convenience store"
+          },
+          {
+            "symbol": "🏫",
+            "name": "school"
+          },
+          {
+            "symbol": "🏬",
+            "name": "department store"
+          },
+          {
+            "symbol": "🏭",
+            "name": "factory"
+          },
+          {
+            "symbol": "🏯",
+            "name": "Japanese castle"
+          },
+          {
+            "symbol": "🏰",
+            "name": "castle"
+          },
+          {
+            "symbol": "💒",
+            "name": "wedding"
+          },
+          {
+            "symbol": "🗼",
+            "name": "Tokyo tower"
+          },
+          {
+            "symbol": "🗽",
+            "name": "Statue of Liberty"
+          },
+          {
+            "symbol": "🧱",
+            "name": "brick"
+          }
+        ]
+      },
+      {
+        "symbol": "⛲️",
+        "name": "Other Places",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "⛩️",
+            "name": "shinto shrine"
+          },
+          {
+            "symbol": "⛪",
+            "name": "church"
+          },
+          {
+            "symbol": "🕋",
+            "name": "kaaba"
+          },
+          {
+            "symbol": "🕌",
+            "name": "mosque"
+          },
+          {
+            "symbol": "🕍",
+            "name": "synagogue"
+          },
+          {
+            "symbol": "🛕",
+            "name": "hindu temple"
+          },
+          {
+            "symbol": "♨️",
+            "name": "hot springs"
+          },
+          {
+            "symbol": "⛲",
+            "name": "fountain"
+          },
+          {
+            "symbol": "⛺",
+            "name": "tent"
+          },
+          {
+            "symbol": "🌁",
+            "name": "foggy"
+          },
+          {
+            "symbol": "🌃",
+            "name": "night with stars"
+          },
+          {
+            "symbol": "🌄",
+            "name": "sunrise over mountains"
+          },
+          {
+            "symbol": "🌅",
+            "name": "sunrise"
+          },
+          {
+            "symbol": "🌆",
+            "name": "cityscape at dusk"
+          },
+          {
+            "symbol": "🌇",
+            "name": "sunset"
+          },
+          {
+            "symbol": "🌉",
+            "name": "bridge at night"
+          },
+          {
+            "symbol": "🎠",
+            "name": "carousel horse"
+          },
+          {
+            "symbol": "🎡",
+            "name": "ferris wheel"
+          },
+          {
+            "symbol": "🎢",
+            "name": "roller coaster"
+          },
+          {
+            "symbol": "🎪",
+            "name": "circus tent"
+          },
+          {
+            "symbol": "🏙️",
+            "name": "cityscape"
+          },
+          {
+            "symbol": "💈",
+            "name": "barber pole"
+          },
+          {
+            "symbol": "🛎️",
+            "name": "bellhop bell"
+          },
+          {
+            "symbol": "🧳",
+            "name": "luggage"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "symbol": "🚌",
+    "name": "Transport",
+    "id": "8",
+    "subCategories": [
+      {
+        "symbol": "🚗",
+        "name": "Ground Transport",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "⛽",
+            "name": "fuel pump"
+          },
+          {
+            "symbol": "🏍️",
+            "name": "motorcycle"
+          },
+          {
+            "symbol": "🏎️",
+            "name": "racing car"
+          },
+          {
+            "symbol": "🚂",
+            "name": "locomotive"
+          },
+          {
+            "symbol": "🚃",
+            "name": "railway car"
+          },
+          {
+            "symbol": "🚄",
+            "name": "high-speed train"
+          },
+          {
+            "symbol": "🚅",
+            "name": "bullet train"
+          },
+          {
+            "symbol": "🚆",
+            "name": "train"
+          },
+          {
+            "symbol": "🚇",
+            "name": "metro"
+          },
+          {
+            "symbol": "🚈",
+            "name": "light rail"
+          },
+          {
+            "symbol": "🚉",
+            "name": "station"
+          },
+          {
+            "symbol": "🚊",
+            "name": "tram"
+          },
+          {
+            "symbol": "🚋",
+            "name": "tram car"
+          },
+          {
+            "symbol": "🚌",
+            "name": "bus"
+          },
+          {
+            "symbol": "🚍",
+            "name": "oncoming bus"
+          },
+          {
+            "symbol": "🚎",
+            "name": "trolleybus"
+          },
+          {
+            "symbol": "🚏",
+            "name": "bus stop"
+          },
+          {
+            "symbol": "🚐",
+            "name": "minibus"
+          },
+          {
+            "symbol": "🚑",
+            "name": "ambulance"
+          },
+          {
+            "symbol": "🚒",
+            "name": "fire engine"
+          },
+          {
+            "symbol": "🚓",
+            "name": "police car"
+          },
+          {
+            "symbol": "🚔",
+            "name": "oncoming police car"
+          },
+          {
+            "symbol": "🚕",
+            "name": "taxi"
+          },
+          {
+            "symbol": "🚖",
+            "name": "oncoming taxi"
+          },
+          {
+            "symbol": "🚗",
+            "name": "automobile"
+          },
+          {
+            "symbol": "🚘",
+            "name": "oncoming automobile"
+          },
+          {
+            "symbol": "🚙",
+            "name": "sport utility vehicle"
+          },
+          {
+            "symbol": "🚚",
+            "name": "delivery truck"
+          },
+          {
+            "symbol": "🚛",
+            "name": "articulated lorry"
+          },
+          {
+            "symbol": "🚜",
+            "name": "tractor"
+          },
+          {
+            "symbol": "🚝",
+            "name": "monorail"
+          },
+          {
+            "symbol": "🚞",
+            "name": "mountain railway"
+          },
+          {
+            "symbol": "🚥",
+            "name": "horizontal traffic light"
+          },
+          {
+            "symbol": "🚦",
+            "name": "vertical traffic light"
+          },
+          {
+            "symbol": "🚧",
+            "name": "construction"
+          },
+          {
+            "symbol": "🚨",
+            "name": "police car light"
+          },
+          {
+            "symbol": "🚲",
+            "name": "bicycle"
+          },
+          {
+            "symbol": "🛑",
+            "name": "stop sign"
+          },
+          {
+            "symbol": "🛢️",
+            "name": "oil drum"
+          },
+          {
+            "symbol": "🛣️",
+            "name": "motorway"
+          },
+          {
+            "symbol": "🛤️",
+            "name": "railway track"
+          },
+          {
+            "symbol": "🛴",
+            "name": "kick scooter"
+          },
+          {
+            "symbol": "🛵",
+            "name": "motor scooter"
+          },
+          {
+            "symbol": "🛹",
+            "name": "skateboard"
+          },
+          {
+            "symbol": "🛺",
+            "name": "auto rickshaw"
+          },
+          {
+            "symbol": "🦼",
+            "name": "motorized wheelchair"
+          },
+          {
+            "symbol": "🦽",
+            "name": "manual wheelchair"
+          }
+        ]
+      },
+      {
+        "symbol": "🚢",
+        "name": "Water Transport",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "⚓",
+            "name": "anchor"
+          },
+          {
+            "symbol": "⛴️",
+            "name": "ferry"
+          },
+          {
+            "symbol": "⛵",
+            "name": "sailboat"
+          },
+          {
+            "symbol": "🚢",
+            "name": "ship"
+          },
+          {
+            "symbol": "🚤",
+            "name": "speedboat"
+          },
+          {
+            "symbol": "🛥️",
+            "name": "motor boat"
+          },
+          {
+            "symbol": "🛳️",
+            "name": "passenger ship"
+          },
+          {
+            "symbol": "🛶",
+            "name": "canoe"
+          }
+        ]
+      },
+      {
+        "symbol": "✈️",
+        "name": "Air Transport",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "✈️",
+            "name": "airplane"
+          },
+          {
+            "symbol": "💺",
+            "name": "seat"
+          },
+          {
+            "symbol": "🚀",
+            "name": "rocket"
+          },
+          {
+            "symbol": "🚁",
+            "name": "helicopter"
+          },
+          {
+            "symbol": "🚟",
+            "name": "suspension railway"
+          },
+          {
+            "symbol": "🚠",
+            "name": "mountain cableway"
+          },
+          {
+            "symbol": "🚡",
+            "name": "aerial tramway"
+          },
+          {
+            "symbol": "🛩️",
+            "name": "small airplane"
+          },
+          {
+            "symbol": "🛫",
+            "name": "airplane departure"
+          },
+          {
+            "symbol": "🛬",
+            "name": "airplane arrival"
+          },
+          {
+            "symbol": "🛰️",
+            "name": "satellite"
+          },
+          {
+            "symbol": "🛸",
+            "name": "flying saucer"
+          },
+          {
+            "symbol": "🪂",
+            "name": "parachute"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "symbol": "⚽️",
+    "name": "Activities",
+    "id": "9",
+    "subCategories": [
+      {
+        "symbol": "🎈",
+        "name": "Event",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "✨",
+            "name": "sparkles"
+          },
+          {
+            "symbol": "🎀",
+            "name": "ribbon"
+          },
+          {
+            "symbol": "🎁",
+            "name": "wrapped gift"
+          },
+          {
+            "symbol": "🎃",
+            "name": "jack-o-lantern"
+          },
+          {
+            "symbol": "🎄",
+            "name": "Christmas tree"
+          },
+          {
+            "symbol": "🎆",
+            "name": "fireworks"
+          },
+          {
+            "symbol": "🎇",
+            "name": "sparkler"
+          },
+          {
+            "symbol": "🎈",
+            "name": "balloon"
+          },
+          {
+            "symbol": "🎉",
+            "name": "party popper"
+          },
+          {
+            "symbol": "🎊",
+            "name": "confetti ball"
+          },
+          {
+            "symbol": "🎋",
+            "name": "tanabata tree"
+          },
+          {
+            "symbol": "🎍",
+            "name": "pine decoration"
+          },
+          {
+            "symbol": "🎎",
+            "name": "Japanese dolls"
+          },
+          {
+            "symbol": "🎏",
+            "name": "carp streamer"
+          },
+          {
+            "symbol": "🎐",
+            "name": "wind chime"
+          },
+          {
+            "symbol": "🎑",
+            "name": "moon viewing ceremony"
+          },
+          {
+            "symbol": "🎗️",
+            "name": "reminder ribbon"
+          },
+          {
+            "symbol": "🎟️",
+            "name": "admission tickets"
+          },
+          {
+            "symbol": "🎫",
+            "name": "ticket"
+          },
+          {
+            "symbol": "🧧",
+            "name": "red envelope"
+          },
+          {
+            "symbol": "🧨",
+            "name": "firecracker"
+          }
+        ]
+      },
+      {
+        "symbol": "🏅",
+        "name": "Award & Medal",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🎖️",
+            "name": "military medal"
+          },
+          {
+            "symbol": "🏅",
+            "name": "sports medal"
+          },
+          {
+            "symbol": "🏆",
+            "name": "trophy"
+          },
+          {
+            "symbol": "🥇",
+            "name": "1st place medal"
+          },
+          {
+            "symbol": "🥈",
+            "name": "2nd place medal"
+          },
+          {
+            "symbol": "🥉",
+            "name": "3rd place medal"
+          }
+        ]
+      },
+      {
+        "symbol": "🏀",
+        "name": "Sport",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "⚽",
+            "name": "soccer ball"
+          },
+          {
+            "symbol": "⚾",
+            "name": "baseball"
+          },
+          {
+            "symbol": "⛳",
+            "name": "flag in hole"
+          },
+          {
+            "symbol": "⛸️",
+            "name": "ice skate"
+          },
+          {
+            "symbol": "🎣",
+            "name": "fishing pole"
+          },
+          {
+            "symbol": "🎳",
+            "name": "bowling"
+          },
+          {
+            "symbol": "🎽",
+            "name": "running shirt"
+          },
+          {
+            "symbol": "🎾",
+            "name": "tennis"
+          },
+          {
+            "symbol": "🎿",
+            "name": "skis"
+          },
+          {
+            "symbol": "🏀",
+            "name": "basketball"
+          },
+          {
+            "symbol": "🏈",
+            "name": "american football"
+          },
+          {
+            "symbol": "🏉",
+            "name": "rugby football"
+          },
+          {
+            "symbol": "🏏",
+            "name": "cricket game"
+          },
+          {
+            "symbol": "🏐",
+            "name": "volleyball"
+          },
+          {
+            "symbol": "🏑",
+            "name": "field hockey"
+          },
+          {
+            "symbol": "🏒",
+            "name": "ice hockey"
+          },
+          {
+            "symbol": "🏓",
+            "name": "ping pong"
+          },
+          {
+            "symbol": "🏸",
+            "name": "badminton"
+          },
+          {
+            "symbol": "🛷",
+            "name": "sled"
+          },
+          {
+            "symbol": "🤿",
+            "name": "diving mask"
+          },
+          {
+            "symbol": "🥅",
+            "name": "goal net"
+          },
+          {
+            "symbol": "🥊",
+            "name": "boxing glove"
+          },
+          {
+            "symbol": "🥋",
+            "name": "martial arts uniform"
+          },
+          {
+            "symbol": "🥌",
+            "name": "curling stone"
+          },
+          {
+            "symbol": "🥍",
+            "name": "lacrosse"
+          },
+          {
+            "symbol": "🥎",
+            "name": "softball"
+          },
+          {
+            "symbol": "🥏",
+            "name": "flying disc"
+          }
+        ]
+      },
+      {
+        "symbol": "🎯",
+        "name": "Game",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "♟️",
+            "name": "chess pawn"
+          },
+          {
+            "symbol": "♠️",
+            "name": "spade suit"
+          },
+          {
+            "symbol": "♣️",
+            "name": "club suit"
+          },
+          {
+            "symbol": "♥️",
+            "name": "heart suit"
+          },
+          {
+            "symbol": "♦️",
+            "name": "diamond suit"
+          },
+          {
+            "symbol": "🀄",
+            "name": "mahjong red dragon"
+          },
+          {
+            "symbol": "🃏",
+            "name": "joker"
+          },
+          {
+            "symbol": "🎮",
+            "name": "video game"
+          },
+          {
+            "symbol": "🎯",
+            "name": "bullseye"
+          },
+          {
+            "symbol": "🎰",
+            "name": "slot machine"
+          },
+          {
+            "symbol": "🎱",
+            "name": "pool 8 ball"
+          },
+          {
+            "symbol": "🎲",
+            "name": "game die"
+          },
+          {
+            "symbol": "🎴",
+            "name": "flower playing cards"
+          },
+          {
+            "symbol": "🔫",
+            "name": "water pistol"
+          },
+          {
+            "symbol": "🔮",
+            "name": "crystal ball"
+          },
+          {
+            "symbol": "🕹️",
+            "name": "joystick"
+          },
+          {
+            "symbol": "🧩",
+            "name": "puzzle piece"
+          },
+          {
+            "symbol": "🧸",
+            "name": "teddy bear"
+          },
+          {
+            "symbol": "🪀",
+            "name": "yo-yo"
+          },
+          {
+            "symbol": "🪁",
+            "name": "kite"
+          }
+        ]
+      },
+      {
+        "symbol": "🎨",
+        "name": "Art & Craft",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🎨",
+            "name": "artist palette"
+          },
+          {
+            "symbol": "🎭",
+            "name": "performing arts"
+          },
+          {
+            "symbol": "🖼️",
+            "name": "framed picture"
+          },
+          {
+            "symbol": "🧵",
+            "name": "thread"
+          },
+          {
+            "symbol": "🧶",
+            "name": "yarn"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "symbol": "📌",
+    "name": "Items",
+    "id": "10",
+    "subCategories": [
+      {
+        "symbol": "⌚️",
+        "name": "Time",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "⌚",
+            "name": "watch"
+          },
+          {
+            "symbol": "⌛",
+            "name": "hourglass done"
+          },
+          {
+            "symbol": "⏰",
+            "name": "alarm clock"
+          },
+          {
+            "symbol": "⏱️",
+            "name": "stopwatch"
+          },
+          {
+            "symbol": "⏲️",
+            "name": "timer clock"
+          },
+          {
+            "symbol": "⏳",
+            "name": "hourglass not done"
+          },
+          {
+            "symbol": "🕰️",
+            "name": "mantelpiece clock"
+          }
+        ]
+      },
+      {
+        "symbol": "👖",
+        "name": "Clothing",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "⛑️",
+            "name": "rescue worker’s helmet"
+          },
+          {
+            "symbol": "🎒",
+            "name": "backpack"
+          },
+          {
+            "symbol": "🎓",
+            "name": "graduation cap"
+          },
+          {
+            "symbol": "🎩",
+            "name": "top hat"
+          },
+          {
+            "symbol": "👑",
+            "name": "crown"
+          },
+          {
+            "symbol": "👒",
+            "name": "woman’s hat"
+          },
+          {
+            "symbol": "👓",
+            "name": "glasses"
+          },
+          {
+            "symbol": "👔",
+            "name": "necktie"
+          },
+          {
+            "symbol": "👕",
+            "name": "t-shirt"
+          },
+          {
+            "symbol": "👖",
+            "name": "jeans"
+          },
+          {
+            "symbol": "👗",
+            "name": "dress"
+          },
+          {
+            "symbol": "👘",
+            "name": "kimono"
+          },
+          {
+            "symbol": "👙",
+            "name": "bikini"
+          },
+          {
+            "symbol": "👚",
+            "name": "woman’s clothes"
+          },
+          {
+            "symbol": "👛",
+            "name": "purse"
+          },
+          {
+            "symbol": "👜",
+            "name": "handbag"
+          },
+          {
+            "symbol": "👝",
+            "name": "clutch bag"
+          },
+          {
+            "symbol": "👞",
+            "name": "man’s shoe"
+          },
+          {
+            "symbol": "👟",
+            "name": "running shoe"
+          },
+          {
+            "symbol": "👠",
+            "name": "high-heeled shoe"
+          },
+          {
+            "symbol": "👡",
+            "name": "woman’s sandal"
+          },
+          {
+            "symbol": "👢",
+            "name": "woman’s boot"
+          },
+          {
+            "symbol": "💄",
+            "name": "lipstick"
+          },
+          {
+            "symbol": "💍",
+            "name": "ring"
+          },
+          {
+            "symbol": "💎",
+            "name": "gem stone"
+          },
+          {
+            "symbol": "📿",
+            "name": "prayer beads"
+          },
+          {
+            "symbol": "🕶️",
+            "name": "sunglasses"
+          },
+          {
+            "symbol": "🛍️",
+            "name": "shopping bags"
+          },
+          {
+            "symbol": "🥻",
+            "name": "sari"
+          },
+          {
+            "symbol": "🥼",
+            "name": "lab coat"
+          },
+          {
+            "symbol": "🥽",
+            "name": "goggles"
+          },
+          {
+            "symbol": "🥾",
+            "name": "hiking boot"
+          },
+          {
+            "symbol": "🥿",
+            "name": "flat shoe"
+          },
+          {
+            "symbol": "🦺",
+            "name": "safety vest"
+          },
+          {
+            "symbol": "🧢",
+            "name": "billed cap"
+          },
+          {
+            "symbol": "🧣",
+            "name": "scarf"
+          },
+          {
+            "symbol": "🧤",
+            "name": "gloves"
+          },
+          {
+            "symbol": "🧥",
+            "name": "coat"
+          },
+          {
+            "symbol": "🧦",
+            "name": "socks"
+          },
+          {
+            "symbol": "🩰",
+            "name": "ballet shoes"
+          },
+          {
+            "symbol": "🩱",
+            "name": "one-piece swimsuit"
+          },
+          {
+            "symbol": "🩲",
+            "name": "briefs"
+          },
+          {
+            "symbol": "🩳",
+            "name": "shorts"
+          }
+        ]
+      },
+      {
+        "symbol": "📢",
+        "name": "Sound",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "📢",
+            "name": "loudspeaker"
+          },
+          {
+            "symbol": "📣",
+            "name": "megaphone"
+          },
+          {
+            "symbol": "📯",
+            "name": "postal horn"
+          },
+          {
+            "symbol": "🔇",
+            "name": "muted speaker"
+          },
+          {
+            "symbol": "🔈",
+            "name": "speaker low volume"
+          },
+          {
+            "symbol": "🔉",
+            "name": "speaker medium volume"
+          },
+          {
+            "symbol": "🔊",
+            "name": "speaker high volume"
+          },
+          {
+            "symbol": "🔔",
+            "name": "bell"
+          },
+          {
+            "symbol": "🔕",
+            "name": "bell with slash"
+          }
+        ]
+      },
+      {
+        "symbol": "🎵",
+        "name": "Music",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🎙️",
+            "name": "studio microphone"
+          },
+          {
+            "symbol": "🎚️",
+            "name": "level slider"
+          },
+          {
+            "symbol": "🎛️",
+            "name": "control knobs"
+          },
+          {
+            "symbol": "🎤",
+            "name": "microphone"
+          },
+          {
+            "symbol": "🎧",
+            "name": "headphone"
+          },
+          {
+            "symbol": "🎵",
+            "name": "musical note"
+          },
+          {
+            "symbol": "🎶",
+            "name": "musical notes"
+          },
+          {
+            "symbol": "🎼",
+            "name": "musical score"
+          },
+          {
+            "symbol": "📻",
+            "name": "radio"
+          }
+        ]
+      },
+      {
+        "symbol": "🎹",
+        "name": "Musical Instrument",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🎷",
+            "name": "saxophone"
+          },
+          {
+            "symbol": "🎸",
+            "name": "guitar"
+          },
+          {
+            "symbol": "🎹",
+            "name": "musical keyboard"
+          },
+          {
+            "symbol": "🎺",
+            "name": "trumpet"
+          },
+          {
+            "symbol": "🎻",
+            "name": "violin"
+          },
+          {
+            "symbol": "🥁",
+            "name": "drum"
+          }
+        ]
+      },
+      {
+        "symbol": "📞",
+        "name": "Phone",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "☎️",
+            "name": "telephone"
+          },
+          {
+            "symbol": "📞",
+            "name": "telephone receiver"
+          },
+          {
+            "symbol": "📟",
+            "name": "pager"
+          },
+          {
+            "symbol": "📠",
+            "name": "fax machine"
+          },
+          {
+            "symbol": "📱",
+            "name": "mobile phone"
+          },
+          {
+            "symbol": "📲",
+            "name": "mobile phone with arrow"
+          }
+        ]
+      },
+      {
+        "symbol": "💻️",
+        "name": "Computer",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "⌨️",
+            "name": "keyboard"
+          },
+          {
+            "symbol": "💻",
+            "name": "laptop"
+          },
+          {
+            "symbol": "💽",
+            "name": "computer disk"
+          },
+          {
+            "symbol": "💾",
+            "name": "floppy disk"
+          },
+          {
+            "symbol": "💿",
+            "name": "optical disk"
+          },
+          {
+            "symbol": "📀",
+            "name": "dvd"
+          },
+          {
+            "symbol": "🔋",
+            "name": "battery"
+          },
+          {
+            "symbol": "🔌",
+            "name": "electric plug"
+          },
+          {
+            "symbol": "🖥️",
+            "name": "desktop computer"
+          },
+          {
+            "symbol": "🖨️",
+            "name": "printer"
+          },
+          {
+            "symbol": "🖱️",
+            "name": "computer mouse"
+          },
+          {
+            "symbol": "🖲️",
+            "name": "trackball"
+          },
+          {
+            "symbol": "🧮",
+            "name": "abacus"
+          }
+        ]
+      },
+      {
+        "symbol": "💡",
+        "name": "Light & Video",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🎞️",
+            "name": "film frames"
+          },
+          {
+            "symbol": "🎥",
+            "name": "movie camera"
+          },
+          {
+            "symbol": "🎬",
+            "name": "clapper board"
+          },
+          {
+            "symbol": "🏮",
+            "name": "red paper lantern"
+          },
+          {
+            "symbol": "💡",
+            "name": "light bulb"
+          },
+          {
+            "symbol": "📷",
+            "name": "camera"
+          },
+          {
+            "symbol": "📸",
+            "name": "camera with flash"
+          },
+          {
+            "symbol": "📹",
+            "name": "video camera"
+          },
+          {
+            "symbol": "📺",
+            "name": "television"
+          },
+          {
+            "symbol": "📼",
+            "name": "videocassette"
+          },
+          {
+            "symbol": "📽️",
+            "name": "film projector"
+          },
+          {
+            "symbol": "🔍",
+            "name": "magnifying glass tilted left"
+          },
+          {
+            "symbol": "🔎",
+            "name": "magnifying glass tilted right"
+          },
+          {
+            "symbol": "🔦",
+            "name": "flashlight"
+          },
+          {
+            "symbol": "🕯️",
+            "name": "candle"
+          },
+          {
+            "symbol": "🪔",
+            "name": "diya lamp"
+          }
+        ]
+      },
+      {
+        "symbol": "📒",
+        "name": "Book & Paper",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🏷️",
+            "name": "label"
+          },
+          {
+            "symbol": "📃",
+            "name": "page with curl"
+          },
+          {
+            "symbol": "📄",
+            "name": "page facing up"
+          },
+          {
+            "symbol": "📑",
+            "name": "bookmark tabs"
+          },
+          {
+            "symbol": "📒",
+            "name": "ledger"
+          },
+          {
+            "symbol": "📓",
+            "name": "notebook"
+          },
+          {
+            "symbol": "📔",
+            "name": "notebook with decorative cover"
+          },
+          {
+            "symbol": "📕",
+            "name": "closed book"
+          },
+          {
+            "symbol": "📖",
+            "name": "open book"
+          },
+          {
+            "symbol": "📗",
+            "name": "green book"
+          },
+          {
+            "symbol": "📘",
+            "name": "blue book"
+          },
+          {
+            "symbol": "📙",
+            "name": "orange book"
+          },
+          {
+            "symbol": "📚",
+            "name": "books"
+          },
+          {
+            "symbol": "📜",
+            "name": "scroll"
+          },
+          {
+            "symbol": "📰",
+            "name": "newspaper"
+          },
+          {
+            "symbol": "🔖",
+            "name": "bookmark"
+          },
+          {
+            "symbol": "🗞️",
+            "name": "rolled-up newspaper"
+          }
+        ]
+      },
+      {
+        "symbol": "💰",
+        "name": "Money",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "💰",
+            "name": "money bag"
+          },
+          {
+            "symbol": "💳",
+            "name": "credit card"
+          },
+          {
+            "symbol": "💴",
+            "name": "yen banknote"
+          },
+          {
+            "symbol": "💵",
+            "name": "dollar banknote"
+          },
+          {
+            "symbol": "💶",
+            "name": "euro banknote"
+          },
+          {
+            "symbol": "💷",
+            "name": "pound banknote"
+          },
+          {
+            "symbol": "💸",
+            "name": "money with wings"
+          },
+          {
+            "symbol": "💹",
+            "name": "chart increasing with yen"
+          },
+          {
+            "symbol": "🧾",
+            "name": "receipt"
+          }
+        ]
+      },
+      {
+        "symbol": "✉️",
+        "name": "Mail",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "✉️",
+            "name": "envelope"
+          },
+          {
+            "symbol": "📤",
+            "name": "outbox tray"
+          },
+          {
+            "symbol": "📥",
+            "name": "inbox tray"
+          },
+          {
+            "symbol": "📦",
+            "name": "package"
+          },
+          {
+            "symbol": "📧",
+            "name": "e-mail"
+          },
+          {
+            "symbol": "📨",
+            "name": "incoming envelope"
+          },
+          {
+            "symbol": "📩",
+            "name": "envelope with arrow"
+          },
+          {
+            "symbol": "📪",
+            "name": "closed mailbox with lowered flag"
+          },
+          {
+            "symbol": "📫",
+            "name": "closed mailbox with raised flag"
+          },
+          {
+            "symbol": "📬",
+            "name": "open mailbox with raised flag"
+          },
+          {
+            "symbol": "📭",
+            "name": "open mailbox with lowered flag"
+          },
+          {
+            "symbol": "📮",
+            "name": "postbox"
+          },
+          {
+            "symbol": "🗳️",
+            "name": "ballot box with ballot"
+          }
+        ]
+      },
+      {
+        "symbol": "✂️",
+        "name": "Office",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "✏️",
+            "name": "pencil"
+          },
+          {
+            "symbol": "✒️",
+            "name": "black nib"
+          },
+          {
+            "symbol": "📝",
+            "name": "memo"
+          },
+          {
+            "symbol": "🖊️",
+            "name": "pen"
+          },
+          {
+            "symbol": "🖋️",
+            "name": "fountain pen"
+          },
+          {
+            "symbol": "🖌️",
+            "name": "paintbrush"
+          },
+          {
+            "symbol": "🖍️",
+            "name": "crayon"
+          },
+          {
+            "symbol": "✂️",
+            "name": "scissors"
+          },
+          {
+            "symbol": "💼",
+            "name": "briefcase"
+          },
+          {
+            "symbol": "📁",
+            "name": "file folder"
+          },
+          {
+            "symbol": "📂",
+            "name": "open file folder"
+          },
+          {
+            "symbol": "📅",
+            "name": "calendar"
+          },
+          {
+            "symbol": "📆",
+            "name": "tear-off calendar"
+          },
+          {
+            "symbol": "📇",
+            "name": "card index"
+          },
+          {
+            "symbol": "📈",
+            "name": "chart increasing"
+          },
+          {
+            "symbol": "📉",
+            "name": "chart decreasing"
+          },
+          {
+            "symbol": "📊",
+            "name": "bar chart"
+          },
+          {
+            "symbol": "📋",
+            "name": "clipboard"
+          },
+          {
+            "symbol": "📌",
+            "name": "pushpin"
+          },
+          {
+            "symbol": "📍",
+            "name": "round pushpin"
+          },
+          {
+            "symbol": "📎",
+            "name": "paperclip"
+          },
+          {
+            "symbol": "📏",
+            "name": "straight ruler"
+          },
+          {
+            "symbol": "📐",
+            "name": "triangular ruler"
+          },
+          {
+            "symbol": "🖇️",
+            "name": "linked paperclips"
+          },
+          {
+            "symbol": "🗂️",
+            "name": "card index dividers"
+          },
+          {
+            "symbol": "🗃️",
+            "name": "card file box"
+          },
+          {
+            "symbol": "🗄️",
+            "name": "file cabinet"
+          },
+          {
+            "symbol": "🗑️",
+            "name": "wastebasket"
+          },
+          {
+            "symbol": "🗒️",
+            "name": "spiral notepad"
+          },
+          {
+            "symbol": "🗓️",
+            "name": "spiral calendar"
+          }
+        ]
+      },
+      {
+        "symbol": "🔏",
+        "name": "Lock & Key",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🔏",
+            "name": "locked with pen"
+          },
+          {
+            "symbol": "🔐",
+            "name": "locked with key"
+          },
+          {
+            "symbol": "🔑",
+            "name": "key"
+          },
+          {
+            "symbol": "🔒",
+            "name": "locked"
+          },
+          {
+            "symbol": "🔓",
+            "name": "unlocked"
+          },
+          {
+            "symbol": "🗝️",
+            "name": "old key"
+          }
+        ]
+      },
+      {
+        "symbol": "⛏️",
+        "name": "Tool",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "⚒️",
+            "name": "hammer and pick"
+          },
+          {
+            "symbol": "⚔️",
+            "name": "crossed swords"
+          },
+          {
+            "symbol": "⚖️",
+            "name": "balance scale"
+          },
+          {
+            "symbol": "⚙️",
+            "name": "gear"
+          },
+          {
+            "symbol": "⛏️",
+            "name": "pick"
+          },
+          {
+            "symbol": "⛓️",
+            "name": "chains"
+          },
+          {
+            "symbol": "🏹",
+            "name": "bow and arrow"
+          },
+          {
+            "symbol": "💣",
+            "name": "bomb"
+          },
+          {
+            "symbol": "🔗",
+            "name": "link"
+          },
+          {
+            "symbol": "🔧",
+            "name": "wrench"
+          },
+          {
+            "symbol": "🔨",
+            "name": "hammer"
+          },
+          {
+            "symbol": "🔩",
+            "name": "nut and bolt"
+          },
+          {
+            "symbol": "🗜️",
+            "name": "clamp"
+          },
+          {
+            "symbol": "🗡️",
+            "name": "dagger"
+          },
+          {
+            "symbol": "🛠️",
+            "name": "hammer and wrench"
+          },
+          {
+            "symbol": "🛡️",
+            "name": "shield"
+          },
+          {
+            "symbol": "🦯",
+            "name": "white cane"
+          },
+          {
+            "symbol": "🧰",
+            "name": "toolbox"
+          },
+          {
+            "symbol": "🧲",
+            "name": "magnet"
+          },
+          {
+            "symbol": "🪓",
+            "name": "axe"
+          }
+        ]
+      },
+      {
+        "symbol": "🔭",
+        "name": "Science",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "⚗️",
+            "name": "alembic"
+          },
+          {
+            "symbol": "📡",
+            "name": "satellite antenna"
+          },
+          {
+            "symbol": "🔬",
+            "name": "microscope"
+          },
+          {
+            "symbol": "🔭",
+            "name": "telescope"
+          },
+          {
+            "symbol": "🧪",
+            "name": "test tube"
+          },
+          {
+            "symbol": "🧫",
+            "name": "petri dish"
+          },
+          {
+            "symbol": "🧬",
+            "name": "dna"
+          }
+        ]
+      },
+      {
+        "symbol": "💊",
+        "name": "Medicine",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "💉",
+            "name": "syringe"
+          },
+          {
+            "symbol": "💊",
+            "name": "pill"
+          },
+          {
+            "symbol": "🩸",
+            "name": "drop of blood"
+          },
+          {
+            "symbol": "🩹",
+            "name": "adhesive bandage"
+          },
+          {
+            "symbol": "🩺",
+            "name": "stethoscope"
+          }
+        ]
+      },
+      {
+        "symbol": "🚽",
+        "name": "Household",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🚪",
+            "name": "door"
+          },
+          {
+            "symbol": "🚽",
+            "name": "toilet"
+          },
+          {
+            "symbol": "🚿",
+            "name": "shower"
+          },
+          {
+            "symbol": "🛁",
+            "name": "bathtub"
+          },
+          {
+            "symbol": "🛋️",
+            "name": "couch and lamp"
+          },
+          {
+            "symbol": "🛏️",
+            "name": "bed"
+          },
+          {
+            "symbol": "🛒",
+            "name": "shopping cart"
+          },
+          {
+            "symbol": "🧯",
+            "name": "fire extinguisher"
+          },
+          {
+            "symbol": "🧴",
+            "name": "lotion bottle"
+          },
+          {
+            "symbol": "🧷",
+            "name": "safety pin"
+          },
+          {
+            "symbol": "🧹",
+            "name": "broom"
+          },
+          {
+            "symbol": "🧺",
+            "name": "basket"
+          },
+          {
+            "symbol": "🧻",
+            "name": "roll of paper"
+          },
+          {
+            "symbol": "🧼",
+            "name": "soap"
+          },
+          {
+            "symbol": "🧽",
+            "name": "sponge"
+          },
+          {
+            "symbol": "🪑",
+            "name": "chair"
+          },
+          {
+            "symbol": "🪒",
+            "name": "razor"
+          }
+        ]
+      },
+      {
+        "symbol": "🍴",
+        "name": "Dishware",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "🍴",
+            "name": "fork and knife"
+          },
+          {
+            "symbol": "🍽️",
+            "name": "fork and knife with plate"
+          },
+          {
+            "symbol": "🏺",
+            "name": "amphora"
+          },
+          {
+            "symbol": "🔪",
+            "name": "kitchen knife"
+          },
+          {
+            "symbol": "🥄",
+            "name": "spoon"
+          },
+          {
+            "symbol": "🥢",
+            "name": "chopsticks"
+          }
+        ]
+      },
+      {
+        "symbol": "🚬",
+        "name": "Other",
+        "inMode": false,
+        "emojis": [
+          {
+            "symbol": "⚰️",
+            "name": "coffin"
+          },
+          {
+            "symbol": "⚱️",
+            "name": "funeral urn"
+          },
+          {
+            "symbol": "🗿",
+            "name": "moai"
+          },
+          {
+            "symbol": "🚬",
+            "name": "cigarette"
+          },
+          {
+            "symbol": "🧿",
+            "name": "nazar amulet"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "symbol": "❤️",
+    "name": "Symbols",
+    "id": "11",
+    "emojis": [
+      {
+        "symbol": "❤️",
+        "name": "red heart"
+      },
+      {
+        "symbol": "❣️",
+        "name": "heart exclamation"
+      },
+      {
+        "symbol": "💌",
+        "name": "love letter"
+      },
+      {
+        "symbol": "💓",
+        "name": "beating heart"
+      },
+      {
+        "symbol": "💔",
+        "name": "broken heart"
+      },
+      {
+        "symbol": "💕",
+        "name": "two hearts"
+      },
+      {
+        "symbol": "💖",
+        "name": "sparkling heart"
+      },
+      {
+        "symbol": "💗",
+        "name": "growing heart"
+      },
+      {
+        "symbol": "💘",
+        "name": "heart with arrow"
+      },
+      {
+        "symbol": "💙",
+        "name": "blue heart"
+      },
+      {
+        "symbol": "💚",
+        "name": "green heart"
+      },
+      {
+        "symbol": "💛",
+        "name": "yellow heart"
+      },
+      {
+        "symbol": "💜",
+        "name": "purple heart"
+      },
+      {
+        "symbol": "💝",
+        "name": "heart with ribbon"
+      },
+      {
+        "symbol": "💞",
+        "name": "revolving hearts"
+      },
+      {
+        "symbol": "💟",
+        "name": "heart decoration"
+      },
+      {
+        "symbol": "🖤",
+        "name": "black heart"
+      },
+      {
+        "symbol": "🤍",
+        "name": "white heart"
+      },
+      {
+        "symbol": "🤎",
+        "name": "brown heart"
+      },
+      {
+        "symbol": "🧡",
+        "name": "orange heart"
+      },
+      {
+        "symbol": "🕐",
+        "name": "one o’clock"
+      },
+      {
+        "symbol": "🕑",
+        "name": "two o’clock"
+      },
+      {
+        "symbol": "🕒",
+        "name": "three o’clock"
+      },
+      {
+        "symbol": "🕓",
+        "name": "four o’clock"
+      },
+      {
+        "symbol": "🕔",
+        "name": "five o’clock"
+      },
+      {
+        "symbol": "🕕",
+        "name": "six o’clock"
+      },
+      {
+        "symbol": "🕖",
+        "name": "seven o’clock"
+      },
+      {
+        "symbol": "🕗",
+        "name": "eight o’clock"
+      },
+      {
+        "symbol": "🕘",
+        "name": "nine o’clock"
+      },
+      {
+        "symbol": "🕙",
+        "name": "ten o’clock"
+      },
+      {
+        "symbol": "🕚",
+        "name": "eleven o’clock"
+      },
+      {
+        "symbol": "🕛",
+        "name": "twelve o’clock"
+      },
+      {
+        "symbol": "🕜",
+        "name": "one-thirty"
+      },
+      {
+        "symbol": "🕝",
+        "name": "two-thirty"
+      },
+      {
+        "symbol": "🕞",
+        "name": "three-thirty"
+      },
+      {
+        "symbol": "🕟",
+        "name": "four-thirty"
+      },
+      {
+        "symbol": "🕠",
+        "name": "five-thirty"
+      },
+      {
+        "symbol": "🕡",
+        "name": "six-thirty"
+      },
+      {
+        "symbol": "🕢",
+        "name": "seven-thirty"
+      },
+      {
+        "symbol": "🕣",
+        "name": "eight-thirty"
+      },
+      {
+        "symbol": "🕤",
+        "name": "nine-thirty"
+      },
+      {
+        "symbol": "🕥",
+        "name": "ten-thirty"
+      },
+      {
+        "symbol": "🕦",
+        "name": "eleven-thirty"
+      },
+      {
+        "symbol": "🕧",
+        "name": "twelve-thirty"
+      },
+      {
+        "symbol": "♿",
+        "name": "wheelchair symbol"
+      },
+      {
+        "symbol": "🏧",
+        "name": "ATM sign"
+      },
+      {
+        "symbol": "🚮",
+        "name": "litter in bin sign"
+      },
+      {
+        "symbol": "🚰",
+        "name": "potable water"
+      },
+      {
+        "symbol": "🚹",
+        "name": "men’s room"
+      },
+      {
+        "symbol": "🚺",
+        "name": "women’s room"
+      },
+      {
+        "symbol": "🚻",
+        "name": "restroom"
+      },
+      {
+        "symbol": "🚼",
+        "name": "baby symbol"
+      },
+      {
+        "symbol": "🚾",
+        "name": "water closet"
+      },
+      {
+        "symbol": "🛂",
+        "name": "passport control"
+      },
+      {
+        "symbol": "🛃",
+        "name": "customs"
+      },
+      {
+        "symbol": "🛄",
+        "name": "baggage claim"
+      },
+      {
+        "symbol": "🛅",
+        "name": "left luggage"
+      },
+      {
+        "symbol": "☢️",
+        "name": "radioactive"
+      },
+      {
+        "symbol": "☣️",
+        "name": "biohazard"
+      },
+      {
+        "symbol": "⚠️",
+        "name": "warning"
+      },
+      {
+        "symbol": "⛔",
+        "name": "no entry"
+      },
+      {
+        "symbol": "📵",
+        "name": "no mobile phones"
+      },
+      {
+        "symbol": "🔞",
+        "name": "no one under eighteen"
+      },
+      {
+        "symbol": "🚫",
+        "name": "prohibited"
+      },
+      {
+        "symbol": "🚭",
+        "name": "no smoking"
+      },
+      {
+        "symbol": "🚯",
+        "name": "no littering"
+      },
+      {
+        "symbol": "🚱",
+        "name": "non-potable water"
+      },
+      {
+        "symbol": "🚳",
+        "name": "no bicycles"
+      },
+      {
+        "symbol": "🚷",
+        "name": "no pedestrians"
+      },
+      {
+        "symbol": "🚸",
+        "name": "children crossing"
+      },
+      {
+        "symbol": "↔️",
+        "name": "left-right arrow"
+      },
+      {
+        "symbol": "↕️",
+        "name": "up-down arrow"
+      },
+      {
+        "symbol": "↖️",
+        "name": "up-left arrow"
+      },
+      {
+        "symbol": "↗️",
+        "name": "up-right arrow"
+      },
+      {
+        "symbol": "↘️",
+        "name": "down-right arrow"
+      },
+      {
+        "symbol": "↙️",
+        "name": "down-left arrow"
+      },
+      {
+        "symbol": "↩️",
+        "name": "right arrow curving left"
+      },
+      {
+        "symbol": "↪️",
+        "name": "left arrow curving right"
+      },
+      {
+        "symbol": "➡️",
+        "name": "right arrow"
+      },
+      {
+        "symbol": "⤴️",
+        "name": "right arrow curving up"
+      },
+      {
+        "symbol": "⤵️",
+        "name": "right arrow curving down"
+      },
+      {
+        "symbol": "⬅️",
+        "name": "left arrow"
+      },
+      {
+        "symbol": "⬆️",
+        "name": "up arrow"
+      },
+      {
+        "symbol": "⬇️",
+        "name": "down arrow"
+      },
+      {
+        "symbol": "🔃",
+        "name": "clockwise vertical arrows"
+      },
+      {
+        "symbol": "🔄",
+        "name": "counterclockwise arrows button"
+      },
+      {
+        "symbol": "🔙",
+        "name": "BACK arrow"
+      },
+      {
+        "symbol": "🔚",
+        "name": "END arrow"
+      },
+      {
+        "symbol": "🔛",
+        "name": "ON! arrow"
+      },
+      {
+        "symbol": "🔜",
+        "name": "SOON arrow"
+      },
+      {
+        "symbol": "🔝",
+        "name": "TOP arrow"
+      },
+      {
+        "symbol": "☦️",
+        "name": "orthodox cross"
+      },
+      {
+        "symbol": "☪️",
+        "name": "star and crescent"
+      },
+      {
+        "symbol": "☮️",
+        "name": "peace symbol"
+      },
+      {
+        "symbol": "☯️",
+        "name": "yin yang"
+      },
+      {
+        "symbol": "☸️",
+        "name": "wheel of dharma"
+      },
+      {
+        "symbol": "⚛️",
+        "name": "atom symbol"
+      },
+      {
+        "symbol": "✝️",
+        "name": "latin cross"
+      },
+      {
+        "symbol": "✡️",
+        "name": "star of David"
+      },
+      {
+        "symbol": "🔯",
+        "name": "dotted six-pointed star"
+      },
+      {
+        "symbol": "🕉️",
+        "name": "om"
+      },
+      {
+        "symbol": "🕎",
+        "name": "menorah"
+      },
+      {
+        "symbol": "🛐",
+        "name": "place of worship"
+      },
+      {
+        "symbol": "♈",
+        "name": "Aries"
+      },
+      {
+        "symbol": "♉",
+        "name": "Taurus"
+      },
+      {
+        "symbol": "♊",
+        "name": "Gemini"
+      },
+      {
+        "symbol": "♋",
+        "name": "Cancer"
+      },
+      {
+        "symbol": "♌",
+        "name": "Leo"
+      },
+      {
+        "symbol": "♍",
+        "name": "Virgo"
+      },
+      {
+        "symbol": "♎",
+        "name": "Libra"
+      },
+      {
+        "symbol": "♏",
+        "name": "Scorpio"
+      },
+      {
+        "symbol": "♐",
+        "name": "Sagittarius"
+      },
+      {
+        "symbol": "♑",
+        "name": "Capricorn"
+      },
+      {
+        "symbol": "♒",
+        "name": "Aquarius"
+      },
+      {
+        "symbol": "♓",
+        "name": "Pisces"
+      },
+      {
+        "symbol": "⛎",
+        "name": "Ophiuchus"
+      },
+      {
+        "symbol": "⏏️",
+        "name": "eject button"
+      },
+      {
+        "symbol": "⏩",
+        "name": "fast-forward button"
+      },
+      {
+        "symbol": "⏪",
+        "name": "fast reverse button"
+      },
+      {
+        "symbol": "⏫",
+        "name": "fast up button"
+      },
+      {
+        "symbol": "⏬",
+        "name": "fast down button"
+      },
+      {
+        "symbol": "⏭️",
+        "name": "next track button"
+      },
+      {
+        "symbol": "⏮️",
+        "name": "last track button"
+      },
+      {
+        "symbol": "⏯️",
+        "name": "play or pause button"
+      },
+      {
+        "symbol": "⏸️",
+        "name": "pause button"
+      },
+      {
+        "symbol": "⏹️",
+        "name": "stop button"
+      },
+      {
+        "symbol": "⏺️",
+        "name": "record button"
+      },
+      {
+        "symbol": "▶️",
+        "name": "play button"
+      },
+      {
+        "symbol": "◀️",
+        "name": "reverse button"
+      },
+      {
+        "symbol": "🎦",
+        "name": "cinema"
+      },
+      {
+        "symbol": "📳",
+        "name": "vibration mode"
+      },
+      {
+        "symbol": "📴",
+        "name": "mobile phone off"
+      },
+      {
+        "symbol": "📶",
+        "name": "antenna bars"
+      },
+      {
+        "symbol": "🔀",
+        "name": "shuffle tracks button"
+      },
+      {
+        "symbol": "🔁",
+        "name": "repeat button"
+      },
+      {
+        "symbol": "🔂",
+        "name": "repeat single button"
+      },
+      {
+        "symbol": "🔅",
+        "name": "dim button"
+      },
+      {
+        "symbol": "🔆",
+        "name": "bright button"
+      },
+      {
+        "symbol": "🔼",
+        "name": "upwards button"
+      },
+      {
+        "symbol": "🔽",
+        "name": "downwards button"
+      },
+      {
+        "symbol": "♀️",
+        "name": "female sign"
+      },
+      {
+        "symbol": "♂️",
+        "name": "male sign"
+      },
+      {
+        "symbol": "♾️",
+        "name": "infinity"
+      },
+      {
+        "symbol": "✖️",
+        "name": "multiply"
+      },
+      {
+        "symbol": "➕",
+        "name": "plus"
+      },
+      {
+        "symbol": "➖",
+        "name": "minus"
+      },
+      {
+        "symbol": "➗",
+        "name": "divide"
+      },
+      {
+        "symbol": "‼️",
+        "name": "double exclamation mark"
+      },
+      {
+        "symbol": "⁉️",
+        "name": "exclamation question mark"
+      },
+      {
+        "symbol": "❓",
+        "name": "red question mark"
+      },
+      {
+        "symbol": "❔",
+        "name": "white question mark"
+      },
+      {
+        "symbol": "❕",
+        "name": "white exclamation mark"
+      },
+      {
+        "symbol": "❗",
+        "name": "red exclamation mark"
+      },
+      {
+        "symbol": "〰️",
+        "name": "wavy dash"
+      },
+      {
+        "symbol": "💱",
+        "name": "currency exchange"
+      },
+      {
+        "symbol": "💲",
+        "name": "heavy dollar sign"
+      },
+      {
+        "symbol": "©️",
+        "name": "copyright"
+      },
+      {
+        "symbol": "®️",
+        "name": "registered"
+      },
+      {
+        "symbol": "™️",
+        "name": "trade mark"
+      },
+      {
+        "symbol": "☑️",
+        "name": "check box with check"
+      },
+      {
+        "symbol": "♻️",
+        "name": "recycling symbol"
+      },
+      {
+        "symbol": "⚕️",
+        "name": "medical symbol"
+      },
+      {
+        "symbol": "⚜️",
+        "name": "fleur-de-lis"
+      },
+      {
+        "symbol": "✅",
+        "name": "check mark button"
+      },
+      {
+        "symbol": "✔️",
+        "name": "check mark"
+      },
+      {
+        "symbol": "✳️",
+        "name": "eight-spoked asterisk"
+      },
+      {
+        "symbol": "✴️",
+        "name": "eight-pointed star"
+      },
+      {
+        "symbol": "❇️",
+        "name": "sparkle"
+      },
+      {
+        "symbol": "❌",
+        "name": "cross mark"
+      },
+      {
+        "symbol": "❎",
+        "name": "cross mark button"
+      },
+      {
+        "symbol": "➰",
+        "name": "curly loop"
+      },
+      {
+        "symbol": "➿",
+        "name": "double curly loop"
+      },
+      {
+        "symbol": "⭕",
+        "name": "hollow red circle"
+      },
+      {
+        "symbol": "〽️",
+        "name": "part alternation mark"
+      },
+      {
+        "symbol": "📛",
+        "name": "name badge"
+      },
+      {
+        "symbol": "🔰",
+        "name": "Japanese symbol for beginner"
+      },
+      {
+        "symbol": "🔱",
+        "name": "trident emblem"
+      },
+      {
+        "symbol": "#️⃣",
+        "name": "keycap: #"
+      },
+      {
+        "symbol": "*️⃣",
+        "name": "keycap: *"
+      },
+      {
+        "symbol": "0️⃣",
+        "name": "keycap: 0"
+      },
+      {
+        "symbol": "1️⃣",
+        "name": "keycap: 1"
+      },
+      {
+        "symbol": "2️⃣",
+        "name": "keycap: 2"
+      },
+      {
+        "symbol": "3️⃣",
+        "name": "keycap: 3"
+      },
+      {
+        "symbol": "4️⃣",
+        "name": "keycap: 4"
+      },
+      {
+        "symbol": "5️⃣",
+        "name": "keycap: 5"
+      },
+      {
+        "symbol": "6️⃣",
+        "name": "keycap: 6"
+      },
+      {
+        "symbol": "7️⃣",
+        "name": "keycap: 7"
+      },
+      {
+        "symbol": "8️⃣",
+        "name": "keycap: 8"
+      },
+      {
+        "symbol": "9️⃣",
+        "name": "keycap: 9"
+      },
+      {
+        "symbol": "🔟",
+        "name": "keycap: 10"
+      },
+      {
+        "symbol": "ℹ️",
+        "name": "information"
+      },
+      {
+        "symbol": "Ⓜ️",
+        "name": "circled M"
+      },
+      {
+        "symbol": "㊗️",
+        "name": "Japanese “congratulations” button"
+      },
+      {
+        "symbol": "㊙️",
+        "name": "Japanese “secret” button"
+      },
+      {
+        "symbol": "🅰️",
+        "name": "A button (blood type)"
+      },
+      {
+        "symbol": "🅱️",
+        "name": "B button (blood type)"
+      },
+      {
+        "symbol": "🅾️",
+        "name": "O button (blood type)"
+      },
+      {
+        "symbol": "🅿️",
+        "name": "P button"
+      },
+      {
+        "symbol": "🆎",
+        "name": "AB button (blood type)"
+      },
+      {
+        "symbol": "🆑",
+        "name": "CL button"
+      },
+      {
+        "symbol": "🆒",
+        "name": "COOL button"
+      },
+      {
+        "symbol": "🆓",
+        "name": "FREE button"
+      },
+      {
+        "symbol": "🆔",
+        "name": "ID button"
+      },
+      {
+        "symbol": "🆕",
+        "name": "NEW button"
+      },
+      {
+        "symbol": "🆖",
+        "name": "NG button"
+      },
+      {
+        "symbol": "🆗",
+        "name": "OK button"
+      },
+      {
+        "symbol": "🆘",
+        "name": "SOS button"
+      },
+      {
+        "symbol": "🆙",
+        "name": "UP! button"
+      },
+      {
+        "symbol": "🆚",
+        "name": "VS button"
+      },
+      {
+        "symbol": "🈁",
+        "name": "Japanese “here” button"
+      },
+      {
+        "symbol": "🈂️",
+        "name": "Japanese “service charge” button"
+      },
+      {
+        "symbol": "🈚",
+        "name": "Japanese “free of charge” button"
+      },
+      {
+        "symbol": "🈯",
+        "name": "Japanese “reserved” button"
+      },
+      {
+        "symbol": "🈲",
+        "name": "Japanese “prohibited” button"
+      },
+      {
+        "symbol": "🈳",
+        "name": "Japanese “vacancy” button"
+      },
+      {
+        "symbol": "🈴",
+        "name": "Japanese “passing grade” button"
+      },
+      {
+        "symbol": "🈵",
+        "name": "Japanese “no vacancy” button"
+      },
+      {
+        "symbol": "🈶",
+        "name": "Japanese “not free of charge” button"
+      },
+      {
+        "symbol": "🈷️",
+        "name": "Japanese “monthly amount” button"
+      },
+      {
+        "symbol": "🈸",
+        "name": "Japanese “application” button"
+      },
+      {
+        "symbol": "🈹",
+        "name": "Japanese “discount” button"
+      },
+      {
+        "symbol": "🈺",
+        "name": "Japanese “open for business” button"
+      },
+      {
+        "symbol": "🉐",
+        "name": "Japanese “bargain” button"
+      },
+      {
+        "symbol": "🉑",
+        "name": "Japanese “acceptable” button"
+      },
+      {
+        "symbol": "🔠",
+        "name": "input latin uppercase"
+      },
+      {
+        "symbol": "🔡",
+        "name": "input latin lowercase"
+      },
+      {
+        "symbol": "🔢",
+        "name": "input numbers"
+      },
+      {
+        "symbol": "🔣",
+        "name": "input symbols"
+      },
+      {
+        "symbol": "🔤",
+        "name": "input latin letters"
+      }
+    ]
+  },
+  {
+    "symbol": "🏁",
+    "name": "Flags",
+    "id": "12",
+    "emojis": [
+      {
+        "symbol": "🎌",
+        "name": "crossed flags"
+      },
+      {
+        "symbol": "🏁",
+        "name": "chequered flag"
+      },
+      {
+        "symbol": "🏳️",
+        "name": "white flag"
+      },
+      {
+        "symbol": "🏴",
+        "name": "black flag"
+      },
+      {
+        "symbol": "🏴‍☠️",
+        "name": "pirate flag"
+      },
+      {
+        "symbol": "🚩",
+        "name": "triangular flag"
+      }
+    ]
+  }
+]
